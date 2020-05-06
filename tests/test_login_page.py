@@ -62,7 +62,7 @@ def test_login_page(test_obj):
         
 
         #11. Click ok on alert window
-        test_obj.alert_window()
+        #test_obj.alert_window()
         result_flag = test_obj.alert_accept()
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",

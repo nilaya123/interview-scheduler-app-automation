@@ -53,6 +53,7 @@ class Form_Object:
             positive='Clicked on the "Login" button',
             negative='Failed to click on "Login" button',
             level='debug')
+        result_flag = self.alert_accept()
 
         return result_flag
 
@@ -62,7 +63,6 @@ class Form_Object:
     def alert_accept(self):
         "Click on 'Ok' alert"
         result_flag = self.alert_window()
-        print ("NILAYA")
         self.conditional_write(result_flag,
             positive='Clicked on the OK',
             negative='Failed to click on OK',
