@@ -11,18 +11,26 @@
 #PARTIAL_LINK_TEXT
 #XPATH
 ###########################################
-
+'''
 #Locators for the footer object(footer_object.py)
 
 footer_menu = "xpath,//ul[contains(@class,'nav-justified')]/descendant::a[text()='%s']"
 copyright_text = "xpath,//p[contains(@class,'qxf2_copyright')]"
 #----
-
+'''
 #Locators for the login object(form_object.py)
 username_field = "xpath,//input[@id = 'username']"
 password_field = "xpath,//input[@id='userpassword']"
 login_button = "xpath,//*[@id='loginButton']"
 signup_button = "xpath,//*[@id='signupButton']"
+
+#Locators for the index object(index_object.py)
+interviewers_page = "xpath,//a[contains(.,'List the interviewers')]"
+jobs_page = "xpath,//a[contains(.,'List the jobs')]"
+candidates_page = "xpath,//a[contains(.,'List the candidates')]"
+
+#Heading for index page
+heading = "xpath,//h2[contains(.,'Why Interview Scheduler Application?')]"
 
 '''
 #Locators for the form object(form_object.py)

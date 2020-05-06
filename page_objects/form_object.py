@@ -47,11 +47,25 @@ class Form_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def login(self):
-        "Click on 'Click Me' button"
+        "Click on 'Login' button"
         result_flag = self.click_element(self.login_button)
         self.conditional_write(result_flag,
             positive='Clicked on the "Login" button',
             negative='Failed to click on "Login" button',
+            level='debug')
+
+        return result_flag
+
+    
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def alert_accept(self):
+        "Click on 'Ok' alert"
+        result_flag = self.alert_window()
+        print ("NILAYA")
+        self.conditional_write(result_flag,
+            positive='Clicked on the OK',
+            negative='Failed to click on OK',
             level='debug')
 
         return result_flag

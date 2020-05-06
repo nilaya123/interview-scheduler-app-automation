@@ -325,6 +325,25 @@ class Base_Page(Borg,unittest.TestCase):
         return window_handle_id
 
 
+    def alert_window(self):
+        try:
+            alert = self.driver.switch_to.alert()
+            print(alert.text)
+            alert = self.assertTrue(self.is_text_present("The Credentials are correct and logging in"))
+            alert.accept()
+            message = alert.text
+            return message
+            #print ("Alert shows following message: "+ message )
+            #self.wait(5)
+            #alert.accept()
+        except Exception as e:
+            self.write("Exception when trying to alert window")
+            self.write(str(e))
+            self.exceptions.append("Error when switching browser window")
+        
+        return result_flag
+ 
+
     def switch_window(self,name=None):
         "Make the driver switch to the last window or a window with a name"
         result_flag = False

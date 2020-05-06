@@ -34,7 +34,7 @@ def test_login_page(test_obj):
         #4. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
-        
+
         #5. Set name in form
         print(username)
         result_flag = test_obj.set_user(username)
@@ -43,7 +43,7 @@ def test_login_page(test_obj):
                             negative="Failed to set name: %s \nOn url: %s\n" % (username, test_obj.get_current_url()))
         test_obj.write('Script duration: %d seconds\n' %
                        (int(time.time()-start_time)))
-        
+
         #6. Set Password in form
         result_flag = test_obj.set_password(password)
         test_obj.log_result(result_flag,
@@ -51,32 +51,27 @@ def test_login_page(test_obj):
                             negative="Failed to set password: %s \nOn url: %s\n" % (password, test_obj.get_current_url()))
         test_obj.write('Script duration: %d seconds\n' %
                        (int(time.time()-start_time)))
-       
-        
+
+
         #10. Set and submit the form in one go
         result_flag = test_obj.login()
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
                             negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
+        
 
+        #11. Click ok on alert window
+        test_obj.alert_window()
+        result_flag = test_obj.alert_accept()
+        test_obj.log_result(result_flag,
+                            positive="Successfully logged in the page\n",
+                            negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
+                            level="critical")
 
+        
         #Turn off the highlighting feature
         #test_obj.turn_off_highlight()
-
-        #Switching to Alert        
-        Alert alert = driver.switchTo().alert();		
-        		
-        #Capturing alert message.    
-        String alertMessage= driver.switchTo().alert().getText();		
-        		
-        # Displaying alert message		
-        System.out.println(alertMessage);	
-        Thread.sleep(5000);
-        		
-        # Accepting alert		
-        alert.accept();		
-     
 
         #13. Print out the result
         test_obj.write_test_summary()
