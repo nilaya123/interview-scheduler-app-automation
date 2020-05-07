@@ -327,15 +327,10 @@ class Base_Page(Borg,unittest.TestCase):
 
     def alert_window(self):
         try:
-            alert = self.driver.switch_to.alert()
-            print(alert.text)
-            alert = self.assertTrue(self.is_text_present("The Credentials are correct and logging in"))
-            alert.accept()
-            message = alert.text
-            return message
-            #print ("Alert shows following message: "+ message )
-            #self.wait(5)
-            #alert.accept()
+            result_flag = False
+            alert_obj = self.driver.switch_to.alert
+            alert_obj.accept()
+            result_flag = True
         except Exception as e:
             self.write("Exception when trying to alert window")
             self.write(str(e))
