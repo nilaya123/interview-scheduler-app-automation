@@ -109,6 +109,7 @@ def test_example_form(test_obj):
         #Notice you don't need to create a new page object!
         if result_flag is True:
             result_flag = test_obj.check_heading()
+            print(NILAYA)
         test_obj.log_result(result_flag,
                             positive="Heading on the redirect page checks out!\n",
                             negative="Fail: Heading on the redirect page is incorrect!")

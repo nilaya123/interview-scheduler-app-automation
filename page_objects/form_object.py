@@ -63,6 +63,7 @@ class Form_Object:
     def alert_accept(self):
         "Click on 'Ok' alert"
         result_flag = self.alert_window()
+        return result_flag
         self.conditional_write(result_flag,
             positive='Clicked on the OK',
             negative='Failed to click on OK',

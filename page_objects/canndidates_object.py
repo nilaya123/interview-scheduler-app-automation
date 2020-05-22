@@ -8,56 +8,19 @@ import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
 
 
-class Index_Object:
+class Candidates_Object:
     "Page object for the Form"
     
     #locators
-    candidates_page = locators.candidates_page
-    interviewers_page = locators.interviewers_page
-    jobs_page = locators.jobs_page   
-    heading = locators.heading
-
-    @Wrapit._exceptionHandler    
-    def check_heading(self):
-        "Check if the heading exists"
-        result_flag = self.check_element_present(self.heading)
-        self.conditional_write(result_flag,
-            positive='Correct heading present on index page',
-            negative='Heading on index page is INCORRECT!!',
-            level='debug')
-
-        return result_flag
+    username_field = locators.username_field
+    password_field = locators.password_field
+    login_button = locators.login_button
+    signup_button = locators.signup_button
+    redirect_title = "redirect"    
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def click_ok(self):
-        "Accept the terms and conditions"
-        alert = self.click_element(self.name)
-        alert.accept()
-        self.conditional_write(result_flag,
-            positive='Accepted the terms and conditions',
-            negative='Failed to accept the terms and conditions',
-            level='debug')
-            
-        return result_flag
-
-    
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def click_on_link(self):
-        "Accept the terms and conditions"
-        result_flag = self.click_element(self.interviewers_page)
-        self.conditional_write(result_flag,
-            positive='Clicked on Interviewers Page',
-            negative='Failed to click on Interviewers Page',
-            level='debug')
-            
-        return result_flag
-
-'''
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def open_candidate(self,username):
+    def set_user(self,username):
         "Set the name on the form"
         result_flag = self.set_text(self.username_field,username)
         self.conditional_write(result_flag,
@@ -84,11 +47,26 @@ class Index_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def login(self):
-        "Click on 'Click Me' button"
+        "Click on 'Login' button"
         result_flag = self.click_element(self.login_button)
         self.conditional_write(result_flag,
             positive='Clicked on the "Login" button',
             negative='Failed to click on "Login" button',
+            level='debug')
+        result_flag = self.alert_accept()
+
+        return result_flag
+
+    
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def alert_accept(self):
+        "Click on 'Ok' alert"
+        result_flag = self.alert_window()
+        return result_flag
+        self.conditional_write(result_flag,
+            positive='Clicked on the OK',
+            negative='Failed to click on OK',
             level='debug')
 
         return result_flag
@@ -130,4 +108,5 @@ class Index_Object:
         result_flag &= self.check_redirect()
 
         return result_flag
-'''
+
+

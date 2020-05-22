@@ -327,7 +327,7 @@ class Base_Page(Borg,unittest.TestCase):
 
     def alert_window(self):
         try:
-            result_flag = False
+            result_flag = True
             alert_obj = self.driver.switch_to.alert
             alert_obj.accept()
             result_flag = True

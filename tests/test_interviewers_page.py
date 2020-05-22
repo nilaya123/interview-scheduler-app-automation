@@ -34,11 +34,6 @@ def test_login_page(test_obj):
         #4. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
-        interviewers_name = conf.interviewers_name
-        interviewers_email = conf.interviewers_email
-        interviewers_designation = conf.interviewers_designation
-        interviewers_starttime = conf.interviewers_starttime
-        interviewers_endtime = conf.interviewers_endtime
 
         #5. Set name in form
         result_flag = test_obj.set_user(username)
@@ -47,7 +42,6 @@ def test_login_page(test_obj):
                         negative="Failed to set name: %s \nOn url: %s\n" % (username, test_obj.get_current_url()))
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-
 
         #6. Set Password in form
         result_flag = test_obj.set_password(password)
@@ -64,8 +58,6 @@ def test_login_page(test_obj):
                         positive="Successfully logged in the page\n",
                         negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
-        test_obj.write('Script duration: %d seconds\n' %
-                   (int(time.time()-start_time)))
 
 
         #11. Click ok on alert window
@@ -85,77 +77,13 @@ def test_login_page(test_obj):
         test_obj.add_tesults_case("Check Heading", "Checks the heading on the redirect page", "test_example_form", result_flag,"Fail: Heading on the redirect page is incorrect!", [])
  
         
-        #11. Click on Interviewers Page
-        result_flag = test_obj.click_on_link()
+        #12. Click on interviewers page
+        #test_obj.alert_window()
+        result_flag = test_obj.alert_accept()
         test_obj.log_result(result_flag,
-                        positive="Successfully Opened Interviewers page\n",
-                        negative="Failed to Open Interviewers page \nOn url: %s" % test_obj.get_current_url(),
+                        positive="Successfully logged in the page\n",
+                        negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
-
-        
-        #11. Click on Interviewers Page
-        result_flag = test_obj.add_inter()
-        test_obj.log_result(result_flag,
-                        positive="Successfully Opened Add Interviewers page\n",
-                        negative="Failed to Open Add Interviewers page \nOn url: %s" % test_obj.get_current_url(),
-                        level="critical")
-
-
-        #12. Add interviewer name
-        result_flag = test_obj.set_name(interviewers_name)
-        test_obj.log_result(result_flag,
-                        positive="Successfully added Interviewers name\n",
-                        negative="Failed to add Interviewers name \nOn url: %s" % test_obj.get_current_url(),
-                        level="critical")
-
-        
-        #13. Add interviewer email
-        result_flag = test_obj.set_email(interviewers_email)
-        test_obj.log_result(result_flag,
-                        positive="Successfully added Interviewers email\n",
-                        negative="Failed to add Interviewers email \nOn url: %s" % test_obj.get_current_url(),
-                        level="critical")
-
-        
-        #14. Add interviewers designatiom
-        result_flag = test_obj.set_designation(interviewers_designation)
-        test_obj.log_result(result_flag,
-                        positive="Successfully added Interviewers designation\n",
-                        negative="Failed to add Interviewers designation \nOn url: %s" % test_obj.get_current_url(),
-                        level="critical")
-
-
-        #15. Add interviewers starttime
-        result_flag = test_obj.set_starttime(interviewers_starttime)
-        test_obj.log_result(result_flag,
-                        positive="Successfully added Interviewers start time\n",
-                        negative="Failed to add Interviewers start time \nOn url: %s" % test_obj.get_current_url(),
-                        level="critical")
-
-        
-        #16. Add interviewers endime
-        result_flag = test_obj.set_endtime(interviewers_endtime)
-        test_obj.log_result(result_flag,
-                        positive="Successfully added Interviewers end time\n",
-                        negative="Failed to add Interviewers end time \nOn url: %s" % test_obj.get_current_url(),
-                        level="critical")
-        
-
-        #17. Save Interviewers details
-        result_flag = test_obj.save()
-        test_obj.log_result(result_flag,
-                        positive="Successfully Saved Interviewers page\n",
-                        negative="Failed to save Interviewers page \nOn url: %s" % test_obj.get_current_url(),
-                        level="critical")
-
-        
-
-    
-
-
-
-        
-        
         
         #Turn off the highlighting feature
         #test_obj.turn_off_highlight()
@@ -190,7 +118,7 @@ if __name__=='__main__':
                 
         #teardowm
         test_obj.wait(3)
-        #test_obj.teardown() 
+        test_obj.teardown() 
     else:
         print('ERROR: Received incorrect comand line input arguments')
         print(option_obj.print_usage())
