@@ -21,7 +21,7 @@ class Interviewers_Object:
     add_time_button = locators.add_time_button
     save_interviewers_button = locators.save_interviewers_button
     cancel_interviewers_button = locators.cancel_interviewers_button
-
+    close_interviewers_button = locators.close_interviewers_button
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -32,6 +32,7 @@ class Interviewers_Object:
             positive='Clicked on the "Add Interviewers" button',
             negative='Failed to click on "Add Interviewers" button',
             level='debug')
+        result_flag = self.alert_accept()
 
         return result_flag
 
@@ -46,6 +47,19 @@ class Interviewers_Object:
             level='debug')
 
         return result_flag 
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def alert_accept(self):
+        "Click on 'Ok' alert"
+        result_flag = self.alert_window()
+        return result_flag
+        self.conditional_write(result_flag,
+            positive='Clicked on the OK',
+            negative='Failed to click on OK',
+            level='debug')
+
+        return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -127,6 +141,18 @@ class Interviewers_Object:
         self.conditional_write(result_flag,
             positive='Clicked on the "Cancel Interviewers" button',
             negative='Failed to click on "Cancel Interviewers" button',
+            level='debug')
+
+        return result_flag
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def close_inter(self):
+        "Click on 'Add Interviewers' button"
+        result_flag = self.click_element(self.close_interviewers_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on the ok button',
+            negative='Failed to click on ok button',
             level='debug')
 
         return result_flag

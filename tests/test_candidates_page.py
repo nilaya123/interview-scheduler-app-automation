@@ -24,7 +24,7 @@ def test_login_page(test_obj):
         actual_pass = -1
 
         #1. Create a test object and fill the example form.
-        test_obj = PageFactory.get_page_object("login page")
+        test_obj = PageFactory.get_page_object("candidates page")
         #Set start_time with current time
         start_time = int(time.time())
 

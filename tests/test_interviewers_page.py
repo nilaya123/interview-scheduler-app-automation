@@ -78,7 +78,6 @@ def test_login_page(test_obj):
  
         
         #12. Click on interviewers page
-        #test_obj.alert_window()
         result_flag = test_obj.alert_accept()
         test_obj.log_result(result_flag,
                         positive="Successfully logged in the page\n",

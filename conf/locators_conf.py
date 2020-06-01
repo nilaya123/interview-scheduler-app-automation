@@ -33,12 +33,15 @@ candidates_page = "xpath,//a[contains(.,'List the candidates')]"
 heading = "xpath,//h2[contains(.,'Why Interview Scheduler Application?')]"
 
 #Locators for Candidates Page
-add_candidates = "xpath,//input[@id='add']"
+add_candidates_button = "xpath,//input[@id='add']"
 delete_candidate = "xpath,//button[contains(@data-candidateid,'')]"
 edit_candidate = "xpath,//input[@onclick='editCandidates()']"
-name_candidate = "xpath,//input[@id='fname']"
-email_candidate = "xpath,//input[@id='email']"
+name_candidates = "xpath,//input[@id='fname']"
+email_candidates = "xpath,//input[@id='email']"
 job_applied = "xpath,//select[contains(@id,'select1')]"
+comment_candidates = "xpath,//textarea[@id='comments']"
+submit_candidates_button = "xpath,//button[@id='addSubmit']"
+
 
 #Locators for Interviewers Page
 add_interviewers_button = "xpath,//input[contains(@onclick,'addinterviewer()')]"
@@ -50,12 +53,13 @@ interviewers_endtime = "xpath,//input[contains(@id,'endtime0')] "
 add_time_button = "xpath,//input[contains(@value,'Add time')]"
 save_interviewers_button = "xpath,//input[@id='submit']"
 cancel_interviewers_button = "xpath,//button[@id='clear']"
+close_interviewers_button = "xpath,//button[@id='close']"
 
 #Locators for Jobs Page
-add_jobs = "xpath,//input[@id='add']"
-add_job_role = "xpath,//input[@id='role']"
-add_job_intervierwers = "xpath,//input[contains(@id,'interviewers')]"
-submit_job = "xpath,//button[contains(@id,'submit')]"
+add_jobs_button = "xpath,//input[contains(@onclick,'addJob()')]"
+job_role = "xpath,//input[contains(@id,'role')]"
+job_interviewers = "xpath,//input[contains(@id,'interviewers')]"
+submit_job_button = "xpath,//button[contains(@id,'submit')]"
 
 '''
 #Locators for the form object(form_object.py)

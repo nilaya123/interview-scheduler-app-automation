@@ -34,11 +34,20 @@ def test_login_page(test_obj):
         #4. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
+
         interviewers_name = conf.interviewers_name
         interviewers_email = conf.interviewers_email
         interviewers_designation = conf.interviewers_designation
         interviewers_starttime = conf.interviewers_starttime
         interviewers_endtime = conf.interviewers_endtime
+
+        job_role = conf.job_role
+        job_interviewers = conf.job_interviewers
+
+        name_candidates = conf.name_candidates
+        email_candidates = conf.email_candidates
+        job_applied = conf.job_applied
+        comment_candidates = conf.comment_candidates
 
         #5. Set name in form
         result_flag = test_obj.set_user(username)
@@ -75,6 +84,9 @@ def test_login_page(test_obj):
                         positive="Successfully logged in the page\n",
                         negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
 
         if result_flag is True:
           result_flag = test_obj.check_heading()
@@ -83,7 +95,9 @@ def test_login_page(test_obj):
                         negative="Fail: Heading on the redirect page is incorrect!")
         test_obj.write('Script duration: %d seconds\n'%(int(time.time()-start_time)))
         test_obj.add_tesults_case("Check Heading", "Checks the heading on the redirect page", "test_example_form", result_flag,"Fail: Heading on the redirect page is incorrect!", [])
- 
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
         
         #11. Click on Interviewers Page
         result_flag = test_obj.click_on_link()
@@ -91,6 +105,8 @@ def test_login_page(test_obj):
                         positive="Successfully Opened Interviewers page\n",
                         negative="Failed to Open Interviewers page \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
 
         
         #11. Click on Interviewers Page
@@ -99,6 +115,8 @@ def test_login_page(test_obj):
                         positive="Successfully Opened Add Interviewers page\n",
                         negative="Failed to Open Add Interviewers page \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
 
 
         #12. Add interviewer name
@@ -107,6 +125,8 @@ def test_login_page(test_obj):
                         positive="Successfully added Interviewers name\n",
                         negative="Failed to add Interviewers name \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
 
         
         #13. Add interviewer email
@@ -115,6 +135,8 @@ def test_login_page(test_obj):
                         positive="Successfully added Interviewers email\n",
                         negative="Failed to add Interviewers email \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
 
         
         #14. Add interviewers designatiom
@@ -123,6 +145,8 @@ def test_login_page(test_obj):
                         positive="Successfully added Interviewers designation\n",
                         negative="Failed to add Interviewers designation \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
 
 
         #15. Add interviewers starttime
@@ -131,6 +155,8 @@ def test_login_page(test_obj):
                         positive="Successfully added Interviewers start time\n",
                         negative="Failed to add Interviewers start time \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
 
         
         #16. Add interviewers endime
@@ -139,24 +165,145 @@ def test_login_page(test_obj):
                         positive="Successfully added Interviewers end time\n",
                         negative="Failed to add Interviewers end time \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
         
 
         #17. Save Interviewers details
         result_flag = test_obj.save()
         test_obj.log_result(result_flag,
-                        positive="Successfully Saved Interviewers page\n",
-                        negative="Failed to save Interviewers page \nOn url: %s" % test_obj.get_current_url(),
+                        positive="Successfully Saved Interviewer details\n",
+                        negative="Failed to save Interviewer details \nOn url: %s" % test_obj.get_current_url(),
                         level="critical")
-
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
         
 
-    
+        #18. Click on Ok
+        result_flag = test_obj.close_inter()
+        test_obj.log_result(result_flag,
+                        positive="Successfully Clicked on OK\n",
+                        negative="Failed to Click on OK \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+        
+
+        test_obj = PageFactory.get_page_object("jobs page")
 
 
+        result_flag = test_obj.add_jobs()
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened add jobs page\n",
+                        negative="Failed to open jobs page \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #19. Add interviewers starttime
+        result_flag = test_obj.set_job_role(job_role)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added job role\n",
+                        negative="Failed to add job role \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
 
         
+        #16. Add interviewers endime
+        result_flag = test_obj.set_job_interviewer(job_interviewers)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added Interviewers end time\n",
+                        negative="Failed to add Interviewers end time \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
         
+
+        #17. Save Interviewers details
+        result_flag = test_obj.submit_job()
+        test_obj.log_result(result_flag,
+                        positive="Successfully Saved job details\n",
+                        negative="Failed to save Job details \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #18. Click ok on alert window
+        #test_obj.alert_window()
+        result_flag = test_obj.alert_accept()
+        test_obj.log_result(result_flag,
+                        positive="Successfully logged in the page\n",
+                        negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
         
+        test_obj = PageFactory.get_page_object("candidates page")
+        
+
+        result_flag = test_obj.add_candidates()
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened add candidates page\n",
+                        negative="Failed to open candidates page \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #19. Add interviewers starttime
+        result_flag = test_obj.add_name(name_candidates)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added name of candidate\n",
+                        negative="Failed to add name of candidate \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+        
+        #16. Add interviewers endime
+        result_flag = test_obj.add_email(email_candidates)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added Candidates email\n",
+                        negative="Failed to add Candidates email \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #16. Add interviewers endime
+        result_flag = test_obj.add_job_applied(job_applied)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added Job appliedl\n",
+                        negative="Failed to add Job applied \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+        
+
+        #16. Add interviewers endime
+        result_flag = test_obj.add_comments(comment_candidates)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added Candidates comments\n",
+                        negative="Failed to add Candidates comments \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+        
+
+        #17. Save Interviewers details
+        result_flag = test_obj.submit()
+        test_obj.log_result(result_flag,
+                        positive="Successfully Saved Candidate details\n",
+                        negative="Failed to save Candidate details \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
         #Turn off the highlighting feature
         #test_obj.turn_off_highlight()
 
