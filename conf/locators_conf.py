@@ -61,6 +61,16 @@ job_role = "xpath,//input[contains(@id,'role')]"
 job_interviewers = "xpath,//input[contains(@id,'interviewers')]"
 submit_job_button = "xpath,//button[contains(@id,'submit')]"
 
+#Locators for Rounds 
+specific_round_add = "xpath,//a[text()='Internship']/parent::td/following-sibling::td/input[@value='Rounds']"
+add_rounds_button = "xpath,//input[@value='Add Rounds']"
+round_name = "xpath,//input[@id='rname']"
+round_duration = "xpath,//select[@name='Duration']"
+round_description = "xpath,//textarea[@name='rdesc']"
+round_requirements = "xpath,//input[@name='rreq']"
+add_button = "xpath,//button[@id='addRound']"
+cancel_rounds_button = "xpath,//button[@id='cancelRound']"
+
 '''
 #Locators for the form object(form_object.py)
 name_field = "id,name"       

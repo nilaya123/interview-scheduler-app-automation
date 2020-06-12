@@ -32,7 +32,6 @@ class Interviewers_Object:
             positive='Clicked on the "Add Interviewers" button',
             negative='Failed to click on "Add Interviewers" button',
             level='debug')
-        result_flag = self.alert_accept()
 
         return result_flag
 

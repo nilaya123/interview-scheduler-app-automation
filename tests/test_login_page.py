@@ -49,6 +49,11 @@ def test_login_page(test_obj):
         job_applied = conf.job_applied
         comment_candidates = conf.comment_candidates
 
+        round_name = conf.round_name
+        round_duration = conf.round_duration
+        round_description = conf.round_description
+        round_requirements = conf.round_requirements
+
         #5. Set name in form
         result_flag = test_obj.set_user(username)
         test_obj.log_result(result_flag,
@@ -302,6 +307,96 @@ def test_login_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
+
+        
+        test_obj = PageFactory.get_page_object("jobs page")
+
+
+        #18. Open jobs page to add rounds
+        result_flag = test_obj.round_to_job()
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened jobs page to add rounds\n",
+                        negative="Failed to open jobs page \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #19. Click Add rounds
+        result_flag = test_obj.add_rounds()
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened add rounds\n",
+                        negative="Failed to open add rounds \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #20. Add Round name
+        result_flag = test_obj.add_name(round_name)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added round name\n",
+                        negative="Failed to add round name \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #21. Add Round duration
+        result_flag = test_obj.add_duration(round_duration)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added Round duration\n",
+                        negative="Failed to add Round duration \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+        
+
+        #22. Add Round description
+        result_flag = test_obj.add_description(round_description)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added Round description\n",
+                        negative="Failed to add Round description \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #22. Add Round requirements
+        result_flag = test_obj.add_requirements(round_requirements)
+        test_obj.log_result(result_flag,
+                        positive="Successfully added Round requirements\n",
+                        negative="Failed to add Round requirements \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        #23. Click Add 
+        result_flag = test_obj.add()
+        test_obj.log_result(result_flag,
+                        positive="Successfully clicked on add \n",
+                        negative="Failed to open add  \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+        
+        
+        #24. Click ok on alert window
+        #test_obj.alert_window()
+        result_flag = test_obj.alert_accept()
+        test_obj.log_result(result_flag,
+                        positive="Successfully added round to job\n",
+                        negative="Failed to add round to job \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+        
+
+
+
 
 
         #Turn off the highlighting feature

@@ -9,10 +9,11 @@ from page_objects.form_object import Form_Object
 from page_objects.index_object import Index_Object
 from page_objects.interviewers_object import Interviewers_Object
 from page_objects.jobs_object import Jobs_Object
+from page_objects.rounds_object import Rounds_Object
 from utils.Wrapit import Wrapit
 
 
-class Jobs_Page(Base_Page,Form_Object,Index_Object,Interviewers_Object,Jobs_Object):
+class Jobs_Page(Base_Page,Form_Object,Index_Object,Interviewers_Object,Jobs_Object,Rounds_Object):
     "Page Object for the tutorial's main page"
     
     def start(self):
