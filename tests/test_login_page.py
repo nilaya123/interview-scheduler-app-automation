@@ -1,9 +1,17 @@
 """
-This is an example automated test to help you learn Qxf2's framework
+This is an example automated test to help you test interview scheduler application
 Our automated test will do the following:
-    #Open Qxf2 selenium-tutorial-main page.
-    #Fill the example form.
-    #Click on Click me! button and check if its working fine.
+    #Open Login Page of Scheduler App.
+    #Enter Login details.
+    #Login to app.
+    #Go to interviewers page.
+    #Add the details of interviewers add the same.
+    #Go to the Jobs Page
+    #Add the job details, add the same.
+    #Go to the candidates page.
+    #add the candidate details, add the same.
+    #Go to the Jobs page, add rounds.
+    
 """
 import os,sys,time,pytest
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
