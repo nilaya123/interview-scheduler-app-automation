@@ -10,7 +10,7 @@ Pages implemented so far:
 5. Bitcoin price page
 """
 
-from page_objects.zero_mobile_page import Zero_Mobile_Page
+#from page_objects.zero_mobile_page import Zero_Mobile_Page
 from page_objects.zero_page import Zero_Page
 from page_objects.login_page import Login_Page
 from page_objects.scheduler_main_page import Scheduler_Main_Page

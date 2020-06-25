@@ -11,7 +11,7 @@ Our automated test will do the following:
     #Go to the candidates page.
     #add the candidate details, add the same.
     #Go to the Jobs page, add rounds.
-    
+
 """
 import os,sys,time,pytest
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -402,11 +402,6 @@ def test_login_page(test_obj):
                    (int(time.time()-start_time)))
 
         
-
-
-
-
-
         #Turn off the highlighting feature
         #test_obj.turn_off_highlight()
 
