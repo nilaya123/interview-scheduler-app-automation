@@ -18,6 +18,7 @@ from page_objects.index_page import Index_Page
 from page_objects.redirect_index_page import Redirect_Index_Page
 from page_objects.jobs_page import Jobs_Page
 from page_objects.candidates_page import Candidates_Page
+from page_objects.interviewers_page import Interviewers_Page
 import conf.base_url_conf
 
 

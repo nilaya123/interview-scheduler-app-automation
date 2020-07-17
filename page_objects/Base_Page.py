@@ -341,7 +341,8 @@ class Base_Page(Borg,unittest.TestCase):
 
     def switch_window(self,name=None):
         "Make the driver switch to the last window or a window with a name"
-        result_flag = False
+        result_flag = Falsesubmit
+        
         try:
             if name is not None:
                 window_handle_id = self.get_window_by_name(name)
@@ -530,6 +531,7 @@ class Base_Page(Borg,unittest.TestCase):
         text = ''
         try:
             text = self.get_element(locator).text
+            print(text)
         except Exception as e:
             self.write(e)
             self.exceptions.append("Error when getting text from the path-'%s' in the conf/locators.conf file"%locator)

@@ -41,7 +41,14 @@ email_candidates = "xpath,//input[@id='email']"
 job_applied = "xpath,//select[contains(@id,'select1')]"
 comment_candidates = "xpath,//textarea[@id='comments']"
 submit_candidates_button = "xpath,//button[@id='addSubmit']"
-
+delete_candidates_button = "xpath,//button[contains(@data-candidatename,'Mayara')]"
+remove_candidates_button = "xpath,//button[@id='remove-button']"
+select_candidate_button = "xpath,//a[contains(.,'Mayara')]"
+thumbs_up_button = "xpath,//input[@value='Thumbs up']"
+thumbs_down_button = "xpath,//input[@value='Thumbs down']"
+select_round_level_scroll = "xpath,//select[@id='select1']"
+send_email_button = "xpath,//button[contains(.,'Send Email')]"
+select_url = "xpath,//label[@class='col-md-8'][contains(.,'http://localhost:6464/')]"
 
 #Locators for Interviewers Page
 add_interviewers_button = "xpath,//input[contains(@onclick,'addinterviewer()')]"
@@ -54,12 +61,16 @@ add_time_button = "xpath,//input[contains(@value,'Add time')]"
 save_interviewers_button = "xpath,//input[@id='submit']"
 cancel_interviewers_button = "xpath,//button[@id='clear']"
 close_interviewers_button = "xpath,//button[@id='close']"
+delete_interviewers_button = "xpath,//a[text()='avinash']/parent::td/following-sibling::td/button[@data-toggle='modal']"
+remove_interviewers_button = "xpath,//button[contains(@id,'remove-button')]"
 
 #Locators for Jobs Page
 add_jobs_button = "xpath,//input[contains(@onclick,'addJob()')]"
 job_role = "xpath,//input[contains(@id,'role')]"
 job_interviewers = "xpath,//input[contains(@id,'interviewers')]"
 submit_job_button = "xpath,//button[contains(@id,'submit')]"
+delete_job_button = "xpath,//a[text()='Junior QA']/parent::td/following-sibling::td/button[@data-jobrole='Junior QA']"
+remove_job_button = "xpath,//button[@id='remove-button']"
 
 #Locators for Rounds 
 specific_round_add = "xpath,//a[text()='Junior QA']/parent::td/following-sibling::td/input[@value='Rounds']"

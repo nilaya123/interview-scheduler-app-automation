@@ -16,6 +16,8 @@ class Jobs_Object:
     job_role = locators.job_role
     job_interviewers = locators.job_interviewers
     submit_job_button = locators.submit_job_button
+    delete_job_button = locators.delete_job_button
+    remove_job_button = locators.remove_job_button
 
 
     @Wrapit._exceptionHandler
@@ -54,9 +56,7 @@ class Jobs_Object:
 
         return result_flag 
 
-    
-
-    
+      
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def submit_job(self):
@@ -67,6 +67,31 @@ class Jobs_Object:
             negative='Failed to click on "Submit Job" button',
             level='debug')
         result_flag = self.alert_accept()
+
+        return result_flag
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def delete_job(self):
+        "Click on 'Delete Job' button"
+        result_flag = self.click_element(self.delete_job_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on delete job button',
+            negative='Failed to click on button',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def remove_job(self):
+        "Click on 'Delete Job' button"
+        result_flag = self.click_element(self.remove_job_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on remove job button',
+            negative='Failed to click on button',
+            level='debug')
 
         return result_flag
 

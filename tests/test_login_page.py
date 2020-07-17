@@ -56,6 +56,7 @@ def test_login_page(test_obj):
         email_candidates = conf.email_candidates
         job_applied = conf.job_applied
         comment_candidates = conf.comment_candidates
+        select_round_level = conf.select_round_level
 
         round_name = conf.round_name
         round_duration = conf.round_duration
@@ -402,6 +403,68 @@ def test_login_page(test_obj):
                    (int(time.time()-start_time)))
 
         
+        test_obj = PageFactory.get_page_object("candidates page")
+
+
+        result_flag = test_obj.delete_candidates()
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened delete candidates page\n",
+                        negative="Failed to open delete candidates page \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        result_flag = test_obj.remove_candidates()
+        test_obj.log_result(result_flag,
+                        positive="Successfully deleted candidate\n",
+                        negative="Failed to delete candidate \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+        
+
+        test_obj = PageFactory.get_page_object("interviewers page")
+
+        result_flag = test_obj.delete_interviewers()
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened delete interviewers page\n",
+                        negative="Failed to open delete interviewers page \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        result_flag = test_obj.remove_interviewers()
+        test_obj.log_result(result_flag,
+                        positive="Successfully deleted interviewer\n",
+                        negative="Failed to delete interviewer \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+        
+        test_obj = PageFactory.get_page_object("jobs page")
+        
+        result_flag = test_obj.delete_job()
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened delete jobs page\n",
+                        negative="Failed to open delete jobs page \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+
+
+        result_flag = test_obj.remove_job()
+        test_obj.log_result(result_flag,
+                        positive="Successfully deleted job\n",
+                        negative="Failed to delete job \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+        
+          
+        
         #Turn off the highlighting feature
         #test_obj.turn_off_highlight()
 
@@ -435,7 +498,7 @@ if __name__=='__main__':
                 
         #teardowm
         test_obj.wait(3)
-        #test_obj.teardown() 
+        test_obj.teardown() 
     else:
         print('ERROR: Received incorrect comand line input arguments')
         print(option_obj.print_usage())

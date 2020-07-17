@@ -91,12 +91,19 @@ class Email_Util:
     def fetch_email_body(self,uid):
         "Fetch the email body for a given uid"
         email_body = []
+
         if uid is not None:
             result,data = self.mail.uid('fetch',uid,'(RFC822)')
-            raw_email = data[0][1]
+            raw_email = data[0][1].decode('utf-8')
+            print(raw_email)
+            print("raw email")
             email_msg = email.message_from_string(raw_email)
             email_body = self.get_email_body(email_msg)
 
+        print("email util")
+        print(email_body)
+            
+        
         return email_body
         
     
@@ -158,14 +165,14 @@ if __name__=='__main__':
         print("FAIL: Failed to select the folder: Inbox")
     
     #Get the latest email's unique id
-    uid = email_obj.get_latest_email_uid(wait_time=300)
+    uid = email_obj.get_latest_email_uid(subject="Invitation to schedule an Interview with Qxf2 Services!",wait_time=300)
     if uid != None:
         print("PASS: Unique id of the latest email is: ",uid)
     else:
         print("FAIL: Didn't get unique id of latest email")
     
     #A. Look for an Email from provided sender, print uid and check it's contents
-    uid = email_obj.get_latest_email_uid(sender="Andy from Google",wait_time=300)
+    uid = email_obj.get_latest_email_uid(sender="Qxf2 Services",wait_time=300)
     if uid != None:
         print("PASS: Unique id of the latest email with given sender is: ",uid)
         
@@ -190,7 +197,7 @@ if __name__=='__main__':
         print("FAIL: After wait of 5 mins, looks like there is no email present with given sender")
     
     #B. Look for an Email with provided subject, print uid, find Qxf2 POM address and compare with expected address
-    uid = email_obj.get_latest_email_uid(subject="Qxf2 Services: Public POM Link",wait_time=300)
+    uid = email_obj.get_latest_email_uid(subject="Invitation to schedule an Interview with Qxf2 Services!",wait_time=300)
     if uid != None:
         print("PASS: Unique id of the latest email with given subject is: ",uid)
         #Get pom url from email body
@@ -220,14 +227,14 @@ if __name__=='__main__':
         print("FAIL: After wait of 5 mins, looks like there is no email present with given subject")
 
     #C. Look for an Email with provided sender and subject and print uid
-    uid = email_obj.get_latest_email_uid(subject="get more out of your new Google Account",sender="andy-noreply@google.com",wait_time=300)
+    uid = email_obj.get_latest_email_uid(subject="Invitation to schedule an Interview with Qxf2 Services!",sender="test@qxf2.com",wait_time=300)
     if uid != None:
         print("PASS: Unique id of the latest email with given subject and sender is: ",uid)
     else:
         print("FAIL: After wait of 5 mins, looks like there is no email present with given subject and sender")
 
     #D. Look for an Email with non-existant sender and non-existant subject details
-    uid = email_obj.get_latest_email_uid(subject="Activate your account",sender="support@qxf2.com",wait_time=120) #you can change wait time by setting wait_time variable
+    uid = email_obj.get_latest_email_uid(subject="Invitation to schedule an Interview with Qxf2 Services!",sender="test@qxf2.com",wait_time=120) #you can change wait time by setting wait_time variable
     if uid != None:
         print("FAIL: Unique id of the latest email with non-existant subject and non-existant sender is: ",uid)
     else:

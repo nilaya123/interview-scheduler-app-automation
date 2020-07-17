@@ -22,6 +22,8 @@ class Interviewers_Object:
     save_interviewers_button = locators.save_interviewers_button
     cancel_interviewers_button = locators.cancel_interviewers_button
     close_interviewers_button = locators.close_interviewers_button
+    delete_interviewers_button = locators.delete_interviewers_button
+    remove_interviewers_button = locators.remove_interviewers_button
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -155,6 +157,33 @@ class Interviewers_Object:
             level='debug')
 
         return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def delete_interviewers(self):
+        "Click on 'Delete Interviewers' button"
+        result_flag = self.click_element(self.delete_interviewers_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on delete interviewers button',
+            negative='Failed to click on button',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def remove_interviewers(self):
+        "Click on 'Delete Interviewers' button"
+        result_flag = self.click_element(self.remove_interviewers_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on remove interviewers button',
+            negative='Failed to click on button',
+            level='debug')
+
+        return result_flag
+    
 
     
     '''
