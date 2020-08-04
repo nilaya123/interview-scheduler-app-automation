@@ -9,24 +9,31 @@ import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
 from utils.email_util import Email_Util
 import conf.email_conf as conf_file
-import re
+import conf.login_conf as login
+from bs4 import BeautifulSoup
+from selenium import webdriver
+import datetime
+
 
 #Fetching conf details from the conf file
 imap_host = conf_file.imaphost
 username = conf_file.username
 password = conf_file.app_password
+email = login.email_candidates
+date_picker = login.date_picker
+date_check = login.date_check
 
 
 class Candidates_Object:
     "Page object for the Candidates"
-    
+
     #locators
     add_candidates_button = locators.add_candidates_button
     name_candidates = locators.name_candidates
     email_candidates = locators.email_candidates
     job_applied = locators.job_applied
     comment_candidates = locators.comment_candidates
-    submit_candidates_button = locators.submit_candidates_button   
+    submit_candidates_button = locators.submit_candidates_button
     delete_candidates_button = locators.delete_candidates_button
     remove_candidates_button = locators.remove_candidates_button
     select_candidate_button = locators.select_candidate_button
@@ -35,6 +42,16 @@ class Candidates_Object:
     select_round_level_scroll = locators.select_round_level_scroll
     send_email_button = locators.send_email_button
     select_url = locators.select_url
+    select_unique_code = locators.select_unique_code
+    select_candidate_email = locators.select_candidate_email
+    go_for_schedule = locators.go_for_schedule
+    date_picker = locators.date_picker
+    confirm_interview_date = locators.confirm_interview_date
+    select_free_slot = locators.select_free_slot
+    schedule_my_interview = locators.schedule_my_interview
+    date_on_calendar = locators.date_on_calendar
+
+    url = ""
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -58,7 +75,7 @@ class Candidates_Object:
             negative='Failed to set the name',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
 
     @Wrapit._exceptionHandler
@@ -73,7 +90,7 @@ class Candidates_Object:
 
         return result_flag
 
-    
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def add_job_applied(self,job_applied):
@@ -85,7 +102,7 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
-    
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -139,7 +156,7 @@ class Candidates_Object:
 
         return result_flag
 
-    
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def select_candidates(self):
@@ -189,9 +206,9 @@ class Candidates_Object:
             negative='Failed to set the round',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
-    
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def send_email(self):
@@ -217,97 +234,168 @@ class Candidates_Object:
 
         return result_flag
 
-   
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def get_url(self):
-        #Fetching conf details from the conf file
+    def fetch_email_invite(self):
+        "Get email contents and fetch URL and unique code"
         imap_host = conf_file.imaphost
         username = conf_file.username
         password = conf_file.app_password
-        "Get email contents and fetch URL and unique code"
+
+        time_elapsed = 0
+        unique_code = 0
         email_obj = Email_Util()
 
         #Connect to the IMAP host
         email_obj.connect(imap_host)
-    
-        #Login
-        if email_obj.login(username,password):
-            print("PASS: Successfully logged in.")
-        else:
-            print("FAIL: Failed to login")
-        '''
-        #Get a list of folder
-        folders = email_obj.get_folders() 
-        if folders != None or []:
-            print("PASS: Email folders:", email_obj.get_folders()) 
-
-        else:
-            print("FAIL: Didn't get folder details")
-        '''
-        #Select a folder
-        if email_obj.select_folder('Inbox'):
-            print("PASS: Successfully selected the folder: Inbox")
-        else:
-            print("FAIL: Failed to select the folder: Inbox")
-
-        #Get the latest email's unique id
-        uid = email_obj.get_latest_email_uid(subject = "Invitation to schedule an Interview with Qxf2 Services!",wait_time=300)
-        if uid != None:
-            print("PASS: Unique id of the latest email is: ",uid)
-        else:
-            print("FAIL: Didn't get unique id of latest email")
-        '''
-        #A. Look for an Email from provided sender, print uid and check it's contents
-        uid = email_obj.get_latest_email_uid(sender="Qxf2 Services",wait_time=300)
-        '''
-        if uid != None:
-            print("PASS: Unique id of the latest email with given sender is: ",uid)
-
-            #Check the text of the latest email id
-            email_body = email_obj.fetch_email_body(uid)
-            
-            print("nilaya")
-            print(type(email_body))
-            print(email_body)
-            print(raw_email)
-            link_pattern = re.compile('<a[^>]+href=\'(.*?)\'[^>]*>(.*)?</a>')
-            unique_code = re.compile('<b>[a-z0-9]{8}')
-            print("nilaya_waiting _for")
-            link = link_pattern.findall(raw_email)
-            u_code = unique_code.findall(raw_email)
-            print(u_code)
-            print(link)
-            
-            
-            data_flag = False
-            print("  - Automation checking mail contents")
-            for line in email_body:
-                line = line.replace('=','')
-                line = line.replace('<','')
-                line = line.replace('>','')
-
-                if "Hi Email_Util" and "This email was sent to you" in line:
-                    data_flag = True
-                    break
-            if data_flag == True:
-                print("PASS: Automation provided correct Email details. Email contents matched with provided data.")
-            else:
-                print("FAIL: Provided data not matched with Email contents. Looks like automation provided incorrect Email details")
-
-        else:
-            print("FAIL: After wait of 5 mins, looks like there is no email present with given sender")
-
-               
-        result_flag = self.get_url(self.select_url)
+        result_flag = email_obj.login(username, password)
         self.conditional_write(result_flag,
-            positive='Copied the URL',
-            negative='Failed to copy the URL',
+                               positive='Logged into %s' % imap_host,
+                               negative='Could not log into %s to fetch the activation email' % imap_host)
+        if result_flag is True:
+            result_flag = email_obj.select_folder('Inbox')
+            self.conditional_write(result_flag,
+                                   positive='Selected the folder Inbox',
+                                   negative='Could not select the folder Inbox')
+        uid = email_obj.get_latest_email_uid(
+                    subject="Invitation to schedule an Interview with Qxf2 Services!", sender='test@qxf2.com',wait_time=10)
+        email_body = email_obj.fetch_email_body(uid)
+
+
+        soup = BeautifulSoup(''.join(email_body), 'html.parser')
+        unique_code = soup.b.text
+        url = soup.a.get('href')
+        #link = print(type(link))
+
+        #return unique_code
+        #return link
+
+        #url = link
+
+        result_flag = self.open_url_new_tab(url,wait_time=1)
+        self.conditional_write(result_flag,
+            positive='OPened the new tab with link',
+            negative='Failed to open the new tab with link',
+            level='debug')
+
+
+        result_flag = self.set_text(self.select_unique_code,unique_code)
+        self.conditional_write(result_flag,
+            positive='Set unique code  to: %s'% unique_code,
+            negative='Failed to set the unique code',
+            level='debug')
+
+
+        result_flag = self.set_text(self.select_candidate_email,email)
+        self.conditional_write(result_flag,
+            positive='Set candidate email to: %s'% email,
+            negative='Failed to set the email',
+            level='debug')
+
+
+        result_flag = self.click_element(self.go_for_schedule)
+        self.conditional_write(result_flag,
+            positive='Clicked on Scheduling interview button',
+            negative='Failed to click on Scheduling interview button',
+            level='debug')
+
+
+        result_flag = self.click_element(self.date_picker)
+        self.conditional_write(result_flag,
+            positive='Set the date',
+            negative='Failed to set the date',
+            level='debug')
+
+
+
+        list = self.get_elements(self.date_on_calendar)
+        print(list)
+        print(len(list))
+        for i in range(len(list)):
+            date=self.get_text(self.date_on_calendar)
+            print(date)
+            '''
+            if(date.equalsIgnoreCase("10")):
+                {
+                result_flag = self.click_element(self.date_on_calendar)
+                }
+                self.conditional_write(result_flag,
+                    positive='Set the date',
+                    negative='Failed to set the date',
+                    level='debug')
+            '''
+
+        result_flag = self.set_text(self.date_on_calendar,date_check)
+        self.conditional_write(result_flag,
+            positive='Set the date',
+            negative='Failed to set the date',
+            level='debug')
+
+        '''
+        result_flag = self.click_element(self.confirm_interview_date)
+        self.conditional_write(result_flag,
+            positive='Clicked on confirming interview date',
+            negative='Failed to click on confirming interview date',
+            level='debug')
+
+
+        result_flag = self.click_element(self.confirm_interview_date)
+        self.conditional_write(result_flag,
+            positive='Clicked on confirming interview date',
+            negative='Failed to click on confirming interview date',
+            level='debug')
+
+
+        result_flag = self.click_element(self.select_free_slot)
+        self.conditional_write(result_flag,
+            positive='Selected free interview slot',
+            negative='Failed to select free interview slot',
+            level='debug')
+
+
+        result_flag = self.click_element(self.schedule_my_interview)
+        self.conditional_write(result_flag,
+            positive='Clicked on schedule my interview',
+            negative='Failed to click on schedule my interview',
+            level='debug')
+        '''
+
+        return result_flag
+
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def open_email_invite_link(self):
+        url = self.link
+        print("nilaya")
+        #print(url)
+        result_flag = self.open_url_new_tab(self.url,wait_time=1)
+        self.conditional_write(result_flag,
+            positive='OPened the new tab with link',
+            negative='Failed to open the new tab with link',
             level='debug')
 
         return result_flag
-            
-        
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def click_on_invite(self):
+        "Copy URL"
+        url = "60/1/eyJhbGciOiJIUzUxMiIsImlhdCI6MTU5NTQ4NjcwOCwiZXhwIjoxNTk2MDkxNTA4fQ.eyJjYW5kaWRhdGVfaWQiOiI2MCIsImpvYl9pZCI6IjEifQ.lpfFAZhZygidrssijed3qWRRJAuVIiU9Pqpa2h0ZI3BRXmn529rKE8tvpCdxcEpXoe2pkySYU1GNzgrviHsriQ/welcome"
+        result_flag = self.open(url,wait_time=1)
+        self.conditional_write(result_flag,
+            positive='OPened the new tab with link',
+            negative='Failed to open the new tab with link',
+            level='debug')
+
+        return result_flag
+
+
+
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def alert_accept(self):
@@ -320,8 +408,3 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
-
-
-   
-
-

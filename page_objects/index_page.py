@@ -14,5 +14,5 @@ class Index_Page(Base_Page,Index_Object):
     
     def start(self):
         "Use this method to go to specific URL -- if needed"
-        url = '/index'
+        url = '/'
         self.open(url)

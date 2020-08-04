@@ -21,3 +21,5 @@ round_duration = "45 minutes"
 round_description = "We will test your technical skills and give an excercise"
 round_requirements = "Laptop,Mobile,Headphone"
 
+date_picker = "06/08/2020"
+date_check = "12"

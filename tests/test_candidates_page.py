@@ -101,7 +101,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-
+        '''
         if result_flag is True:
           result_flag = test_obj.check_heading()
         test_obj.log_result(result_flag,
@@ -441,7 +441,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-
+        
         test_obj = PageFactory.get_page_object("candidates page")
 
 
@@ -453,16 +453,8 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        '''
-        result_flag = test_obj.copy_url()
-        test_obj.log_result(result_flag,
-                        positive="Successfully copied link\n",
-                        negative="Failed to copy link \nOn url: %s" % test_obj.get_current_url(),
-                        level="critical")
-        test_obj.write('Script duration: %d seconds\n' %
-                   (int(time.time()-start_time)))
-
-
+        
+        
         test_obj = PageFactory.get_page_object("candidates page")
 
 
@@ -526,8 +518,24 @@ def test_candidates_page(test_obj):
         test_obj = PageFactory.get_page_object("candidates page")
         
         
-        result_flag = test_obj.get_url()
+        result_flag = test_obj.fetch_email_invite()
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened link and interview scheduled\n",
+                        negative="Failed to open link \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+        
         '''
+        result_flag = test_obj.open_email_invite_link(url)
+        test_obj.log_result(result_flag,
+                        positive="Successfully opened link and interview scheduled\n",
+                        negative="Failed to open link \nOn url: %s" % test_obj.get_current_url(),
+                        level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                   (int(time.time()-start_time)))
+        
+        
         test_obj.log_result(result_flag,
                         positive="Got the url\n",
                         negative="Failed to get the url \nOn url: %s" % test_obj.get_current_url(),

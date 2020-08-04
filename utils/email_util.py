@@ -87,7 +87,7 @@ class Email_Util:
 
         return uid
 
-
+    
     def fetch_email_body(self,uid):
         "Fetch the email body for a given uid"
         email_body = []
@@ -106,7 +106,7 @@ class Email_Util:
         
         return email_body
         
-    
+    '''
     def get_email_body(self,email_msg):
         "Parse out the text of the email message. Handle multipart messages"
         email_body = []
@@ -119,7 +119,29 @@ class Email_Util:
             email_body.append(email_msg.get_payload())
 
         return email_body
+    '''
 
+    def get_email_body(self,email_msg):
+        "Parse out the text of the email message. Handle multipart messages"
+        email_body = []
+        maintype = email_msg.get_content_maintype()
+        #print(maintype) prints multipart
+        if maintype == 'multipart':
+            for part in email_msg.walk():
+                print (part.get_content_type()) 
+                if part.get_content_type() == "text/html":
+                    email_body.append(part.get_payload())
+            """
+            for part in email_msg.get_payload():
+                print(part.get_content_maintype()) #prints multipart
+                if part.get_content_maintype() == 'text':
+                    email_body.append(part.get_payload())
+            """
+        elif maintype == 'text':
+            email_body.append(email_msg.get_payload())
+
+        return email_body
+    
 
     def logout(self):
         "Logout"

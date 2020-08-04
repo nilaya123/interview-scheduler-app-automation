@@ -283,6 +283,17 @@ class Base_Page(Borg,unittest.TestCase):
         self.wait(wait_time)
 
 
+    def open_url_new_tab(self,url,wait_time=2):
+        "Visit the page base_url + url"
+        print("I am in open new url tab")
+        #self.get_current_url()
+        #if self.driver.current_url != url:
+        self.driver.get(url)
+            #element.send_keys(Keys.COMMAND + 't') 
+            #element.get(url)
+        self.wait(wait_time)
+
+
     def get_current_url(self):
         "Get the current URL"
         return self.driver.current_url
