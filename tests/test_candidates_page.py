@@ -57,12 +57,14 @@ def test_candidates_page(test_obj):
         job_applied = conf.job_applied
         comment_candidates = conf.comment_candidates
         select_round_level = conf.select_round_level
+        search_option = conf.search_option
+
 
         round_name = conf.round_name
         round_duration = conf.round_duration
         round_description = conf.round_description
         round_requirements = conf.round_requirements
-        
+
         #5. Set name in form
         result_flag = test_obj.set_user(username)
         test_obj.log_result(result_flag,
@@ -101,7 +103,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        '''
+
         if result_flag is True:
           result_flag = test_obj.check_heading()
         test_obj.log_result(result_flag,
@@ -112,7 +114,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         #11. Click on Interviewers Page
         result_flag = test_obj.click_on_link()
         test_obj.log_result(result_flag,
@@ -122,7 +124,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         #11. Click on Interviewers Page
         result_flag = test_obj.add_inter()
         test_obj.log_result(result_flag,
@@ -142,7 +144,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         #13. Add interviewer email
         result_flag = test_obj.set_email(interviewers_email)
         test_obj.log_result(result_flag,
@@ -152,7 +154,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         #14. Add interviewers designatiom
         result_flag = test_obj.set_designation(interviewers_designation)
         test_obj.log_result(result_flag,
@@ -172,7 +174,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         #16. Add interviewers endime
         result_flag = test_obj.set_endtime(interviewers_endtime)
         test_obj.log_result(result_flag,
@@ -181,7 +183,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
 
         #17. Save Interviewers details
         result_flag = test_obj.save()
@@ -191,7 +193,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
 
         #18. Click on Ok
         result_flag = test_obj.close_inter()
@@ -201,7 +203,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
 
         test_obj = PageFactory.get_page_object("jobs page")
 
@@ -224,7 +226,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         #16. Add interviewers endime
         result_flag = test_obj.set_job_interviewer(job_interviewers)
         test_obj.log_result(result_flag,
@@ -233,7 +235,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
 
         #17. Save Interviewers details
         result_flag = test_obj.submit_job()
@@ -255,9 +257,9 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         test_obj = PageFactory.get_page_object("candidates page")
-        
+
 
         result_flag = test_obj.add_candidates()
         test_obj.log_result(result_flag,
@@ -277,7 +279,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         #16. Add interviewers endime
         result_flag = test_obj.add_email(email_candidates)
         test_obj.log_result(result_flag,
@@ -296,7 +298,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
 
         #16. Add interviewers endime
         result_flag = test_obj.add_comments(comment_candidates)
@@ -306,7 +308,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
 
         #17. Save Interviewers details
         result_flag = test_obj.submit()
@@ -317,7 +319,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         test_obj = PageFactory.get_page_object("jobs page")
 
 
@@ -359,7 +361,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
 
         #22. Add Round description
         result_flag = test_obj.add_description(round_description)
@@ -381,7 +383,7 @@ def test_candidates_page(test_obj):
                    (int(time.time()-start_time)))
 
 
-        #23. Click Add 
+        #23. Click Add
         result_flag = test_obj.add()
         test_obj.log_result(result_flag,
                         positive="Successfully clicked on add \n",
@@ -390,8 +392,8 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
-        
+
+
         #24. Click ok on alert window
         #test_obj.alert_window()
         result_flag = test_obj.alert_accept()
@@ -402,8 +404,17 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         test_obj = PageFactory.get_page_object("candidates page")
+
+
+        result_flag = test_obj.search_candidate(search_option)
+        test_obj.log_result(result_flag,
+                            positive="Successfully searched candidates name\n",
+                            negative="Failed to search candidates name \nOn url: %s" % test_obj.get_current_url(),
+                            level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                       (int(time.time()-start_time)))
 
 
         result_flag = test_obj.select_candidates()
@@ -423,7 +434,7 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         result_flag = test_obj.select_round(select_round_level)
         test_obj.log_result(result_flag,
                         positive="Successfully opened select round and set round\n",
@@ -441,8 +452,18 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         test_obj = PageFactory.get_page_object("candidates page")
+
+        '''
+        result_flag = test_obj.search_candidate(search_option)
+        test_obj.log_result(result_flag,
+                            positive="Successfully searched candidates name\n",
+                            negative="Failed to search candidates name \nOn url: %s" % test_obj.get_current_url(),
+                            level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                       (int(time.time()-start_time)))
+
 
 
         result_flag = test_obj.select_candidates()
@@ -453,9 +474,6 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
-        
-        test_obj = PageFactory.get_page_object("candidates page")
 
 
         result_flag = test_obj.delete_candidates()
@@ -474,7 +492,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
 
         test_obj = PageFactory.get_page_object("interviewers page")
 
@@ -495,9 +513,9 @@ def test_candidates_page(test_obj):
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
 
-        
+
         test_obj = PageFactory.get_page_object("jobs page")
-        
+
         result_flag = test_obj.delete_job()
         test_obj.log_result(result_flag,
                         positive="Successfully opened delete jobs page\n",
@@ -516,8 +534,8 @@ def test_candidates_page(test_obj):
                    (int(time.time()-start_time)))
         '''
         test_obj = PageFactory.get_page_object("candidates page")
-        
-        
+
+
         result_flag = test_obj.fetch_email_invite()
         test_obj.log_result(result_flag,
                         positive="Successfully opened link and interview scheduled\n",
@@ -525,7 +543,7 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
+
         '''
         result_flag = test_obj.open_email_invite_link(url)
         test_obj.log_result(result_flag,
@@ -534,8 +552,8 @@ def test_candidates_page(test_obj):
                         level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                    (int(time.time()-start_time)))
-        
-        
+
+
         test_obj.log_result(result_flag,
                         positive="Got the url\n",
                         negative="Failed to get the url \nOn url: %s" % test_obj.get_current_url(),
@@ -557,25 +575,25 @@ def test_candidates_page(test_obj):
 
     assert expected_pass == actual_pass, "Test failed: %s"%__file__
 
-    
-#---START OF SCRIPT   
+
+#---START OF SCRIPT
 if __name__=='__main__':
     print("Start of %s"%__file__)
     #Creating an instance of the class
     options_obj = Option_Parser()
     options = options_obj.get_options()
-                
+
     #Run the test only if the options provided are valid
-    if options_obj.check_options(options): 
+    if options_obj.check_options(options):
         test_obj = PageFactory.get_page_object("Zero",base_url=options.url)
 
         #Setup and register a driver
         test_obj.register_driver(options.remote_flag,options.os_name,options.os_version,options.browser,options.browser_version,options.remote_project_name,options.remote_build_name)
 
-                
+
         #teardowm
         test_obj.wait(3)
-        test_obj.teardown() 
+        test_obj.teardown()
     else:
         print('ERROR: Received incorrect comand line input arguments')
         print(option_obj.print_usage())
