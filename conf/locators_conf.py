@@ -33,6 +33,7 @@ candidates_page = "xpath,//a[contains(.,'List the candidates')]"
 heading = "xpath,//h2[contains(.,'Why Interview Scheduler Application?')]"
 
 #Locators for Candidates Page
+search_option = "xpath,//input[contains(@type,'search')]"
 add_candidates_button = "xpath,//input[@id='add']"
 delete_candidate = "xpath,//button[contains(@data-candidateid,'')]"
 edit_candidate = "xpath,//input[@onclick='editCandidates()']"
@@ -53,9 +54,13 @@ select_unique_code = "xpath,//input[contains(@id,'candidate-name')]"
 select_candidate_email = "xpath,//input[contains(@id,'candidate-email')]"
 go_for_schedule = "xpath,//input[contains(@id,'submit')]"
 date_picker = "xpath,//input[contains(@id,'datepicker')]"
-date_on_calendar = "xpath,//table[@class='ui-datepicker-calendar']//td"
+#date_on_calendar = "xpath,//table[@class='ui-datepicker-calendar']//td"
+#date_on_calendar = "xpath,//td[not(contains(@class,'ui-datepicker-other-month'))]"
+#date_on_calendar = "xpath,//a[contains(text(),%s)]"
+#date_on_calendar = "xpath,//a[contains(.,%s)]"
+date_on_calendar = "xpath,//td[not(contains(@class,'ui-datepicker-other-month'))]/a[text()=%s]"
 confirm_interview_date = "xpath,//input[contains(@id,'submit')]"
-select_free_slot = "xpath,//input[@class='btn']"
+select_free_slot = "xpath,//input[@value='%s']"
 schedule_my_interview = "xpath,//input[contains(@value,'Schedule my interview')]"
 
 #Locators for Interviewers Page
@@ -80,7 +85,7 @@ submit_job_button = "xpath,//button[contains(@id,'submit')]"
 delete_job_button = "xpath,//a[text()='Junior QA']/parent::td/following-sibling::td/button[@data-jobrole='Junior QA']"
 remove_job_button = "xpath,//button[@id='remove-button']"
 
-#Locators for Rounds 
+#Locators for Rounds
 specific_round_add = "xpath,//a[text()='Junior QA']/parent::td/following-sibling::td/input[@value='Rounds']"
 add_rounds_button = "xpath,//input[@value='Add Rounds']"
 round_name = "xpath,//input[@id='rname']"
@@ -92,7 +97,7 @@ cancel_rounds_button = "xpath,//button[@id='cancelRound']"
 
 '''
 #Locators for the form object(form_object.py)
-name_field = "id,name"       
+name_field = "id,name"
 email_field = "name,email"
 phone_no_field = "css selector,#phone"
 click_me_button = "xpath,//button[text()='Click me!']"
@@ -132,5 +137,3 @@ bitcoin_real_time_price_button = "xpath,//android.widget.TextView[@resource-id='
 bitcoin_price_page_heading = "xpath,//android.widget.TextView[@text='Real Time Price of Bitcoin']"
 bitcoin_price_in_usd = "xpath,//android.widget.TextView[@resource-id='com.dudam.rohan.bitcoininfo:id/doller_value']"
 '''
-
-

@@ -57,6 +57,7 @@ def test_login_page(test_obj):
         email_candidates = conf.email_candidates
         job_applied = conf.job_applied
         comment_candidates = conf.comment_candidates
+        search_option = conf.search_option
 
         round_name = conf.round_name
         round_duration = conf.round_duration
@@ -404,6 +405,16 @@ def test_login_page(test_obj):
 
 
         test_obj = PageFactory.get_page_object("candidates page")
+
+
+        result_flag = test_obj.search_candidate(search_option)
+        test_obj.log_result(result_flag,
+                            positive="Successfully searched candidates name\n",
+                            negative="Failed to search candidates name \nOn url: %s" % test_obj.get_current_url(),
+                            level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                       (int(time.time()-start_time)))
+
 
 
         result_flag = test_obj.delete_candidates()

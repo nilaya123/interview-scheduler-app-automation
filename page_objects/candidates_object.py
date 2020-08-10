@@ -22,6 +22,7 @@ password = conf_file.app_password
 email = login.email_candidates
 date_picker = login.date_picker
 date_check = login.date_check
+free_slot = login.free_slot
 
 
 class Candidates_Object:
@@ -37,6 +38,7 @@ class Candidates_Object:
     delete_candidates_button = locators.delete_candidates_button
     remove_candidates_button = locators.remove_candidates_button
     select_candidate_button = locators.select_candidate_button
+    search_option = locators.search_option
     thumbs_up_button = locators.thumbs_up_button
     thumbs_down_button = locators.thumbs_down_button
     select_round_level_scroll = locators.select_round_level_scroll
@@ -52,6 +54,9 @@ class Candidates_Object:
     date_on_calendar = locators.date_on_calendar
 
     url = ""
+
+    now = datetime.datetime.now()
+    date = now.day
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -127,6 +132,19 @@ class Candidates_Object:
             negative='Failed to click on Submit button',
             level='debug')
         result_flag = self.alert_accept()
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def search_candidate(self,search_option):
+        "Click on 'Search' button"
+        result_flag = self.set_text(self.search_option,search_option)
+        self.conditional_write(result_flag,
+            positive='Search for Candidate name: %s'%search_option,
+            negative='Failed to Search for Candidate name',
+            level='debug')
 
         return result_flag
 
@@ -308,29 +326,21 @@ class Candidates_Object:
             level='debug')
 
 
-
-        list = self.get_elements(self.date_on_calendar)
-        print(list)
-        print(len(list))
-        for i in range(len(list)):
-            date=self.get_text(self.date_on_calendar)
+        date_elements = self.get_elements(self.date_on_calendar%date)
+        #print(date_elements)
+        for date_element in date_elements:
+            date = self.get_dom_text(date_element)
             print(date)
-            '''
-            if(date.equalsIgnoreCase("10")):
-                {
-                result_flag = self.click_element(self.date_on_calendar)
-                }
+            #print(type(date))
+            now = datetime.datetime.now()
+            date = now.day
+            print(date)
+            if(date == date+6):
+                result_flag = self.click_element(self.date_on_calendar%date)
                 self.conditional_write(result_flag,
                     positive='Set the date',
                     negative='Failed to set the date',
                     level='debug')
-            '''
-
-        result_flag = self.set_text(self.date_on_calendar,date_check)
-        self.conditional_write(result_flag,
-            positive='Set the date',
-            negative='Failed to set the date',
-            level='debug')
 
         '''
         result_flag = self.click_element(self.confirm_interview_date)
@@ -340,14 +350,7 @@ class Candidates_Object:
             level='debug')
 
 
-        result_flag = self.click_element(self.confirm_interview_date)
-        self.conditional_write(result_flag,
-            positive='Clicked on confirming interview date',
-            negative='Failed to click on confirming interview date',
-            level='debug')
-
-
-        result_flag = self.click_element(self.select_free_slot)
+        result_flag = self.click_element(self.select_free_slot%free_slot)
         self.conditional_write(result_flag,
             positive='Selected free interview slot',
             negative='Failed to select free interview slot',
@@ -359,7 +362,7 @@ class Candidates_Object:
             positive='Clicked on schedule my interview',
             negative='Failed to click on schedule my interview',
             level='debug')
-        '''
+
 
         return result_flag
 
@@ -394,8 +397,6 @@ class Candidates_Object:
         return result_flag
 
 
-
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def alert_accept(self):
@@ -408,3 +409,4 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
+        '''
