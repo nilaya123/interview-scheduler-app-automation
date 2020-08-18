@@ -33,6 +33,7 @@ class Candidates_Object:
     name_candidates = locators.name_candidates
     email_candidates = locators.email_candidates
     job_applied = locators.job_applied
+    job_applied_select = locators.job_applied_select
     comment_candidates = locators.comment_candidates
     submit_candidates_button = locators.submit_candidates_button
     delete_candidates_button = locators.delete_candidates_button
@@ -53,10 +54,6 @@ class Candidates_Object:
     schedule_my_interview = locators.schedule_my_interview
     date_on_calendar = locators.date_on_calendar
 
-    url = ""
-
-    now = datetime.datetime.now()
-    date = now.day
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -82,7 +79,6 @@ class Candidates_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def add_email(self,email_candidates):
@@ -95,14 +91,15 @@ class Candidates_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_job_applied(self,job_applied):
+    def add_job_applied(self,job_applied_select,wait_seconds=1):
         "Set the email on the form"
-        result_flag = self.set_text(self.job_applied,job_applied)
+        result_flag = self.click_element(self.job_applied)
+        self.wait(wait_seconds)
+        result_flag = self.click_element(self.job_applied_select%job_applied_select)
         self.conditional_write(result_flag,
-            positive='Set the email to: %s'%job_applied,
+            positive='Set the email to: %s'%job_applied_select,
             negative='Failed to set the email in the form',
             level='debug')
 
@@ -279,21 +276,14 @@ class Candidates_Object:
         uid = email_obj.get_latest_email_uid(
                     subject="Invitation to schedule an Interview with Qxf2 Services!", sender='test@qxf2.com',wait_time=10)
         email_body = email_obj.fetch_email_body(uid)
-
-
         soup = BeautifulSoup(''.join(email_body), 'html.parser')
         unique_code = soup.b.text
         url = soup.a.get('href')
-        #link = print(type(link))
 
-        #return unique_code
-        #return link
-
-        #url = link
 
         result_flag = self.open_url_new_tab(url,wait_time=1)
         self.conditional_write(result_flag,
-            positive='OPened the new tab with link',
+            positive='Opened the new tab with link',
             negative='Failed to open the new tab with link',
             level='debug')
 
@@ -321,64 +311,40 @@ class Candidates_Object:
 
         result_flag = self.click_element(self.date_picker)
         self.conditional_write(result_flag,
-            positive='Set the date',
-            negative='Failed to set the date',
+            positive='Get the date',
+            negative='Failed to get the date',
             level='debug')
 
+        now = datetime.datetime.now()
+        date = now.day
+        date = date + 7
+        result_flag = self.click_element(self.date_on_calendar%date)
+        self.conditional_write(result_flag,
+                positive='Set the date',
+                negative='Failed to set the date',
+                level='debug')
 
-        date_elements = self.get_elements(self.date_on_calendar%date)
-        #print(date_elements)
-        for date_element in date_elements:
-            date = self.get_dom_text(date_element)
-            print(date)
-            #print(type(date))
-            now = datetime.datetime.now()
-            date = now.day
-            print(date)
-            if(date == date+6):
-                result_flag = self.click_element(self.date_on_calendar%date)
-                self.conditional_write(result_flag,
-                    positive='Set the date',
-                    negative='Failed to set the date',
-                    level='debug')
 
-        '''
         result_flag = self.click_element(self.confirm_interview_date)
         self.conditional_write(result_flag,
             positive='Clicked on confirming interview date',
             negative='Failed to click on confirming interview date',
             level='debug')
 
-
-        result_flag = self.click_element(self.select_free_slot%free_slot)
+        #time_slot = self.get_dom_text
+        result_flag = self.click_element(self.select_free_slot)
         self.conditional_write(result_flag,
             positive='Selected free interview slot',
             negative='Failed to select free interview slot',
             level='debug')
 
-
+        self.wait(10)
         result_flag = self.click_element(self.schedule_my_interview)
         self.conditional_write(result_flag,
             positive='Clicked on schedule my interview',
             negative='Failed to click on schedule my interview',
             level='debug')
 
-
-        return result_flag
-
-
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def open_email_invite_link(self):
-        url = self.link
-        print("nilaya")
-        #print(url)
-        result_flag = self.open_url_new_tab(self.url,wait_time=1)
-        self.conditional_write(result_flag,
-            positive='OPened the new tab with link',
-            negative='Failed to open the new tab with link',
-            level='debug')
 
         return result_flag
 
@@ -409,4 +375,3 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
-        '''

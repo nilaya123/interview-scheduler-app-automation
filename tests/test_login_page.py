@@ -47,20 +47,20 @@ def test_login_page(test_obj):
         interviewers_name = conf.interviewers_name
         interviewers_email = conf.interviewers_email
         interviewers_designation = conf.interviewers_designation
-        interviewers_starttime = conf.interviewers_starttime
-        interviewers_endtime = conf.interviewers_endtime
+        interviewers_starttime_drop = conf.interviewers_starttime_drop
+        interviewers_endtime_drop = conf.interviewers_endtime_drop
 
         job_role = conf.job_role
         job_interviewers = conf.job_interviewers
 
         name_candidates = conf.name_candidates
         email_candidates = conf.email_candidates
-        job_applied = conf.job_applied
+        job_applied_select = conf.job_applied_select
         comment_candidates = conf.comment_candidates
         search_option = conf.search_option
 
         round_name = conf.round_name
-        round_duration = conf.round_duration
+        round_duration_select = conf.round_duration_select
         round_description = conf.round_description
         round_requirements = conf.round_requirements
 
@@ -84,17 +84,6 @@ def test_login_page(test_obj):
 
         #10. Set and submit the form in one go
         result_flag = test_obj.login()
-        test_obj.log_result(result_flag,
-                            positive="Successfully logged in the page\n",
-                            negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
-
-
-        #11. Click ok on alert window
-        #test_obj.alert_window()
-        result_flag = test_obj.alert_accept()
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
                             negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
@@ -165,7 +154,7 @@ def test_login_page(test_obj):
 
 
         #15. Add interviewers starttime
-        result_flag = test_obj.set_starttime(interviewers_starttime)
+        result_flag = test_obj.set_starttime(interviewers_starttime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers start time\n",
                             negative="Failed to add Interviewers start time \nOn url: %s" % test_obj.get_current_url(),
@@ -175,7 +164,7 @@ def test_login_page(test_obj):
 
 
         #16. Add interviewers endime
-        result_flag = test_obj.set_endtime(interviewers_endtime)
+        result_flag = test_obj.set_endtime(interviewers_endtime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers end time\n",
                             negative="Failed to add Interviewers end time \nOn url: %s" % test_obj.get_current_url(),
@@ -246,17 +235,6 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #18. Click ok on alert window
-        #test_obj.alert_window()
-        result_flag = test_obj.alert_accept()
-        test_obj.log_result(result_flag,
-                            positive="Successfully logged in the page\n",
-                            negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
-
-
         test_obj = PageFactory.get_page_object("candidates page")
 
 
@@ -290,7 +268,7 @@ def test_login_page(test_obj):
 
 
         #16. Add interviewers endime
-        result_flag = test_obj.add_job_applied(job_applied)
+        result_flag = test_obj.add_job_applied(job_applied_select)
         test_obj.log_result(result_flag,
                             positive="Successfully added Job appliedl\n",
                             negative="Failed to add Job applied \nOn url: %s" % test_obj.get_current_url(),
@@ -353,7 +331,7 @@ def test_login_page(test_obj):
 
 
         #21. Add Round duration
-        result_flag = test_obj.add_duration(round_duration)
+        result_flag = test_obj.add_duration(round_duration_select)
         test_obj.log_result(result_flag,
                             positive="Successfully added Round duration\n",
                             negative="Failed to add Round duration \nOn url: %s" % test_obj.get_current_url(),
@@ -392,18 +370,6 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-
-        #24. Click ok on alert window
-        #test_obj.alert_window()
-        result_flag = test_obj.alert_accept()
-        test_obj.log_result(result_flag,
-                            positive="Successfully added round to job\n",
-                            negative="Failed to add round to job \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
-
-
         test_obj = PageFactory.get_page_object("candidates page")
 
 
@@ -414,7 +380,6 @@ def test_login_page(test_obj):
                             level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                        (int(time.time()-start_time)))
-
 
 
         result_flag = test_obj.delete_candidates()
@@ -437,6 +402,7 @@ def test_login_page(test_obj):
 
         test_obj = PageFactory.get_page_object("interviewers page")
 
+
         result_flag = test_obj.delete_interviewers()
         test_obj.log_result(result_flag,
                             positive="Successfully opened delete interviewers page\n",
@@ -457,6 +423,7 @@ def test_login_page(test_obj):
 
         test_obj = PageFactory.get_page_object("jobs page")
 
+
         result_flag = test_obj.delete_job()
         test_obj.log_result(result_flag,
                             positive="Successfully opened delete jobs page\n",
@@ -473,7 +440,6 @@ def test_login_page(test_obj):
                             level="critical")
         test_obj.write('Script duration: %d seconds\n' %
                        (int(time.time()-start_time)))
-
 
 
         #Turn off the highlighting feature

@@ -6,17 +6,24 @@ The form consists of some input fields, a dropdown, a checkbox and a button
 from .Base_Page import Base_Page
 import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
+import string, random
+email_new = []
 
 
 class Form_Object:
     "Page object for the Form"
-    
+
     #locators
     username_field = locators.username_field
     password_field = locators.password_field
+    user_name_field = locators.user_name_field
+    email_field = locators.email_field
+    password_field = locators.password_field
+    confirm_password_field = locators.confirm_password_field
     login_button = locators.login_button
     signup_button = locators.signup_button
-    redirect_title = "redirect"    
+    submit_button = locators.submit_button
+    redirect_title = "redirect"
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -24,11 +31,11 @@ class Form_Object:
         "Set the name on the form"
         result_flag = self.set_text(self.username_field,username)
         self.conditional_write(result_flag,
-            positive='Set the name to: %s'% username,
+            positive='Set the name to: %s'%username,
             negative='Failed to set the name in the form',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
 
     @Wrapit._exceptionHandler
@@ -57,7 +64,7 @@ class Form_Object:
 
         return result_flag
 
-    
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def alert_accept(self):
@@ -74,6 +81,92 @@ class Form_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
+    def signup(self):
+        "Click on 'Signup' button"
+        result_flag = self.click_element(self.signup_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on the "Signup" button',
+            negative='Failed to click on "Signup" button',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def new_user(self,new_user):
+        "Set the user name on the registration form"
+        result_flag = self.set_text(self.user_name_field,new_user)
+        self.conditional_write(result_flag,
+            positive='Set the name to: %s'% new_user,
+            negative='Failed to set the name in the form',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+
+    #email_new = 'nil'.join(random.choices(string.ascii_uppercase + string.digits, k = 4))
+    #print(email_new)
+    #email_new += @qxf2.com
+    #print(email_new)
+
+    def set_email(self,email):
+        "Set the user name on the registration form"
+        result_flag = self.set_text(self.email_field,email)
+        self.conditional_write(result_flag,
+            positive='Set the email to: %s'% email,
+            negative='Failed to set the email in the form',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def enter_password(self,password):
+        "Set the password on the registration form"
+        result_flag = self.set_text(self.password_field,password)
+        self.conditional_write(result_flag,
+            positive='Set the password to: %s'% password,
+            negative='Failed to set the password in the form',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def confirm_password(self,password):
+        "Set the confirm password on the registration form"
+        result_flag = self.set_text(self.confirm_password_field,password)
+        self.conditional_write(result_flag,
+            positive='Set the confirm password to: %s'% password,
+            negative='Failed to set the confirm password in the form',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def submit(self):
+        "Click on 'Submit' button"
+        result_flag = self.click_element(self.submit_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on the "Submit" button',
+            negative='Failed to click on "Submit" button',
+            level='debug')
+
+        result_flag = self.alert_accept()
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
     def accept_terms(self):
         "Accept the terms and conditions"
         result_flag = self.select_checkbox(self.tac_checkbox)
@@ -81,7 +174,7 @@ class Form_Object:
             positive='Accepted the terms and conditions',
             negative='Failed to accept the terms and conditions',
             level='debug')
-            
+
         return result_flag
 
 
@@ -93,7 +186,7 @@ class Form_Object:
         if self.redirect_title in self.driver.title:
             result_flag = True
             self.switch_page("redirect")
-        
+
         return result_flag
 
 
@@ -108,5 +201,3 @@ class Form_Object:
         result_flag &= self.check_redirect()
 
         return result_flag
-
-

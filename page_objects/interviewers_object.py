@@ -10,14 +10,16 @@ from utils.Wrapit import Wrapit
 
 class Interviewers_Object:
     "Page object for the Form"
-    
+
     #locators
     add_interviewers_button = locators.add_interviewers_button
     interviewers_name = locators.interviewers_name
     interviewers_email = locators.interviewers_email
     interviewers_designation = locators.interviewers_designation
     interviewers_starttime = locators.interviewers_starttime
+    interviewers_starttime_drop = locators.interviewers_starttime_drop
     interviewers_endtime = locators.interviewers_endtime
+    interviewers_endtime_drop = locators.interviewers_endtime_drop
     add_time_button = locators.add_time_button
     save_interviewers_button = locators.save_interviewers_button
     cancel_interviewers_button = locators.cancel_interviewers_button
@@ -47,7 +49,7 @@ class Interviewers_Object:
             negative='Failed to set the name in the form',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -72,7 +74,7 @@ class Interviewers_Object:
             negative='Failed to set the email in the form',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -84,31 +86,35 @@ class Interviewers_Object:
             negative='Failed to set the designation in the form',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_starttime(self,interviewers_starttime):
-        "Set the name on the form"
-        result_flag = self.set_text(self.interviewers_starttime,interviewers_starttime)
+    def set_starttime(self,interviewers_starttime_drop,wait_seconds=1):
+        "Set the starttime on the form"
+        result_flag = self.click_element(self.interviewers_starttime)
+        self.wait(wait_seconds)
+        result_flag &= self.click_element(self.interviewers_starttime_drop%interviewers_starttime_drop)
         self.conditional_write(result_flag,
-            positive='Set the start time to: %s'% interviewers_starttime,
+            positive='Set the start time to: %s'% interviewers_starttime_drop,
             negative='Failed to set the start time in the form',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_endtime(self,interviewers_endtime):
-        "Set the name on the form"
-        result_flag = self.set_text(self.interviewers_endtime,interviewers_endtime)
+    def set_endtime(self,interviewers_endtime_drop,wait_seconds=1):
+        "Set the endtime on the form"
+        result_flag = self.click_element(self.interviewers_endtime)
+        self.wait(wait_seconds)
+        result_flag = self.click_element(self.interviewers_endtime_drop%interviewers_endtime_drop)
         self.conditional_write(result_flag,
-            positive='Set the end time to: %s'% interviewers_endtime,
+            positive='Set the end time to: %s'% interviewers_endtime_drop,
             negative='Failed to set the end time in the form',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -183,9 +189,9 @@ class Interviewers_Object:
             level='debug')
 
         return result_flag
-    
 
-    
+
+
     '''
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -197,7 +203,7 @@ class Interviewers_Object:
             negative='Failed to set the name in the form',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
 
     @Wrapit._exceptionHandler
@@ -226,7 +232,7 @@ class Interviewers_Object:
 
         return result_flag
 
-    
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def alert_accept(self):
@@ -250,7 +256,7 @@ class Interviewers_Object:
             positive='Accepted the terms and conditions',
             negative='Failed to accept the terms and conditions',
             level='debug')
-            
+
         return result_flag
 
 
@@ -262,7 +268,7 @@ class Interviewers_Object:
         if self.redirect_title in self.driver.title:
             result_flag = True
             self.switch_page("redirect")
-        
+
         return result_flag
 
 

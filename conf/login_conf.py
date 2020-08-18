@@ -1,24 +1,26 @@
 user_name = "nilaya"
+email = "nayan+11@qxf2.com"
 password = "nilaya1234"
+new_user = "anonymous"
 
 interviewers_name = "avinash"
 interviewers_email = "avinash@qxf2.com"
 interviewers_designation = "Manager QA"
-interviewers_starttime = "11:00"
-interviewers_endtime = "19:30"
+interviewers_starttime_drop = "11:00"
+interviewers_endtime_drop = "19:30"
 
 job_role = "Junior QA"
 job_interviewers = "avinash"
 
 name_candidates = "Mayara"
 email_candidates = "test+100@qxf2.com"
-job_applied = "Junior QA"
-comment_candidates = "NA"
+job_applied_select = "Junior QA"
+comment_candidates = "Nilaya's referral"
 select_round_level = "Technical Round"
 search_option = "Mayara"
 
 round_name = "Technical Round"
-round_duration = "45 minutes"
+round_duration_select = "45 minutes"
 round_description = "We will test your technical skills and give an exercise"
 round_requirements = "Laptop,Mobile,Headphone"
 

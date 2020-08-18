@@ -10,12 +10,13 @@ from utils.Wrapit import Wrapit
 
 class Rounds_Object:
     "Page object for the Rounds"
-    
+
     #locators
     specific_round_add = locators.specific_round_add
     add_rounds_button = locators.add_rounds_button
     round_name = locators.round_name
     round_duration = locators.round_duration
+    round_duration_select = locators.round_duration_select
     round_description = locators.round_description
     round_requirements = locators.round_requirements
     add_button = locators.add_button
@@ -55,22 +56,24 @@ class Rounds_Object:
             negative='Failed to set the name',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_duration(self,round_duration):
+    def add_duration(self,round_duration_select,wait_seconds=1):
         "Set the duration of round"
-        result_flag = self.set_text(self.round_duration,round_duration)
+        result_flag = self.click_element(self.round_duration)
+        self.wait(wait_seconds)
+        result_flag = self.click_element(self.round_duration_select%round_duration_select)
         self.conditional_write(result_flag,
-            positive='Set the round duration to: %s'%round_duration,
+            positive='Set the round duration to: %s'%round_duration_select,
             negative='Failed to set the round duration',
             level='debug')
 
         return result_flag
 
-    
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def add_description(self,round_description):
@@ -82,7 +85,7 @@ class Rounds_Object:
             level='debug')
 
         return result_flag
-    
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -110,7 +113,7 @@ class Rounds_Object:
 
         return result_flag
 
-    
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def alert_accept(self):
@@ -123,8 +126,3 @@ class Rounds_Object:
             level='debug')
 
         return result_flag
-
-
-
-
-
