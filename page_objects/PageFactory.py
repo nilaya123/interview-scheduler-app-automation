@@ -1,5 +1,5 @@
 """
-PageFactory uses the factory design pattern. 
+PageFactory uses the factory design pattern.
 get_page_object() returns the appropriate page object.
 Add elif clauses as and when you implement new pages.
 Pages implemented so far:
@@ -9,8 +9,6 @@ Pages implemented so far:
 4. Bitcoin main page
 5. Bitcoin price page
 """
-
-#from page_objects.zero_mobile_page import Zero_Mobile_Page
 from page_objects.zero_page import Zero_Page
 from page_objects.login_page import Login_Page
 from page_objects.scheduler_main_page import Scheduler_Main_Page

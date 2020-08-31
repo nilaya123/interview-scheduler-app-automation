@@ -12,7 +12,7 @@ import conf.email_conf as conf_file
 import conf.login_conf as login
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import datetime
+from datetime import datetime, timedelta
 
 
 #Fetching conf details from the conf file
@@ -314,10 +314,18 @@ class Candidates_Object:
             positive='Get the date',
             negative='Failed to get the date',
             level='debug')
-
+        '''
         now = datetime.datetime.now()
         date = now.day
         date = date + 7
+        '''
+        N_DAYS_After = 7
+
+        date = datetime.now()
+        date = date + timedelta(days=N_DAYS_After)
+        date = date.day
+        print(date)
+
         result_flag = self.click_element(self.date_on_calendar%date)
         self.conditional_write(result_flag,
                 positive='Set the date',

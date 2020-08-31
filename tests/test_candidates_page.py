@@ -55,14 +55,14 @@ def test_candidates_page(test_obj):
 
         name_candidates = conf.name_candidates
         email_candidates = conf.email_candidates
-        job_applied = conf.job_applied
+        job_applied_select = conf.job_applied_select
         comment_candidates = conf.comment_candidates
         select_round_level = conf.select_round_level
         search_option = conf.search_option
 
 
         round_name = conf.round_name
-        round_duration = conf.round_duration
+        round_duration_select = conf.round_duration_select
         round_description = conf.round_description
         round_requirements = conf.round_requirements
 
@@ -156,7 +156,7 @@ def test_candidates_page(test_obj):
 
 
         #15. Add interviewers starttime
-        result_flag = test_obj.set_starttime(interviewers_starttime)
+        result_flag = test_obj.set_starttime(interviewers_starttime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers start time\n",
                             negative="Failed to add Interviewers start time \nOn url: %s" % test_obj.get_current_url(),
@@ -166,7 +166,7 @@ def test_candidates_page(test_obj):
 
 
         #16. Add interviewers endime
-        result_flag = test_obj.set_endtime(interviewers_endtime)
+        result_flag = test_obj.set_endtime(interviewers_endtime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers end time\n",
                             negative="Failed to add Interviewers end time \nOn url: %s" % test_obj.get_current_url(),
@@ -270,7 +270,7 @@ def test_candidates_page(test_obj):
 
 
         #16. Add interviewers endime
-        result_flag = test_obj.add_job_applied(job_applied)
+        result_flag = test_obj.add_job_applied(job_applied_select)
         test_obj.log_result(result_flag,
                             positive="Successfully added Job appliedl\n",
                             negative="Failed to add Job applied \nOn url: %s" % test_obj.get_current_url(),
@@ -333,7 +333,7 @@ def test_candidates_page(test_obj):
 
 
         #21. Add Round duration
-        result_flag = test_obj.add_duration(round_duration)
+        result_flag = test_obj.add_duration(round_duration_select)
         test_obj.log_result(result_flag,
                             positive="Successfully added Round duration\n",
                             negative="Failed to add Round duration \nOn url: %s" % test_obj.get_current_url(),
