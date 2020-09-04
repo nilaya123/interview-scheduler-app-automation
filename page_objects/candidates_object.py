@@ -39,7 +39,7 @@ class Candidates_Object:
     delete_candidates_button = locators.delete_candidates_button
     remove_candidates_button = locators.remove_candidates_button
     select_candidate_button = locators.select_candidate_button
-    search_option = locators.search_option
+    search_option_candidate = locators.search_option
     thumbs_up_button = locators.thumbs_up_button
     thumbs_down_button = locators.thumbs_down_button
     select_round_level_scroll = locators.select_round_level_scroll
@@ -135,11 +135,11 @@ class Candidates_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def search_candidate(self,search_option):
+    def search_candidate(self,search_option_candidate):
         "Click on 'Search' button"
-        result_flag = self.set_text(self.search_option,search_option)
+        result_flag = self.set_text(self.search_option_candidate,search_option_candidate)
         self.conditional_write(result_flag,
-            positive='Search for Candidate name: %s'%search_option,
+            positive='Search for Candidate name: %s'%search_option_candidate,
             negative='Failed to Search for Candidate name',
             level='debug')
 

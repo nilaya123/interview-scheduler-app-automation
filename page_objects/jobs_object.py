@@ -10,7 +10,7 @@ from utils.Wrapit import Wrapit
 
 class Jobs_Object:
     "Page object for the Form"
-    
+
     #locators
     add_jobs_button = locators.add_jobs_button
     job_role = locators.job_role
@@ -18,6 +18,7 @@ class Jobs_Object:
     submit_job_button = locators.submit_job_button
     delete_job_button = locators.delete_job_button
     remove_job_button = locators.remove_job_button
+    search_option_job = locators.search_option
 
 
     @Wrapit._exceptionHandler
@@ -42,7 +43,7 @@ class Jobs_Object:
             negative='Failed to set the job role',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -54,9 +55,9 @@ class Jobs_Object:
             negative='Failed to set the interviewers',
             level='debug')
 
-        return result_flag 
+        return result_flag
 
-      
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def submit_job(self):
@@ -95,4 +96,15 @@ class Jobs_Object:
 
         return result_flag
 
-   
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def search_job(self,search_option_job):
+        "Click on 'Search' button"
+        result_flag = self.set_text(self.search_option_job,search_option_job)
+        self.conditional_write(result_flag,
+            positive='Search for Job name: %s'%search_option_job,
+            negative='Failed to Search for Job name',
+            level='debug')
+
+        return result_flag

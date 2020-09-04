@@ -26,6 +26,7 @@ class Interviewers_Object:
     close_interviewers_button = locators.close_interviewers_button
     delete_interviewers_button = locators.delete_interviewers_button
     remove_interviewers_button = locators.remove_interviewers_button
+    search_option_interviewer = locators.search_option
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -186,6 +187,19 @@ class Interviewers_Object:
         self.conditional_write(result_flag,
             positive='Clicked on remove interviewers button',
             negative='Failed to click on button',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def search_interviewer(self,search_option_interviewer):
+        "Click on 'Search' button"
+        result_flag = self.set_text(self.search_option_interviewer,search_option_interviewer)
+        self.conditional_write(result_flag,
+            positive='Search for Interviewer name: %s'%search_option_interviewer,
+            negative='Failed to Search for Interviewer name',
             level='debug')
 
         return result_flag
