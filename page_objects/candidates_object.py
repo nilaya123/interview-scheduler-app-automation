@@ -53,6 +53,7 @@ class Candidates_Object:
     select_free_slot = locators.select_free_slot
     schedule_my_interview = locators.schedule_my_interview
     date_on_calendar = locators.date_on_calendar
+    calendar_link = locators.calendar_link
 
 
     @Wrapit._exceptionHandler
@@ -230,9 +231,10 @@ class Candidates_Object:
         "Click on send email button"
         result_flag = self.click_element(self.send_email_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the send eail button',
+            positive='Clicked on the send email button',
             negative='Failed to click on send email button',
             level='debug')
+        result_flag = self.alert_accept()
 
         return result_flag
 
@@ -274,14 +276,14 @@ class Candidates_Object:
                                    positive='Selected the folder Inbox',
                                    negative='Could not select the folder Inbox')
         uid = email_obj.get_latest_email_uid(
-                    subject="Invitation to schedule an Interview with Qxf2 Services!", sender='test@qxf2.com',wait_time=10)
+                    subject="Invitation to schedule an Interview with Qxf2 Services!", sender='test@qxf2.com',wait_time=25)
         email_body = email_obj.fetch_email_body(uid)
         soup = BeautifulSoup(''.join(email_body), 'html.parser')
         unique_code = soup.b.text
         url = soup.a.get('href')
 
 
-        result_flag = self.open_url_new_tab(url,wait_time=1)
+        result_flag = self.open_url_new_tab(url,wait_time=10)
         self.conditional_write(result_flag,
             positive='Opened the new tab with link',
             negative='Failed to open the new tab with link',
@@ -314,17 +316,12 @@ class Candidates_Object:
             positive='Get the date',
             negative='Failed to get the date',
             level='debug')
-        '''
-        now = datetime.datetime.now()
-        date = now.day
-        date = date + 7
-        '''
+
         N_DAYS_After = 7
 
         date = datetime.now()
         date = date + timedelta(days=N_DAYS_After)
         date = date.day
-        print(date)
 
         result_flag = self.click_element(self.date_on_calendar%date)
         self.conditional_write(result_flag,
@@ -347,25 +344,26 @@ class Candidates_Object:
             level='debug')
 
         self.wait(10)
+
+        result_flag = self.scroll_down(self.schedule_my_interview)
+        self.conditional_write(result_flag,
+            positive='Scrolling down the page till Schedule my interview option',
+            negative='Failed to scroll down the page till schedule my interview option',
+            level='debug')
+
+
         result_flag = self.click_element(self.schedule_my_interview)
         self.conditional_write(result_flag,
             positive='Clicked on schedule my interview',
             negative='Failed to click on schedule my interview',
             level='debug')
 
+        self.wait(10)
 
-        return result_flag
-
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def click_on_invite(self):
-        "Copy URL"
-        url = "60/1/eyJhbGciOiJIUzUxMiIsImlhdCI6MTU5NTQ4NjcwOCwiZXhwIjoxNTk2MDkxNTA4fQ.eyJjYW5kaWRhdGVfaWQiOiI2MCIsImpvYl9pZCI6IjEifQ.lpfFAZhZygidrssijed3qWRRJAuVIiU9Pqpa2h0ZI3BRXmn529rKE8tvpCdxcEpXoe2pkySYU1GNzgrviHsriQ/welcome"
-        result_flag = self.open(url,wait_time=1)
+        result_flag = self.click_element(self.calendar_link)
         self.conditional_write(result_flag,
-            positive='OPened the new tab with link',
-            negative='Failed to open the new tab with link',
+            positive='Clicked on calendar link',
+            negative='Failed to click on calendar link',
             level='debug')
 
         return result_flag

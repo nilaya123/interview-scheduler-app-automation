@@ -2,15 +2,7 @@
 This is an example automated test to help you test interview scheduler application
 Our automated test will do the following:
     #Open Login Page of Scheduler App.
-    #Enter Login details.
-    #Login to app.
-    #Go to interviewers page.
-    #Add the details of interviewers add the same.
-    #Go to the Jobs Page
-    #Add the job details, add the same.
-    #Go to the candidates page.
-    #add the candidate details, add the same.
-    #Go to the Jobs page, add rounds.
+    #Enter SignUp Details and signup
 
 """
 import os
@@ -32,7 +24,7 @@ def test_signup_user(test_obj):
         expected_pass = 0
         actual_pass = -1
 
-        #1. Create a test object and fill the example form.
+        #1. Create a test object and fill the sign up form.
         test_obj = PageFactory.get_page_object("login page")
         #Set start_time with current time
         start_time = int(time.time())

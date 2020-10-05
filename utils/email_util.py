@@ -58,7 +58,7 @@ class Email_Util:
         return result_flag
 
 
-    def get_latest_email_uid(self,subject=None,sender=None,time_delta=10,wait_time=300):
+    def get_latest_email_uid(self,subject=None,sender=None,time_delta=20,wait_time=300):
         "Search for a subject and return the latest unique ids of the emails"
         uid = None
         time_elapsed = 0

@@ -11,6 +11,7 @@ Our automated test will do the following:
     #Go to the candidates page.
     #add the candidate details, add the same.
     #Go to the Jobs page, add rounds.
+    #Go to Candidates/JObs/Rounds and ddelete the same.
 
 """
 import os
@@ -32,7 +33,7 @@ def test_login_page(test_obj):
         expected_pass = 0
         actual_pass = -1
 
-        #1. Create a test object and fill the example form.
+        #1. Create a test object and fill the login form.
         test_obj = PageFactory.get_page_object("login page")
         #Set start_time with current time
         start_time = int(time.time())
@@ -40,7 +41,7 @@ def test_login_page(test_obj):
         # Turn on the highlighting feature
         test_obj.turn_on_highlight()
 
-        #4. Get the test details from the conf file
+        #2. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
 
@@ -64,7 +65,7 @@ def test_login_page(test_obj):
         round_description = conf.round_description
         round_requirements = conf.round_requirements
 
-        #5. Set name in form
+        #3. Set name in form
         result_flag = test_obj.set_user(username)
         test_obj.log_result(result_flag,
                             positive="Name was successfully set to: %s\n" % username,
@@ -73,7 +74,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #6. Set Password in form
+        #4. Set Password in form
         result_flag = test_obj.set_password(password)
         test_obj.log_result(result_flag,
                             positive="Password was successfully set to: %s\n" % password,
@@ -82,7 +83,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #10. Set and submit the form in one go
+        #5. Set and submit the form in one go
         result_flag = test_obj.login()
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
@@ -98,12 +99,11 @@ def test_login_page(test_obj):
                             positive="Heading on the redirect page checks out!\n",
                             negative="Fail: Heading on the redirect page is incorrect!")
         test_obj.write('Script duration: %d seconds\n'%(int(time.time()-start_time)))
-        test_obj.add_tesults_case("Check Heading", "Checks the heading on the redirect page", "test_example_form", result_flag, "Fail: Heading on the redirect page is incorrect!", [])
         test_obj.write('Script duration: %d seconds\n' %
                        (int(time.time()-start_time)))
 
 
-        #11. Click on Interviewers Page
+        #6. Click on Interviewers Page
         result_flag = test_obj.click_on_link()
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Interviewers page\n",
@@ -113,7 +113,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #11. Click on Interviewers Page
+        #7. Click on  add Interviewers Page
         result_flag = test_obj.add_inter()
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Add Interviewers page\n",
@@ -123,7 +123,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #12. Add interviewer name
+        #8. Add interviewer name
         result_flag = test_obj.set_name(interviewers_name)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers name\n",
@@ -133,7 +133,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #13. Add interviewer email
+        #9. Add interviewer email
         result_flag = test_obj.set_email(interviewers_email)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers email\n",
@@ -143,7 +143,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #14. Add interviewers designatiom
+        #10. Add interviewers designatiom
         result_flag = test_obj.set_designation(interviewers_designation)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers designation\n",
@@ -153,7 +153,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #15. Add interviewers starttime
+        #11. Add interviewers starttime
         result_flag = test_obj.set_starttime(interviewers_starttime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers start time\n",
@@ -163,7 +163,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #16. Add interviewers endime
+        #12. Add interviewers endime
         result_flag = test_obj.set_endtime(interviewers_endtime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added Interviewers end time\n",
@@ -173,7 +173,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #17. Save Interviewers details
+        #13. Save Interviewers details
         result_flag = test_obj.save()
         test_obj.log_result(result_flag,
                             positive="Successfully Saved Interviewer details\n",
@@ -183,7 +183,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #18. Click on Ok
+        #14. Click on Ok
         result_flag = test_obj.close_inter()
         test_obj.log_result(result_flag,
                             positive="Successfully Clicked on OK\n",
@@ -195,7 +195,7 @@ def test_login_page(test_obj):
 
         test_obj = PageFactory.get_page_object("jobs page")
 
-
+        #19. Add JObs
         result_flag = test_obj.add_jobs()
         test_obj.log_result(result_flag,
                             positive="Successfully opened add jobs page\n",
@@ -205,7 +205,7 @@ def test_login_page(test_obj):
                        (int(time.time()-start_time)))
 
 
-        #19. Add interviewers starttime
+        #20. Set Job Role
         result_flag = test_obj.set_job_role(job_role)
         test_obj.log_result(result_flag,
                             positive="Successfully added job role\n",
