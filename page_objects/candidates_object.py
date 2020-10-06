@@ -54,6 +54,11 @@ class Candidates_Object:
     schedule_my_interview = locators.schedule_my_interview
     date_on_calendar = locators.date_on_calendar
     calendar_link = locators.calendar_link
+    google_meet_link = locators.google_meet_link
+    email_on_link = locators.email_on_link
+    next_button = locators.next_button
+    next_button_after_password = locators.next_button_after_password
+    password_link = locators.password_link
 
 
     @Wrapit._exceptionHandler
@@ -367,6 +372,38 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
+
+        result_flag = self.set_text(self.email_on_link,email1)
+        self.conditional_write(result_flag,
+            positive='Set email  to: %s'% email1,
+            negative='Failed to set the email',
+            level='debug')
+
+        result_flag = self.click_element(self.next_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on Next',
+            negative='Failed to click on Next',
+            level='debug')
+
+        result_flag = self.set_text(self.password_link,password1)
+        self.conditional_write(result_flag,
+            positive='Set password to: %s'% password1,
+            negative='Failed to set the password',
+            level='debug')
+
+        result_flag = self.click_element(self.next_button_after_password)
+        self.conditional_write(result_flag,
+            positive='Clicked on Next',
+            negative='Failed to click on Next',
+            level='debug')
+
+        result_flag = self.click_element(self.google_meet_link)
+        self.conditional_write(result_flag,
+            positive='Clicked on Google meet link',
+            negative='Failed to click on Google meet link',
+            level='debug')
+
+
 
 
     @Wrapit._exceptionHandler

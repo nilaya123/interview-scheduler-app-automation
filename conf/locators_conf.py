@@ -1,5 +1,4 @@
 #Common locator file for all locators
-#Locators are ordered alphabetically
 
 ############################################
 #Selectors we can use
@@ -12,7 +11,7 @@
 #XPATH
 ###########################################
 
-#Locators for the login object(form_object.py)
+#Locators for the login object
 username_field = "xpath,//input[@id = 'username']"
 password_field = "xpath,//input[@id='userpassword']"
 login_button = "xpath,//*[@id='loginButton']"
@@ -23,7 +22,7 @@ password_field = "xpath,//input[contains(@id,'password')]"
 confirm_password_field = "xpath,//input[contains(@id,'confirmPassword')]"
 submit_button = "xpath,//button[contains(@id,'addSubmit')]"
 
-#Locators for the index object(index_object.py)
+#Locators for the index object
 interviewers_page = "xpath,//a[contains(.,'List the interviewers')]"
 jobs_page = "xpath,//a[contains(.,'List the jobs')]"
 candidates_page = "xpath,//a[contains(.,'List the candidates')]"
@@ -54,14 +53,16 @@ select_unique_code = "xpath,//input[contains(@id,'candidate-name')]"
 select_candidate_email = "xpath,//input[contains(@id,'candidate-email')]"
 go_for_schedule = "xpath,//input[contains(@id,'submit')]"
 date_picker = "xpath,//input[contains(@id,'datepicker')]"
-#date_on_calendar = "xpath,//table[@class='ui-datepicker-calendar']//td"
-#date_on_calendar = "xpath,//td[not(contains(@class,'ui-datepicker-other-month'))]"
-#date_on_calendar = "xpath,//a[contains(text(),%s)]"
-date_on_calendar = "xpath,//a[contains(.,%s)]"
-#date_on_calendar = "xpath,//td[not(contains(@class,'ui-datepicker-other-month'))]/a[text()=%s]"
+date_on_calendar = "xpath,//a[contains(text(),%s)]"
 confirm_interview_date = "xpath,//input[contains(@id,'submit')]"
 select_free_slot = "xpath,/html/body/div[1]/div[1]/input"
 schedule_my_interview = "xpath,//input[@value='Schedule my interview']"
+calendar_link = "xpath,//a[contains(@target,'blank')]"
+google_meet_link = "xpath,//a[contains(.,'Join with Google Meet')]"
+email_on_link = "xpath,//input[@type='email']"
+next_button = "xpath,//div[@class='VfPpkd-RLmnJb']"
+next_button_after_password = "xpath,//*[@id='passwordNext']"
+password_link = "xpath,//input[@type='password']"
 
 #Locators for Interviewers Page
 add_interviewers_button = "xpath,//input[contains(@onclick,'addinterviewer()')]"
