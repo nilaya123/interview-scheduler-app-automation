@@ -68,6 +68,9 @@ def test_candidates_page(test_obj):
         round_description = conf.round_description
         round_requirements = conf.round_requirements
 
+        email_on_link = conf.email_on_link
+        password_link = conf.password_link
+
         #1. Set name in form
         result_flag = test_obj.set_user(username)
         test_obj.log_result(result_flag,

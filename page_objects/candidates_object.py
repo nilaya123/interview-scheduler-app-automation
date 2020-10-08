@@ -20,9 +20,13 @@ imap_host = conf_file.imaphost
 username = conf_file.username
 password = conf_file.app_password
 email = login.email_candidates
+
 date_picker = login.date_picker
 date_check = login.date_check
 free_slot = login.free_slot
+
+email_on_link = login.email_on_link
+password_link = login.password_link
 
 
 class Candidates_Object:
@@ -230,6 +234,7 @@ class Candidates_Object:
         return result_flag
 
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def send_email(self):
@@ -322,7 +327,7 @@ class Candidates_Object:
             negative='Failed to get the date',
             level='debug')
 
-        N_DAYS_After = 7
+        N_DAYS_After = 13
 
         date = datetime.now()
         date = date + timedelta(days=N_DAYS_After)
@@ -348,7 +353,7 @@ class Candidates_Object:
             negative='Failed to select free interview slot',
             level='debug')
 
-        self.wait(10)
+        self.wait(5)
 
         result_flag = self.scroll_down(self.schedule_my_interview)
         self.conditional_write(result_flag,
@@ -363,7 +368,7 @@ class Candidates_Object:
             negative='Failed to click on schedule my interview',
             level='debug')
 
-        self.wait(10)
+        self.wait(5)
 
         result_flag = self.click_element(self.calendar_link)
         self.conditional_write(result_flag,
@@ -371,11 +376,13 @@ class Candidates_Object:
             negative='Failed to click on calendar link',
             level='debug')
 
-        return result_flag
+        self.wait(2)
 
-        result_flag = self.set_text(self.email_on_link,email1)
+        self.switch_window()
+
+        result_flag = self.set_text(self.email_on_link,email_on_link)
         self.conditional_write(result_flag,
-            positive='Set email  to: %s'% email1,
+            positive='Set email to: %s'% email_on_link,
             negative='Failed to set the email',
             level='debug')
 
@@ -385,9 +392,9 @@ class Candidates_Object:
             negative='Failed to click on Next',
             level='debug')
 
-        result_flag = self.set_text(self.password_link,password1)
+        result_flag = self.set_text(self.password_link,password_link)
         self.conditional_write(result_flag,
-            positive='Set password to: %s'% password1,
+            positive='Set password to: %s'% password_link,
             negative='Failed to set the password',
             level='debug')
 
@@ -403,7 +410,7 @@ class Candidates_Object:
             negative='Failed to click on Google meet link',
             level='debug')
 
-
+        return result_flag
 
 
     @Wrapit._exceptionHandler
