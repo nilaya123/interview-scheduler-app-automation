@@ -327,7 +327,7 @@ class Candidates_Object:
             negative='Failed to get the date',
             level='debug')
 
-        N_DAYS_After = 13
+        N_DAYS_After = 7
 
         date = datetime.now()
         date = date + timedelta(days=N_DAYS_After)
