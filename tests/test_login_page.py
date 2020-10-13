@@ -50,15 +50,17 @@ def test_login_page(test_obj):
         interviewers_designation = conf.interviewers_designation
         interviewers_starttime_drop = conf.interviewers_starttime_drop
         interviewers_endtime_drop = conf.interviewers_endtime_drop
+        search_option_interviewer = conf.search_option_interviewer
 
         job_role = conf.job_role
         job_interviewers = conf.job_interviewers
+        search_option_job = conf.search_option_job
 
         name_candidates = conf.name_candidates
         email_candidates = conf.email_candidates
         job_applied_select = conf.job_applied_select
         comment_candidates = conf.comment_candidates
-        search_option = conf.search_option
+        search_option_candidate = conf.search_option_candidate
 
         round_name = conf.round_name
         round_duration_select = conf.round_duration_select
@@ -299,6 +301,15 @@ def test_login_page(test_obj):
 
         test_obj = PageFactory.get_page_object("jobs page")
 
+        #19. Search job
+        result_flag = test_obj.search_job(search_option_job)
+        test_obj.log_result(result_flag,
+                            positive="Successfully searched interviewer name\n",
+                            negative="Failed to search interviewer name \nOn url: %s" % test_obj.get_current_url(),
+                            level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                       (int(time.time()-start_time)))
+
 
         #18. Open jobs page to add rounds
         result_flag = test_obj.round_to_job()
@@ -373,7 +384,7 @@ def test_login_page(test_obj):
         test_obj = PageFactory.get_page_object("candidates page")
 
 
-        result_flag = test_obj.search_candidate(search_option)
+        result_flag = test_obj.search_candidate(search_option_candidate)
         test_obj.log_result(result_flag,
                             positive="Successfully searched candidates name\n",
                             negative="Failed to search candidates name \nOn url: %s" % test_obj.get_current_url(),
@@ -402,6 +413,15 @@ def test_login_page(test_obj):
 
         test_obj = PageFactory.get_page_object("interviewers page")
 
+        #35.Search Interviewer and delete the same.
+        result_flag = test_obj.search_interviewer(search_option_interviewer)
+        test_obj.log_result(result_flag,
+                            positive="Successfully searched interviewer name\n",
+                            negative="Failed to search interviewer name \nOn url: %s" % test_obj.get_current_url(),
+                            level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                       (int(time.time()-start_time)))
+
 
         result_flag = test_obj.delete_interviewers()
         test_obj.log_result(result_flag,
@@ -422,6 +442,15 @@ def test_login_page(test_obj):
 
 
         test_obj = PageFactory.get_page_object("jobs page")
+
+        #36.Search Job and delete the same.
+        result_flag = test_obj.search_job(search_option_job)
+        test_obj.log_result(result_flag,
+                            positive="Successfully searched interviewer name\n",
+                            negative="Failed to search interviewer name \nOn url: %s" % test_obj.get_current_url(),
+                            level="critical")
+        test_obj.write('Script duration: %d seconds\n' %
+                       (int(time.time()-start_time)))
 
 
         result_flag = test_obj.delete_job()
