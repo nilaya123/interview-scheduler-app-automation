@@ -9,6 +9,7 @@ import os
 import sys
 import time
 import pytest
+import string, random
 from page_objects.PageFactory import PageFactory
 from utils.Option_Parser import Option_Parser
 import conf.login_conf as conf
@@ -35,8 +36,7 @@ def test_signup_user(test_obj):
         #4. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
-        new_user = conf.new_user
-        email = conf.email
+        email = 'nil'.join(random.choices(string.ascii_uppercase + string.digits, k = 3))+ ('@qxf2.com')
 
         #5. Open Signup form
         result_flag = test_obj.signup()
@@ -49,10 +49,10 @@ def test_signup_user(test_obj):
 
 
         #5. Set name in form
-        result_flag = test_obj.new_user(new_user)
+        result_flag = test_obj.new_user(username)
         test_obj.log_result(result_flag,
-                            positive="Name was successfully set to: %s\n" % new_user,
-                            negative="Failed to set name: %s \nOn url: %s\n" % (new_user, test_obj.get_current_url()))
+                            positive="Name was successfully set to: %s\n" % username,
+                            negative="Failed to set name: %s \nOn url: %s\n" % (username, test_obj.get_current_url()))
         test_obj.write('Script duration: %d seconds\n' %
                        (int(time.time()-start_time)))
 
@@ -61,7 +61,7 @@ def test_signup_user(test_obj):
         result_flag = test_obj.set_email(email)
         test_obj.log_result(result_flag,
                             positive="Email was successfully set to: %s\n" % email,
-                            negative="Failed to set email: %s \nOn url: %s\n" % (email, test_obj.get_current_url()))
+                            negative="Failed to set email: %s \nOn url: %s\n" %(email, test_obj.get_current_url()))
         test_obj.write('Script duration: %d seconds\n' %
                        (int(time.time()-start_time)))
 
