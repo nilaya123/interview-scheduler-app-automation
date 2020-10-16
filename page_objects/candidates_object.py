@@ -248,7 +248,7 @@ class Candidates_Object:
 
         return result_flag
 
-
+    '''
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def copy_url(self):
@@ -260,7 +260,9 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
+    '''
 
+    self.wait(15)
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -293,7 +295,7 @@ class Candidates_Object:
         url = soup.a.get('href')
 
 
-        result_flag = self.open_url_new_tab(url,wait_time=10)
+        result_flag = self.open_url_new_tab(url,wait_time=20)
         self.conditional_write(result_flag,
             positive='Opened the new tab with link',
             negative='Failed to open the new tab with link',

@@ -36,7 +36,7 @@ def test_signup_user(test_obj):
         #4. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
-        email = 'nil'.join(random.choices(string.ascii_uppercase + string.digits, k = 3))+ ('@qxf2.com')
+        email = "nilaya+" + ''.join(random.choices(string.digits, k = 3))+ ('@qxf2.com')
 
         #5. Open Signup form
         result_flag = test_obj.signup()
