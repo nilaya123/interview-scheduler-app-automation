@@ -262,8 +262,6 @@ class Candidates_Object:
         return result_flag
     '''
 
-    self.wait(15)
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def fetch_email_invite(self):
@@ -287,8 +285,9 @@ class Candidates_Object:
             self.conditional_write(result_flag,
                                    positive='Selected the folder Inbox',
                                    negative='Could not select the folder Inbox')
+        self.wait(10)
         uid = email_obj.get_latest_email_uid(
-                    subject="Invitation to schedule an Interview with Qxf2 Services!", sender='test@qxf2.com',wait_time=25)
+                    subject="Invitation to schedule an Interview with Qxf2 Services!", sender='careers@qxf2.com',wait_time=25)
         email_body = email_obj.fetch_email_body(uid)
         soup = BeautifulSoup(''.join(email_body), 'html.parser')
         unique_code = soup.b.text
