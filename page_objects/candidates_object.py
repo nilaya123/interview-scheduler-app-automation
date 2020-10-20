@@ -244,7 +244,7 @@ class Candidates_Object:
             positive='Clicked on the send email button',
             negative='Failed to click on send email button',
             level='debug')
-        result_flag = self.alert_accept()
+        #result_flag = self.alert_accept()
 
         return result_flag
 
@@ -280,21 +280,21 @@ class Candidates_Object:
         self.conditional_write(result_flag,
                                positive='Logged into %s' % imap_host,
                                negative='Could not log into %s to fetch the activation email' % imap_host)
+        self.wait(50)
         if result_flag is True:
             result_flag = email_obj.select_folder('Inbox')
             self.conditional_write(result_flag,
                                    positive='Selected the folder Inbox',
                                    negative='Could not select the folder Inbox')
-        self.wait(10)
         uid = email_obj.get_latest_email_uid(
-                    subject="Invitation to schedule an Interview with Qxf2 Services!", sender='careers@qxf2.com',wait_time=25)
+                    subject="Invitation to schedule an Interview with Qxf2 Services!", sender='careers@qxf2.com',wait_time=20)
         email_body = email_obj.fetch_email_body(uid)
         soup = BeautifulSoup(''.join(email_body), 'html.parser')
         unique_code = soup.b.text
         url = soup.a.get('href')
 
 
-        result_flag = self.open_url_new_tab(url,wait_time=20)
+        result_flag = self.open_url_new_tab(url,wait_time=2)
         self.conditional_write(result_flag,
             positive='Opened the new tab with link',
             negative='Failed to open the new tab with link',
