@@ -347,6 +347,14 @@ class Candidates_Object:
             negative='Failed to click on confirming interview date',
             level='debug')
 
+        self.wait(5)
+
+        result_flag = self.scroll_down(self.schedule_my_interview,wait_time=5)
+        self.conditional_write(result_flag,
+            positive='Scrolling down the page till Schedule my interview option',
+            negative='Failed to scroll down the page till schedule my interview option',
+            level='debug')
+
         #time_slot = self.get_dom_text
         result_flag = self.click_element(self.select_free_slot)
         self.conditional_write(result_flag,
@@ -354,14 +362,15 @@ class Candidates_Object:
             negative='Failed to select free interview slot',
             level='debug')
 
+        '''
         self.wait(5)
 
-        result_flag = self.scroll_down(self.schedule_my_interview)
+        result_flag = self.scroll_down(self.schedule_my_interview,wait_time=5)
         self.conditional_write(result_flag,
             positive='Scrolling down the page till Schedule my interview option',
             negative='Failed to scroll down the page till schedule my interview option',
             level='debug')
-
+        '''
 
         result_flag = self.click_element(self.schedule_my_interview)
         self.conditional_write(result_flag,
