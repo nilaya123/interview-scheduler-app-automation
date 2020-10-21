@@ -349,7 +349,7 @@ class Candidates_Object:
 
         self.wait(5)
 
-        result_flag = self.scroll_down(self.schedule_my_interview,wait_time=5)
+        result_flag = self.scroll_down(self.confirm_interview_date,wait_time=5)
         self.conditional_write(result_flag,
             positive='Scrolling down the page till Schedule my interview option',
             negative='Failed to scroll down the page till schedule my interview option',
