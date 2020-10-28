@@ -30,7 +30,7 @@ class Interviewers_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_inter(self):
+    def add_interviewer(self):
         "Click on 'Add Interviewers' button"
         result_flag = self.click_element(self.add_interviewers_button)
         self.conditional_write(result_flag,
@@ -68,7 +68,7 @@ class Interviewers_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def set_email(self,interviewers_email):
-        "Set the name on the form"
+        "Set the email"
         result_flag = self.set_text(self.interviewers_email,interviewers_email)
         self.conditional_write(result_flag,
             positive='Set the email to: %s'% interviewers_email,
@@ -80,7 +80,7 @@ class Interviewers_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def set_designation(self,interviewers_designation):
-        "Set the name on the form"
+        "Set the designation"
         result_flag = self.set_text(self.interviewers_designation,interviewers_designation)
         self.conditional_write(result_flag,
             positive='Set the designation to: %s'% interviewers_designation,
@@ -131,8 +131,8 @@ class Interviewers_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def save(self):
-        "Click on 'Add Interviewers' button"
+    def save_interviewer(self):
+        "Click on 'Save Interviewers' button"
         result_flag = self.click_element(self.save_interviewers_button)
         self.conditional_write(result_flag,
             positive='Clicked on the "Save Interviewers" button',
@@ -144,7 +144,7 @@ class Interviewers_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def cancel(self):
-        "Click on 'Add Interviewers' button"
+        "Click on 'Cancel Interviewers' button"
         result_flag = self.click_element(self.cancel_interviewers_button)
         self.conditional_write(result_flag,
             positive='Clicked on the "Cancel Interviewers" button',
@@ -155,8 +155,8 @@ class Interviewers_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def close_inter(self):
-        "Click on 'Add Interviewers' button"
+    def close_interviewer(self):
+        "Click on 'Close' button"
         result_flag = self.click_element(self.close_interviewers_button)
         self.conditional_write(result_flag,
             positive='Clicked on the ok button',
@@ -181,8 +181,10 @@ class Interviewers_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def remove_interviewers(self):
+    def remove_interviewers(self,search_option_interviewer):
         "Click on 'Delete Interviewers' button"
+        self.search_interviewer(search_option_interviewer)
+        self.delete_interviewers()
         result_flag = self.click_element(self.remove_interviewers_button)
         self.conditional_write(result_flag,
             positive='Clicked on remove interviewers button',
@@ -205,96 +207,19 @@ class Interviewers_Object:
         return result_flag
 
 
-
-    '''
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_user(self,username):
-        "Set the name on the form"
-        result_flag = self.set_text(self.username_field,username)
+    def interviewers_details(self,interviewers_name,interviewers_email,interviewers_designation,interviewers_starttime_drop,interviewers_endtime_drop):
+        self.set_name(interviewers_name)
+        self.set_email(interviewers_email)
+        self.set_designation(interviewers_designation)
+        self.set_starttime(interviewers_starttime_drop)
+        self.set_endtime(interviewers_endtime_drop)
+        self.save_interviewer()
+        result_flag = self.close_interviewer()
         self.conditional_write(result_flag,
-            positive='Set the name to: %s'% username,
-            negative='Failed to set the name in the form',
+            positive='Interviewer is added successfully',
+            negative='Failed to add Interviewer',
             level='debug')
 
         return result_flag
-
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def set_password(self,password):
-        "Set the email on the form"
-        result_flag = self.set_text(self.password_field,password)
-        self.conditional_write(result_flag,
-            positive='Set the email to: %s'%password,
-            negative='Failed to set the email in the form',
-            level='debug')
-
-        return result_flag
-
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def login(self):
-        "Click on 'Login' button"
-        result_flag = self.click_element(self.login_button)
-        self.conditional_write(result_flag,
-            positive='Clicked on the "Login" button',
-            negative='Failed to click on "Login" button',
-            level='debug')
-        result_flag = self.alert_accept()
-
-        return result_flag
-
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def alert_accept(self):
-        "Click on 'Ok' alert"
-        result_flag = self.alert_window()
-        return result_flag
-        self.conditional_write(result_flag,
-            positive='Clicked on the OK',
-            negative='Failed to click on OK',
-            level='debug')
-
-        return result_flag
-
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def accept_terms(self):
-        "Accept the terms and conditions"
-        result_flag = self.select_checkbox(self.tac_checkbox)
-        self.conditional_write(result_flag,
-            positive='Accepted the terms and conditions',
-            negative='Failed to accept the terms and conditions',
-            level='debug')
-
-        return result_flag
-
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def check_redirect(self):
-        "Check if we have been redirected to the redirect page"
-        result_flag = False
-        if self.redirect_title in self.driver.title:
-            result_flag = True
-            self.switch_page("redirect")
-
-        return result_flag
-
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def submit_form(self,username,password):
-        "Submit the form"
-        result_flag = self.set_user(username)
-        result_flag &= self.set_password(password)
-        result_flag &= self.accept_terms()
-        result_flag &= self.login()
-        result_flag &= self.check_redirect()
-
-        return result_flag
-    '''

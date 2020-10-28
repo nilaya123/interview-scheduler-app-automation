@@ -44,8 +44,8 @@ class Form_Object:
         "Set the email on the form"
         result_flag = self.set_text(self.password_field,password)
         self.conditional_write(result_flag,
-            positive='Set the email to: %s'%password,
-            negative='Failed to set the email in the form',
+            positive='Set the password to: %s'%password,
+            negative='Failed to set the password in the form',
             level='debug')
 
         return result_flag
@@ -74,6 +74,21 @@ class Form_Object:
         self.conditional_write(result_flag,
             positive='Clicked on the OK',
             negative='Failed to click on OK',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def login_page(self,username,password):
+        "Login Wrapper method"
+        self.set_user(username)
+        self.set_password(password)
+        result_flag = self.login()
+        self.conditional_write(result_flag,
+            positive='Clicked on the "Login" button',
+            negative='Failed to click on "Login" button',
             level='debug')
 
         return result_flag

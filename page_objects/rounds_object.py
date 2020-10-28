@@ -126,3 +126,20 @@ class Rounds_Object:
             level='debug')
 
         return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def round_details(self,round_name,round_duration_select,round_description,round_requirements):
+        "Add round details"
+        self.add_name(round_name)
+        self.add_duration(round_duration_select)
+        self.add_description(round_description)
+        self.add_requirements(round_requirements)
+        result_flag = self.add()
+        self.conditional_write(result_flag,
+            positive='Added round details',
+            negative='Failed to add round details',
+            level='debug')
+
+        return result_flag

@@ -142,6 +142,22 @@ class Candidates_Object:
 
         return result_flag
 
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def candidate_details(self,name_candidates,email_candidates,job_applied_select,comment_candidates):
+        "Add all candidate details"
+        self.add_name(name_candidates)
+        self.add_email(email_candidates)
+        self.add_job_applied(job_applied_select)
+        self.add_comments(comment_candidates)
+        result_flag = self.submit()
+        self.conditional_write(result_flag,
+            positive='Added Candidate details',
+            negative='Failed to add Candidate details',
+            level='debug')
+
+        return result_flag
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -171,8 +187,10 @@ class Candidates_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def remove_candidates(self):
+    def remove_candidates(self,search_option_candidate):
         "Click on Remove Candidates button"
+        self.search_candidate(search_option_candidate)
+        self.delete_candidates()
         result_flag = self.click_element(self.remove_candidates_button)
         self.conditional_write(result_flag,
             positive='Clicked on the Delete Candidates button',
@@ -180,6 +198,7 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
+
 
 
     @Wrapit._exceptionHandler

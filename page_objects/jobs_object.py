@@ -86,8 +86,10 @@ class Jobs_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def remove_job(self):
-        "Click on 'Delete Job' button"
+    def remove_job(self,search_option_job):
+        "Click on 'Remove Job' button"
+        self.search_job(search_option_job)
+        self.delete_job()
         result_flag = self.click_element(self.remove_job_button)
         self.conditional_write(result_flag,
             positive='Clicked on remove job button',
@@ -105,6 +107,21 @@ class Jobs_Object:
         self.conditional_write(result_flag,
             positive='Search for Job name: %s'%search_option_job,
             negative='Failed to Search for Job name',
+            level='debug')
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def job_details(self,job_role,job_interviewers):
+        "Add Job details"
+        self.set_job_role(job_role)
+        self.set_job_interviewer(job_interviewers)
+        result_flag = self.submit_job()
+        self.conditional_write(result_flag,
+            positive='Added Job details',
+            negative='Failed to add for Job details',
             level='debug')
 
         return result_flag
