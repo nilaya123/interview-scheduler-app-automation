@@ -27,8 +27,6 @@ def test_signup_user(test_obj):
 
         #1. Create a test object and fill the sign up form.
         test_obj = PageFactory.get_page_object("login page")
-        #Set start_time with current time
-        start_time = int(time.time())
 
         # Turn on the highlighting feature
         test_obj.turn_on_highlight()
@@ -44,17 +42,13 @@ def test_signup_user(test_obj):
                             positive="Successfully Opened the signup form\n",
                             negative="Failed to open the signup form \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
 
-
+        '''
         #5. Set name in form
         result_flag = test_obj.new_user(username)
         test_obj.log_result(result_flag,
                             positive="Name was successfully set to: %s\n" % username,
                             negative="Failed to set name: %s \nOn url: %s\n" % (username, test_obj.get_current_url()))
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
 
 
         #6. Set Email in form
@@ -62,8 +56,6 @@ def test_signup_user(test_obj):
         test_obj.log_result(result_flag,
                             positive="Email was successfully set to: %s\n" % email,
                             negative="Failed to set email: %s \nOn url: %s\n" %(email, test_obj.get_current_url()))
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
 
 
         #7. Set Password in form
@@ -71,8 +63,6 @@ def test_signup_user(test_obj):
         test_obj.log_result(result_flag,
                             positive="Password was successfully set to: %s\n" % password,
                             negative="Failed to set password: %s \nOn url: %s\n" % (password, test_obj.get_current_url()))
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
 
 
         #6. Set Confirm Password in form
@@ -80,18 +70,14 @@ def test_signup_user(test_obj):
         test_obj.log_result(result_flag,
                             positive="Confirm password was successfully set to: %s\n" % password,
                             negative="Failed to set email: %s \nOn url: %s\n" % (password, test_obj.get_current_url()))
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
 
-
+        '''
         #10. Set and submit the form in one go
-        result_flag = test_obj.submit()
+        result_flag = test_obj.submit_signup_form(username,email,password)
         test_obj.log_result(result_flag,
-                            positive="Successfully submitted the form\n",
+                            positive="Successfully submitted the signup form\n",
                             negative="Failed to submit the form \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
-        test_obj.write('Script duration: %d seconds\n' %
-                       (int(time.time()-start_time)))
 
 
 

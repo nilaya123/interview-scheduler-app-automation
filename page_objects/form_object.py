@@ -111,7 +111,6 @@ class Form_Object:
     @Wrapit._screenshot
     def new_user(self,username):
         "Set the user name on the registration form"
-        #new_user = 'nil'.join(random.choices(string.ascii_uppercase + string.digits, k = 3))
         result_flag = self.set_text(self.user_name_field,username)
         self.conditional_write(result_flag,
             positive='Set the name to: %s'% username,
@@ -128,7 +127,6 @@ class Form_Object:
 
     def set_email(self,email):
         "Set the user name on the registration form"
-        #email = 'nil'.join(random.choices(string.ascii_uppercase + string.digits, k = 3))+ ('@qxf2.com')
         result_flag = self.set_text(self.email_field,email)
         self.conditional_write(result_flag,
             positive='Set the email to: %s'% email,
@@ -206,12 +204,12 @@ class Form_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def submit_form(self,username,password):
+    def submit_signup_form(self,username,email,password):
         "Submit the form"
-        result_flag = self.set_user(username)
-        result_flag &= self.set_password(password)
-        result_flag &= self.accept_terms()
-        result_flag &= self.login()
-        result_flag &= self.check_redirect()
+        result_flag = self.new_user(username)
+        result_flag &= self.set_email(email)
+        result_flag &= self.enter_password(password)
+        result_flag &= self.confirm_password(password)
+        result_flag &= self.submit()
 
         return result_flag

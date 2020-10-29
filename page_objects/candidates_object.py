@@ -128,7 +128,6 @@ class Candidates_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def submit(self):
@@ -171,7 +170,6 @@ class Candidates_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def delete_candidates(self):
@@ -184,7 +182,6 @@ class Candidates_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def remove_candidates(self,search_option_candidate):
@@ -193,13 +190,11 @@ class Candidates_Object:
         self.delete_candidates()
         result_flag = self.click_element(self.remove_candidates_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the Delete Candidates button',
-            negative='Failed to click on Delete Candidates button',
+            positive='Clicked on the Remove Candidates button',
+            negative='Failed to click on Remove Candidates button',
             level='debug')
 
         return result_flag
-
-
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -213,7 +208,6 @@ class Candidates_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def thumbs_up(self):
@@ -225,7 +219,6 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
-
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -253,33 +246,23 @@ class Candidates_Object:
         return result_flag
 
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def send_email(self):
+    def send_email(self,search_option_candidate,select_round_level):
         "Click on send email button"
+        self.search_candidate(search_option_candidate)
+        self.select_candidates()
+        self.thumbs_up()
+        self.select_round(select_round_level)
         result_flag = self.click_element(self.send_email_button)
         self.conditional_write(result_flag,
             positive='Clicked on the send email button',
             negative='Failed to click on send email button',
             level='debug')
-        #result_flag = self.alert_accept()
+        result_flag = self.alert_accept()
 
         return result_flag
 
-    '''
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def copy_url(self):
-        "Copy URL"
-        result_flag = self.get_text(self.select_url)
-        self.conditional_write(result_flag,
-            positive='Copied the URL',
-            negative='Failed to copy the URL',
-            level='debug')
-
-        return result_flag
-    '''
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -299,7 +282,7 @@ class Candidates_Object:
         self.conditional_write(result_flag,
                                positive='Logged into %s' % imap_host,
                                negative='Could not log into %s to fetch the activation email' % imap_host)
-        self.wait(50)
+        self.wait(20)
         if result_flag is True:
             result_flag = email_obj.select_folder('Inbox')
             self.conditional_write(result_flag,
@@ -313,7 +296,7 @@ class Candidates_Object:
         url = soup.a.get('href')
 
 
-        result_flag = self.open_url_new_tab(url,wait_time=2)
+        result_flag = self.open_url_new_tab(url)
         self.conditional_write(result_flag,
             positive='Opened the new tab with link',
             negative='Failed to open the new tab with link',
@@ -359,7 +342,6 @@ class Candidates_Object:
                 negative='Failed to set the date',
                 level='debug')
 
-
         result_flag = self.click_element(self.confirm_interview_date)
         self.conditional_write(result_flag,
             positive='Clicked on confirming interview date',
@@ -368,28 +350,17 @@ class Candidates_Object:
 
         self.wait(5)
 
-        result_flag = self.scroll_down(self.confirm_interview_date,wait_time=5)
+        result_flag = self.scroll_down(self.confirm_interview_date)
         self.conditional_write(result_flag,
             positive='Scrolling down the page till Schedule my interview option',
             negative='Failed to scroll down the page till schedule my interview option',
             level='debug')
 
-        #time_slot = self.get_dom_text
         result_flag = self.click_element(self.select_free_slot)
         self.conditional_write(result_flag,
             positive='Selected free interview slot',
             negative='Failed to select free interview slot',
             level='debug')
-
-        '''
-        self.wait(5)
-
-        result_flag = self.scroll_down(self.schedule_my_interview,wait_time=5)
-        self.conditional_write(result_flag,
-            positive='Scrolling down the page till Schedule my interview option',
-            negative='Failed to scroll down the page till schedule my interview option',
-            level='debug')
-        '''
 
         result_flag = self.click_element(self.schedule_my_interview)
         self.conditional_write(result_flag,
@@ -440,7 +411,6 @@ class Candidates_Object:
             level='debug')
 
         return result_flag
-
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot

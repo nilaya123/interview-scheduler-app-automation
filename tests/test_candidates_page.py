@@ -34,8 +34,6 @@ def test_candidates_page(test_obj):
 
         #1. Create a test object and fill the login form.
         test_obj = PageFactory.get_page_object("login page")
-        #Set start_time with current time
-        start_time = int(time.time())
 
         # Turn on the highlighting feature
         test_obj.turn_on_highlight()
@@ -175,40 +173,12 @@ def test_candidates_page(test_obj):
                             negative="Failed to add round details \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
+
         test_obj = PageFactory.get_page_object("candidates page")
 
-        #27.Search Candidate
-        result_flag = test_obj.search_candidate(search_option_candidate)
-        test_obj.log_result(result_flag,
-                            positive="Successfully searched candidates name\n",
-                            negative="Failed to search candidates name \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
 
-        #28.Select Candidate
-        result_flag = test_obj.select_candidates()
-        test_obj.log_result(result_flag,
-                            positive="Successfully opened select candidates page\n",
-                            negative="Failed to open select candidates page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
-
-        #29.Select candidate to send interview schedule
-        result_flag = test_obj.thumbs_up()
-        test_obj.log_result(result_flag,
-                            positive="Successfully clicked on thumbs up button\n",
-                            negative="Failed to click on thumbs up button\nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
-
-
-        #30.Select round for  interview schedule
-        result_flag = test_obj.select_round(select_round_level)
-        test_obj.log_result(result_flag,
-                            positive="Successfully opened select round and set round\n",
-                            negative="Failed to open select round scrolldown\nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
-
-
-        #31.Send Email
-        result_flag = test_obj.send_email()
+        #13.Send Email
+        result_flag = test_obj.send_email(search_option_candidate,select_round_level)
         test_obj.log_result(result_flag,
                             positive="Successfully clicked on send email\n",
                             negative="Failed to click on send email \nOn url: %s" % test_obj.get_current_url(),
@@ -218,27 +188,25 @@ def test_candidates_page(test_obj):
         test_obj = PageFactory.get_page_object("candidates page")
 
 
-        #32.Get the details from email such as url and unique code,login to url and schedule an interview
+        #14.Get the details from email such as url and unique code,login to url and schedule an interview,checking the google link after sceduling an interview
         result_flag = test_obj.fetch_email_invite()
         test_obj.log_result(result_flag,
                             positive="Successfully opened link and interview scheduled\n",
                             negative="Failed to open link \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
-
         test_obj = PageFactory.get_page_object("candidates page")
 
-
+        #15.Delete Configured Candidate
         result_flag = test_obj.remove_candidates(search_option_candidate)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted candidate\n",
                             negative="Failed to delete candidate \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
-
         test_obj = PageFactory.get_page_object("interviewers page")
 
-
+        #16.Delete Configured interviewer
         result_flag = test_obj.remove_interviewers(search_option_interviewer)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted interviewer\n",
@@ -248,6 +216,7 @@ def test_candidates_page(test_obj):
 
         test_obj = PageFactory.get_page_object("jobs page")
 
+        #17.Delete Configured JOb
         result_flag = test_obj.remove_job(search_option_job)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted job\n",
@@ -255,9 +224,9 @@ def test_candidates_page(test_obj):
                             level="critical")
 
         #Turn off the highlighting feature
-        #test_obj.turn_off_highlight()
+        test_obj.turn_off_highlight()
 
-        #13. Print out the result
+        #18. Print out the result
         test_obj.write_test_summary()
         expected_pass = test_obj.result_counter
         actual_pass = test_obj.pass_counter
@@ -282,7 +251,6 @@ if __name__ == '__main__':
 
         #Setup and register a driver
         test_obj.register_driver(options.remote_flag, options.os_name, options.os_version, options.browser, options.browser_version, options.remote_project_name, options.remote_build_name)
-
 
         #teardowm
         test_obj.wait(3)
