@@ -8,6 +8,7 @@ from requests.auth import HTTPBasicAuth
 from urllib.error import HTTPError
 from urllib.error import URLError
 from conf import login_conf as conf
+#from .API_Interface import API_Interface
 
 class Base_API:
     "Main base class for Requests based scripts"
@@ -21,11 +22,14 @@ class Base_API:
         json_response = None
         error = {}
         try:
-            response = requests.get(url=url,headers=headers)
+            response = self.request_obj.get(url=url,headers=headers)
             try:
                 json_response = response.json()
             except:
-                json_response = None
+                if (response.headers["Content-Type"] == 'application/json' or 'text/html'):
+                    json_response = response.text
+                else:
+                    json_response = None
         except (HTTPError,URLError) as e:
             error = e
             if isinstance(e,HTTPError):
@@ -48,11 +52,15 @@ class Base_API:
         error = {}
         json_response = None
         try:
-            response = requests.post(url,params=params,json=json,headers=headers)
+            response = self.request_obj.post(url,data=data,json=json,headers=headers)
             try:
                 json_response = response.json()
             except:
-                json_response = None
+                if (response.headers["Content-Type"] == 'application/json' or 'text/html'):
+                    json_response = response.text
+                else:
+                    json_response = None
+
         except (HTTPError,URLError) as e:
             error = e
             if isinstance(e,HTTPError,URLError):
@@ -74,7 +82,7 @@ class Base_API:
         response = False
         error = {}
         try:
-            response = requests.delete(url,headers = headers)
+            response = self.request_obj.delete(url,headers = headers)
             try:
                 json_response = response.json()
             except:
@@ -101,7 +109,7 @@ class Base_API:
         error = {}
         response = False
         try:
-            response = requests.put(url,json=json,headers=headers)
+            response = self.request_obj.put(url,json=json,headers=headers)
             try:
                 json_response = response.json()
             except:

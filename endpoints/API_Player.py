@@ -7,46 +7,60 @@ c) maintains the test context/state
 from base64 import b64encode
 from .API_Interface import API_Interface
 from utils.results import Results
-import json
 import urllib.parse
 import logging
-from utils.__init__ import get_dict_item
-from conf import login_conf as conf
+from bs4 import BeautifulSoup
+#from utils.__init__ import get_dict_item
+from conf import api_example_conf as conf
 
 
 class API_Player(Results):
     "The class that maintains the test context/state"
 
-    def __init__(self, url, log_file_path=None):
+    def __init__(self, url, log_file_path=None, session_flag=True):
         "Constructor"
         super(API_Player, self).__init__(
             level=logging.DEBUG, log_file_path=log_file_path)
-        self.api_obj = API_Interface(url=url)
+        self.api_obj = API_Interface(url=url, session_flag=session_flag)
 
 
-    def set_auth_details(self, username, password):
+
+    def set_login_details(self, username, password):
         "encode auth details"
         user = username
         password = password
-        b64login = b64encode(bytes('%s:%s' %(user, password),"utf-8"))
+        login_data={'username': user,'password':password}
 
-        return b64login.decode('utf-8')
-
-
-    def set_header_details(self, auth_details=None):
-        "make header details"
-        if auth_details != '' and auth_details is not None:
-            headers = {'Authorization': "Basic %s"%(auth_details)}
-        else:
-            headers = {'content-type': 'application/json'}
-
-        return headers
+        return login_data
 
 
-    def get_jobs(self, auth_details=None):
-        "get available cars "
-        headers = self.set_header_details(auth_details)
-        json_response = self.api_obj.get_jobs(headers=headers)
+    def login_app(self,login_data):
+        "login to app"
+        response = self.api_obj.login_app_is(data=login_data)
+        result_flag = True if response['response'] == 200 else False
+        return result_flag
+
+
+    def get_jobs(self):
+        "get available jobs"
+        response = self.api_obj.get_jobs_is()
+        result_flag = True if response['response'] == 200 else False
+        print("GET JOBS")
+        #print(response['response_content'])
+        ses = response['response_content']
+        soup = BeautifulSoup(ses)
+        My_table = soup.find('table',{'class':'table table-striped'})
+        table_rows = My_table.find_all('tr')
+        table_rows
+        for tr in table_rows:
+            td = tr.find_all('td')
+            row = [i.text for i in td]
+            print(row)
+        print(row)
+        print(row[1])
+
+        return result_flag
+        '''
         json_response = json_response['response']
         result_flag = True if json_response['successful'] == True else False
         self.write(msg="Fetched jobs list:\n %s"%str(json_response))
@@ -55,6 +69,81 @@ class API_Player(Results):
                                negative="Could not fetch jobs")
 
         return json_response
+        '''
+
+    def add_jobs(self,job_data):
+        "add new job"
+        response = self.api_obj.add_jobs_is(data=job_data)
+        result_flag = True if response['response'] == 200 else False
+        print("I am in add jobs")
+        return result_flag
+
+
+    def add_candidates(self,candidate_data):
+        "add new candidate"
+        response = self.api_obj.add_candidates_is(data=candidate_data)
+        result_flag = True if response['response'] == 200 else False
+        print("I am in add candidates")
+        return result_flag
+
+
+    def get_candidates(self):
+        "get available jobs"
+        response = self.api_obj.get_candidates_is()
+        result_flag = True if response['response'] == 200 else False
+        print("GET CANDIDATES")
+        #print(response['response_content'])
+        ses = response['response_content']
+        soup = BeautifulSoup(ses)
+        My_table = soup.find('table',{'class':'table table-striped'})
+        table_rows = My_table.find_all('tr')
+        table_rows
+        for tr in table_rows:
+            td = tr.find_all('td')
+            row = [i.text for i in td]
+            print(row)
+        print(row)
+        print(row[1])
+
+        return result_flag
+
+    def add_interviewers(self,interviewer_data):
+        "add new interviewer"
+        response = self.api_obj.add_interviewer_is(data=interviewer_data)
+        result_flag = True if response['response'] == 200 else False
+        print("I am in add interviwers")
+        return result_flag
+
+
+    def get_interviewers(self):
+        "get available interviewers"
+        response = self.api_obj.get_interviewer_is()
+        result_flag = True if response['response'] == 200 else False
+        print("GET INTERVIWERS")
+        #print(response['response_content'])
+        ses = response['response_content']
+        soup = BeautifulSoup(ses)
+        My_table = soup.find('table',{'class':'table table-striped'})
+        table_rows = My_table.find_all('tr')
+        table_rows
+        for tr in table_rows:
+            td = tr.find_all('td')
+            row = [i.text for i in td]
+            print(row)
+        print(row)
+        print(row[1])
+
+        return result_flag
+    '''
+        json_response = json_response['response']
+        result_flag = True if json_response['successful'] == True else False
+        self.write(msg="Fetched jobs list:\n %s"%str(json_response))
+        self.conditional_write(result_flag,
+                               positive="Successfully fetched jobs",
+                               negative="Could not fetch jobs")
+
+        return json_response
+    '''
 
     '''
     def get_car(self, car_name, brand, auth_details=None):
@@ -138,17 +227,16 @@ class API_Player(Results):
 
         return response
 
-
-    def delete_registered_car(self, auth_details=None):
-        "deletes registered car"
-        headers = self.set_header_details(auth_details)
-        json_response = self.api_obj.delete_registered_car(headers=headers)
+    '''
+    def delete_registered_job(self, auth_details=None):
+        "deletes added job"
+        json_response = self.api_obj.delete_registered_job(headers=headers)
         result_flag = True if json_response['response']['successful'] == True else False
         self.conditional_write(result_flag,
                                positive='Successfully deleted registered cars',
                                negative='Could not delete registered car')
 
-
+    '''
     def get_car_count(self,auth_details=None):
         "Verify car count at the start"
         self.write('\n*****Verifying car count******')
@@ -206,7 +294,7 @@ class API_Player(Results):
             raise e
 
         return {'user_list': result['user_list'], 'response_code': result['response']}
-    '''
+
     def check_validation_error(self, auth_details=None):
         "verify validatin error 403"
         result = self.get_user_list(auth_details)
@@ -233,3 +321,4 @@ class API_Player(Results):
             msg = "unknown reason"
 
         return {'result_flag': result_flag, 'msg': msg}
+    '''
