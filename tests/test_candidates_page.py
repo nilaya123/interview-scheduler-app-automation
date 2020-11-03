@@ -140,7 +140,9 @@ def test_candidates_page(test_obj):
                             negative="Failed to add Candidates details and save \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
+
         test_obj = PageFactory.get_page_object("jobs page")
+
 
         #9. Search job
         result_flag = test_obj.search_job(search_option_job)
@@ -195,7 +197,9 @@ def test_candidates_page(test_obj):
                             negative="Failed to open link \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
+
         test_obj = PageFactory.get_page_object("candidates page")
+
 
         #15.Delete Configured Candidate
         result_flag = test_obj.remove_candidates(search_option_candidate)
@@ -204,7 +208,9 @@ def test_candidates_page(test_obj):
                             negative="Failed to delete candidate \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
+
         test_obj = PageFactory.get_page_object("interviewers page")
+
 
         #16.Delete Configured interviewer
         result_flag = test_obj.remove_interviewers(search_option_interviewer)
@@ -216,12 +222,14 @@ def test_candidates_page(test_obj):
 
         test_obj = PageFactory.get_page_object("jobs page")
 
+
         #17.Delete Configured JOb
         result_flag = test_obj.remove_job(search_option_job)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted job\n",
                             negative="Failed to delete job \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
+
 
         #Turn off the highlighting feature
         test_obj.turn_off_highlight()
