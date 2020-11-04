@@ -11,6 +11,15 @@ Our automated test will do the following:
     #Go to the candidates page.
     #add the candidate details, add the same.
     #Go to the Jobs page, add rounds.
+    #Go to Candidates Page, send invite for an interview
+    #Login to email and extract url, unique code and email address
+    #Go to that url, enter unique code and email address
+    #Select date , slot and schedule an interview
+    #from confirmation link ,click on link enter to calendar with details
+    #Check for google link from calendar
+    #delete candidate
+    #delete job
+    #delete interviewer
 
 """
 import os

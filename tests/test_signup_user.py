@@ -1,7 +1,7 @@
 """
 This is an example automated test to help you test interview scheduler application
 Our automated test will do the following:
-    #Open Login Page of Scheduler App.
+    #Open Signup Page of Scheduler App.
     #Enter SignUp Details and signup
 
 """
@@ -28,51 +28,23 @@ def test_signup_user(test_obj):
         #1. Create a test object and fill the sign up form.
         test_obj = PageFactory.get_page_object("login page")
 
-        # Turn on the highlighting feature
+        #2. Turn on the highlighting feature
         test_obj.turn_on_highlight()
 
-        #4. Get the test details from the conf file
+        #3. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
         email = "nilaya+" + ''.join(random.choices(string.digits, k = 3))+ ('@qxf2.com')
 
-        #5. Open Signup form
+        #4. Open Signup form
         result_flag = test_obj.signup()
         test_obj.log_result(result_flag,
                             positive="Successfully Opened the signup form\n",
                             negative="Failed to open the signup form \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
-        '''
-        #5. Set name in form
-        result_flag = test_obj.new_user(username)
-        test_obj.log_result(result_flag,
-                            positive="Name was successfully set to: %s\n" % username,
-                            negative="Failed to set name: %s \nOn url: %s\n" % (username, test_obj.get_current_url()))
 
-
-        #6. Set Email in form
-        result_flag = test_obj.set_email(email)
-        test_obj.log_result(result_flag,
-                            positive="Email was successfully set to: %s\n" % email,
-                            negative="Failed to set email: %s \nOn url: %s\n" %(email, test_obj.get_current_url()))
-
-
-        #7. Set Password in form
-        result_flag = test_obj.enter_password(password)
-        test_obj.log_result(result_flag,
-                            positive="Password was successfully set to: %s\n" % password,
-                            negative="Failed to set password: %s \nOn url: %s\n" % (password, test_obj.get_current_url()))
-
-
-        #6. Set Confirm Password in form
-        result_flag = test_obj.confirm_password(password)
-        test_obj.log_result(result_flag,
-                            positive="Confirm password was successfully set to: %s\n" % password,
-                            negative="Failed to set email: %s \nOn url: %s\n" % (password, test_obj.get_current_url()))
-
-        '''
-        #10. Set and submit the form in one go
+        #5. Set username and password and submit the form in one go
         result_flag = test_obj.submit_signup_form(username,email,password)
         test_obj.log_result(result_flag,
                             positive="Successfully submitted the signup form\n",
@@ -80,11 +52,10 @@ def test_signup_user(test_obj):
                             level="critical")
 
 
-
-        #Turn off the highlighting feature
+        #6.Turn off the highlighting feature
         #test_obj.turn_off_highlight()
 
-        #13. Print out the result
+        #7. Print out the result
         test_obj.write_test_summary()
         expected_pass = test_obj.result_counter
         actual_pass = test_obj.pass_counter
