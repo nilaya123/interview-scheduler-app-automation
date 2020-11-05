@@ -7,11 +7,10 @@ Our automated test will do the following:
 """
 import os
 import sys
-import time
+import string
+import random
 import pytest
-import string, random
 from page_objects.PageFactory import PageFactory
-from utils.Option_Parser import Option_Parser
 import conf.login_conf as conf
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -21,7 +20,7 @@ def test_signup_user(test_obj):
 
     "Run the test"
     try:
-        #Initalize flags for tests summary
+        #Initialize flags for tests summary
         expected_pass = 0
         actual_pass = -1
 
@@ -34,7 +33,7 @@ def test_signup_user(test_obj):
         #3. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
-        email = "nilaya+" + ''.join(random.choices(string.digits, k = 3))+ ('@qxf2.com')
+        email = "nilaya+" + ''.join(random.choices(string.digits, k=3))+ ('@qxf2.com')
 
         #4. Open Signup form
         result_flag = test_obj.signup()
@@ -45,7 +44,7 @@ def test_signup_user(test_obj):
 
 
         #5. Set username and password and submit the form in one go
-        result_flag = test_obj.submit_signup_form(username,email,password)
+        result_flag = test_obj.submit_signup_form(username, email, password)
         test_obj.log_result(result_flag,
                             positive="Successfully submitted the signup form\n",
                             negative="Failed to submit the form \nOn url: %s" % test_obj.get_current_url(),

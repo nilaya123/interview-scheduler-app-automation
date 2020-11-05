@@ -214,18 +214,27 @@ class Candidates_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def send_email(self,search_option_candidate,select_round_level):
+    def send_email(self):
         "Click on send email button"
-        self.search_candidate(search_option_candidate)
-        self.select_candidates()
-        self.thumbs_up()
-        self.select_round(select_round_level)
         result_flag = self.click_element(self.send_email_button)
         self.conditional_write(result_flag,
             positive='Clicked on the send email button',
             negative='Failed to click on send email button',
             level='debug')
-        #result_flag = self.alert_accept()
+        result_flag = self.alert_accept()
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def send_email_candidate(self,search_option_candidate,select_round_level):
+        "Search candidate,select, thumbs up, select round level, send email to candidate "
+        result_flag = self.search_candidate(search_option_candidate)
+        result_flag &= self.select_candidates()
+        result_flag &= self.thumbs_up()
+        result_flag &= self.select_round(select_round_level)
+        result_flag &= self.send_email()
 
         return result_flag
 

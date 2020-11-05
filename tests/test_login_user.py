@@ -9,10 +9,9 @@ Our automated test will do the following:
 """
 import os
 import sys
-import time
 import pytest
 from page_objects.PageFactory import PageFactory
-from utils.Option_Parser import Option_Parser
+#from utils.Option_Parser import Option_Parser
 import conf.login_conf as conf
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -29,7 +28,6 @@ def test_login_page(test_obj):
         #1. Create a test object and fill the login form.
         test_obj = PageFactory.get_page_object("login page")
 
-
         # Turn on the highlighting feature
         test_obj.turn_on_highlight()
 
@@ -37,9 +35,8 @@ def test_login_page(test_obj):
         username = conf.user_name
         password = conf.password
 
-
         #3. Enter Username and Password and login to page
-        result_flag = test_obj.login_page(username,password)
+        result_flag = test_obj.login_page(username, password)
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
                             negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),

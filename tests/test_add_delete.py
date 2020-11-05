@@ -16,11 +16,10 @@ Our automated test will do the following:
 """
 import os
 import sys
-import time
 import pytest
 from page_objects.PageFactory import PageFactory
 from utils.Option_Parser import Option_Parser
-import conf.login_conf as conf
+from conf import login_conf as conf
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
@@ -67,7 +66,7 @@ def test_login_page(test_obj):
         round_requirements = conf.round_requirements
 
         #3. Enter Username and Password and login to page
-        result_flag = test_obj.login_page(username,password)
+        result_flag = test_obj.login_page(username, password)
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
                             negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
@@ -98,7 +97,7 @@ def test_login_page(test_obj):
 
 
         #6. Add interviewer
-        result_flag = test_obj.add_interviewers_details(interviewers_name,interviewers_email,interviewers_designation,interviewers_starttime_drop,interviewers_endtime_drop)
+        result_flag = test_obj.add_interviewers_details(interviewers_name, interviewers_email, interviewers_designation, interviewers_starttime_drop, interviewers_endtime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added interviewer with all details\n",
                             negative="Failed to add interviewer with all details \nOn url: %s" % test_obj.get_current_url(),
@@ -117,7 +116,7 @@ def test_login_page(test_obj):
 
 
         #8. Add Job details
-        result_flag = test_obj.add_job_details(job_role,job_interviewers)
+        result_flag = test_obj.add_job_details(job_role, job_interviewers)
         test_obj.log_result(result_flag,
                             positive="Successfully added job details\n",
                             negative="Failed to add Job details \nOn url: %s" % test_obj.get_current_url(),
@@ -135,7 +134,7 @@ def test_login_page(test_obj):
                             level="critical")
 
         #10. Add Candidate details
-        result_flag = test_obj.add_candidate_details(name_candidates,email_candidates,job_applied_select,comment_candidates)
+        result_flag = test_obj.add_candidate_details(name_candidates, email_candidates, job_applied_select, comment_candidates)
         test_obj.log_result(result_flag,
                             positive="Successfully added Candidates details and saved the same\n",
                             negative="Failed to add Candidates details and save \nOn url: %s" % test_obj.get_current_url(),
@@ -170,7 +169,7 @@ def test_login_page(test_obj):
 
 
         #14. Add job round details
-        result_flag = test_obj.add_round_details(round_name,round_duration_select,round_description,round_requirements)
+        result_flag = test_obj.add_round_details(round_name, round_duration_select, round_description, round_requirements)
         test_obj.log_result(result_flag,
                             positive="Successfully added round details \n",
                             negative="Failed to add round details \nOn url: %s" % test_obj.get_current_url(),
