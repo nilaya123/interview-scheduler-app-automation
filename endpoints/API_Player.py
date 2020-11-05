@@ -57,7 +57,10 @@ class API_Player(Results):
             row = [i.text for i in td]
             print(row)
         print(row)
-        print(row[1])
+        print(row[0])
+        new_job_id = row[0]
+        print(new_job_id)
+
 
         return result_flag
         '''
@@ -119,7 +122,7 @@ class API_Player(Results):
         "get available interviewers"
         response = self.api_obj.get_interviewer_is()
         result_flag = True if response['response'] == 200 else False
-        print("GET INTERVIWERS")
+        print("GET INTERVIEWERS")
         #print(response['response_content'])
         ses = response['response_content']
         soup = BeautifulSoup(ses)
@@ -133,6 +136,13 @@ class API_Player(Results):
         print(row)
         print(row[1])
 
+        return result_flag
+
+    def delete_jobs(self,new_job_id):
+        "delete job"
+        response = self.api_obj.delete_jobs_is(data=new_job_id)
+        result_flag = True if response['response'] == 200 else False
+        print("I am in delete jobs")
         return result_flag
     '''
         json_response = json_response['response']

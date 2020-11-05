@@ -86,8 +86,14 @@ def test_isapi_example(api_url='http://localhost:6464/'):
 
     result_flag = test_obj.get_interviewers()
     test_obj.log_result(result_flag,
-                           positive='Successfully got the list of interviwers',
+                           positive='Successfully got the list of interviewers',
                            negative='Could not get the list of interviewers')
+
+
+    result_flag = test_obj.delete_jobs(new_job_id)
+    test_obj.log_result(result_flag,
+                           positive='Successfully deleted the job',
+                           negative='Could not delete the job')
 
 
     # write out test summary

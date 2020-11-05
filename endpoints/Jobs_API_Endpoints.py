@@ -49,6 +49,17 @@ class Jobs_API_Endpoints(Base_API):
             'response_content': response['json_response']
         }
 
+
+    def delete_jobs_is(self,data):
+        "Adds a new job"
+        url = self.jobs_url('/delete')
+        response = self.post(url,data=data)
+        return {
+            'url':url,
+            'response':response['response']
+        }
+
+
     '''
     def get_car(self,url_params,headers):
         "gets given car details"
