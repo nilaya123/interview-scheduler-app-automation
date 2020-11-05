@@ -209,17 +209,13 @@ class Interviewers_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def interviewers_details(self,interviewers_name,interviewers_email,interviewers_designation,interviewers_starttime_drop,interviewers_endtime_drop):
-        self.set_name(interviewers_name)
-        self.set_email(interviewers_email)
-        self.set_designation(interviewers_designation)
-        self.set_starttime(interviewers_starttime_drop)
-        self.set_endtime(interviewers_endtime_drop)
-        self.save_interviewer()
-        result_flag = self.close_interviewer()
-        self.conditional_write(result_flag,
-            positive='Interviewer is added successfully',
-            negative='Failed to add Interviewer',
-            level='debug')
+    def add_interviewers_details(self,interviewers_name,interviewers_email,interviewers_designation,interviewers_starttime_drop,interviewers_endtime_drop):
+        result_flag = self.set_name(interviewers_name)
+        result_flag &= self.set_email(interviewers_email)
+        result_flag &= self.set_designation(interviewers_designation)
+        result_flag &= self.set_starttime(interviewers_starttime_drop)
+        result_flag &= self.set_endtime(interviewers_endtime_drop)
+        result_flag &= self.save_interviewer()
+        result_flag &= self.close_interviewer()
 
         return result_flag

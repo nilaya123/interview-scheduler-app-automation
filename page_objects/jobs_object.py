@@ -57,7 +57,6 @@ class Jobs_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def submit_job(self):
@@ -83,7 +82,6 @@ class Jobs_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def remove_job(self,search_option_job):
@@ -98,7 +96,6 @@ class Jobs_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def search_job(self,search_option_job):
@@ -111,17 +108,12 @@ class Jobs_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def job_details(self,job_role,job_interviewers):
+    def add_job_details(self,job_role,job_interviewers):
         "Add Job details"
-        self.set_job_role(job_role)
-        self.set_job_interviewer(job_interviewers)
-        result_flag = self.submit_job()
-        self.conditional_write(result_flag,
-            positive='Added Job details',
-            negative='Failed to add for Job details',
-            level='debug')
+        result_flag = self.set_job_role(job_role)
+        result_flag &= self.set_job_interviewer(job_interviewers)
+        result_flag &= self.submit_job()
 
         return result_flag

@@ -87,7 +87,6 @@ class Candidates_Object:
 
         return result_flag
 
-
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def add_comments(self,comment_candidates):
@@ -115,20 +114,15 @@ class Candidates_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def candidate_details(self,name_candidates,email_candidates,job_applied_select,comment_candidates):
+    def add_candidate_details(self,name_candidates,email_candidates,job_applied_select,comment_candidates):
         "Add all candidate details"
-        self.add_name(name_candidates)
-        self.add_email(email_candidates)
-        self.add_job_applied(job_applied_select)
-        self.add_comments(comment_candidates)
-        result_flag = self.submit()
-        self.conditional_write(result_flag,
-            positive='Added Candidate details',
-            negative='Failed to add Candidate details',
-            level='debug')
+        result_flag = self.add_name(name_candidates)
+        result_flag &= self.add_email(email_candidates)
+        result_flag &= self.add_job_applied(job_applied_select)
+        result_flag &= self.add_comments(comment_candidates)
+        result_flag &= self.submit()
 
         return result_flag
-
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot

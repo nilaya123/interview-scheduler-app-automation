@@ -47,7 +47,7 @@ def test_candidates_page(test_obj):
         # Turn on the highlighting feature
         test_obj.turn_on_highlight()
 
-        #4. Get the test details from the conf file
+        #2. Get the test details from the conf file
         username = conf.user_name
         password = conf.password
 
@@ -79,12 +79,13 @@ def test_candidates_page(test_obj):
         password_link = conf.password_link
 
 
-        #1. Enter Username and Password and login to page
+        #3. Enter Username and Password and login to page
         result_flag = test_obj.login_page(username,password)
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
                             negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
+
 
         if result_flag is True:
             result_flag = test_obj.check_heading()
@@ -93,7 +94,7 @@ def test_candidates_page(test_obj):
                             negative="Fail: Heading on the redirect page is incorrect!")
 
 
-        #2. Click on Interviewers Page
+        #4. Click on Interviewers Page
         result_flag = test_obj.click_on_link()
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Interviewers page\n",
@@ -101,7 +102,7 @@ def test_candidates_page(test_obj):
                             level="critical")
 
 
-        #3. Click on  add Interviewers Page
+        #5. Click on add Interviewers Page
         result_flag = test_obj.add_interviewer()
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Add Interviewers page\n",
@@ -109,16 +110,18 @@ def test_candidates_page(test_obj):
                             level="critical")
 
 
-        #4. Add interviewer details
-        result_flag = test_obj.interviewers_details(interviewers_name,interviewers_email,interviewers_designation,interviewers_starttime_drop,interviewers_endtime_drop)
+        #6. Add interviewer
+        result_flag = test_obj.add_interviewers_details(interviewers_name,interviewers_email,interviewers_designation,interviewers_starttime_drop,interviewers_endtime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added interviewer with all details\n",
                             negative="Failed to add interviewer with all details \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
+
         test_obj = PageFactory.get_page_object("jobs page")
 
-        #5. Add JObs
+
+        #7. Add JObs
         result_flag = test_obj.add_jobs()
         test_obj.log_result(result_flag,
                             positive="Successfully opened add jobs page\n",
@@ -126,24 +129,26 @@ def test_candidates_page(test_obj):
                             level="critical")
 
 
-        #6 Add Job details
-        result_flag = test_obj.job_details(job_role,job_interviewers)
+        #8. Add Job details
+        result_flag = test_obj.add_job_details(job_role,job_interviewers)
         test_obj.log_result(result_flag,
                             positive="Successfully added job details\n",
                             negative="Failed to add Job details \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
+
         test_obj = PageFactory.get_page_object("candidates page")
 
-        #7. Add Candidate
+
+        #9. Add Candidate
         result_flag = test_obj.add_candidates()
         test_obj.log_result(result_flag,
                             positive="Successfully opened add candidates page\n",
                             negative="Failed to open candidates page \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
-        #8. Add Candidate details
-        result_flag = test_obj.candidate_details(name_candidates,email_candidates,job_applied_select,comment_candidates)
+        #10. Add Candidate details
+        result_flag = test_obj.add_candidate_details(name_candidates,email_candidates,job_applied_select,comment_candidates)
         test_obj.log_result(result_flag,
                             positive="Successfully added Candidates details and saved the same\n",
                             negative="Failed to add Candidates details and save \nOn url: %s" % test_obj.get_current_url(),
@@ -153,7 +158,7 @@ def test_candidates_page(test_obj):
         test_obj = PageFactory.get_page_object("jobs page")
 
 
-        #9. Search job
+        #11. Search job
         result_flag = test_obj.search_job(search_option_job)
         test_obj.log_result(result_flag,
                             positive="Successfully searched interviewer name\n",
@@ -161,7 +166,7 @@ def test_candidates_page(test_obj):
                             level="critical")
 
 
-        #10. Open jobs page to add rounds
+        #12. Open jobs page to add rounds
         result_flag = test_obj.round_to_job()
         test_obj.log_result(result_flag,
                             positive="Successfully opened jobs page to add rounds\n",
@@ -169,7 +174,7 @@ def test_candidates_page(test_obj):
                             level="critical")
 
 
-        #11. Click Add rounds
+        #13. Click Add rounds
         result_flag = test_obj.add_rounds()
         test_obj.log_result(result_flag,
                             positive="Successfully opened add rounds\n",
@@ -177,8 +182,8 @@ def test_candidates_page(test_obj):
                             level="critical")
 
 
-        # 12. Add job round details
-        result_flag = test_obj.round_details(round_name,round_duration_select,round_description,round_requirements)
+        #14. Add job round details
+        result_flag = test_obj.add_round_details(round_name,round_duration_select,round_description,round_requirements)
         test_obj.log_result(result_flag,
                             positive="Successfully added round details \n",
                             negative="Failed to add round details \nOn url: %s" % test_obj.get_current_url(),
@@ -187,30 +192,7 @@ def test_candidates_page(test_obj):
 
         test_obj = PageFactory.get_page_object("candidates page")
 
-
-        #13.Send Email
-        result_flag = test_obj.send_email(search_option_candidate,select_round_level)
-        test_obj.log_result(result_flag,
-                            positive="Successfully clicked on send email\n",
-                            negative="Failed to click on send email \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
-
-
-        test_obj = PageFactory.get_page_object("candidates page")
-
-
-        #14.Get the details from email such as url and unique code,login to url and schedule an interview,checking the google link after sceduling an interview
-        result_flag = test_obj.fetch_email_invite()
-        test_obj.log_result(result_flag,
-                            positive="Successfully opened link and interview scheduled\n",
-                            negative="Failed to open link \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
-
-
-        test_obj = PageFactory.get_page_object("candidates page")
-
-
-        #15.Delete Configured Candidate
+        #15. Delete Candidate
         result_flag = test_obj.remove_candidates(search_option_candidate)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted candidate\n",
@@ -220,8 +202,7 @@ def test_candidates_page(test_obj):
 
         test_obj = PageFactory.get_page_object("interviewers page")
 
-
-        #16.Delete Configured interviewer
+        #16. Delete interviewer
         result_flag = test_obj.remove_interviewers(search_option_interviewer)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted interviewer\n",
@@ -231,8 +212,7 @@ def test_candidates_page(test_obj):
 
         test_obj = PageFactory.get_page_object("jobs page")
 
-
-        #17.Delete Configured JOb
+        #17. Delete Job
         result_flag = test_obj.remove_job(search_option_job)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted job\n",
