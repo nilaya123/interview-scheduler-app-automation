@@ -23,6 +23,7 @@ class Form_Object:
     login_button = locators.login_button
     signup_button = locators.signup_button
     submit_button = locators.submit_button
+    logout_button = locators.logout_button
     redirect_title = "redirect"
 
     @Wrapit._exceptionHandler
@@ -83,13 +84,9 @@ class Form_Object:
     @Wrapit._screenshot
     def login_page(self,username,password):
         "Login Wrapper method"
-        self.set_user(username)
-        self.set_password(password)
-        result_flag = self.login()
-        self.conditional_write(result_flag,
-            positive='Clicked on the "Login" button',
-            negative='Failed to click on "Login" button',
-            level='debug')
+        result_flag = self.set_user(username)
+        result_flag &= self.set_password(password)
+        result_flag &= self.login()
 
         return result_flag
 
@@ -122,9 +119,6 @@ class Form_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-
-
-
     def set_email(self,email):
         "Set the user name on the registration form"
         result_flag = self.set_text(self.email_field,email)
@@ -211,5 +205,18 @@ class Form_Object:
         result_flag &= self.enter_password(password)
         result_flag &= self.confirm_password(password)
         result_flag &= self.submit()
+
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def logout_page(self):
+        "Click on 'Logout' button"
+        result_flag = self.click_element(self.logout_button)
+        self.conditional_write(result_flag,
+            positive='Clicked on the "Logout" button',
+            negative='Failed to click on "Logout" button',
+            level='debug')
 
         return result_flag

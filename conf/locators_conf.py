@@ -21,6 +21,7 @@ email_field = "xpath,//input[contains(@id,'email')]"
 password_field = "xpath,//input[contains(@id,'password')]"
 confirm_password_field = "xpath,//input[contains(@id,'confirmPassword')]"
 submit_button = "xpath,//button[contains(@id,'addSubmit')]"
+logout_button = "xpath,//input[contains(@value,'log out')]"
 
 #Locators for the index object
 interviewers_page = "xpath,//a[contains(.,'List the interviewers')]"
