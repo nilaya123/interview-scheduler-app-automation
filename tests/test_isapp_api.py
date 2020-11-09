@@ -53,7 +53,7 @@ def test_isapi_example(api_url='http://localhost:6464/'):
                            positive='Successfully logged in app %s' % username,
                            negative='Could not login to app %s' % username)
 
-
+    '''
     result_flag = test_obj.add_jobs(job_data)
     test_obj.log_result(result_flag,
                            positive='Successfully added new job with details %s' % job_data,
@@ -89,8 +89,8 @@ def test_isapi_example(api_url='http://localhost:6464/'):
                            positive='Successfully got the list of interviewers',
                            negative='Could not get the list of interviewers')
 
-
-    result_flag = test_obj.delete_jobs(new_job_id)
+    '''
+    result_flag = test_obj.delete_jobs()
     test_obj.log_result(result_flag,
                            positive='Successfully deleted the job',
                            negative='Could not delete the job')

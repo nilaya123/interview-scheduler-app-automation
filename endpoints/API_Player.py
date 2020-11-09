@@ -4,6 +4,7 @@ a) serves as an interface between the test and API_Interface
 b) contains several useful wrappers around commonly used combination of actions
 c) maintains the test context/state
 """
+import json
 from base64 import b64encode
 from .API_Interface import API_Interface
 from utils.results import Results
@@ -56,11 +57,9 @@ class API_Player(Results):
             td = tr.find_all('td')
             row = [i.text for i in td]
             print(row)
-        print(row)
-        print(row[0])
-        new_job_id = row[0]
+        print(json.loads(row[0]))
+        new_job_id = json.loads[row[0]]
         print(new_job_id)
-
 
         return result_flag
         '''
@@ -138,9 +137,28 @@ class API_Player(Results):
 
         return result_flag
 
-    def delete_jobs(self,new_job_id):
+    def delete_jobs(self):
         "delete job"
+        response = self.api_obj.get_jobs_is()
+        result_flag = True if response['response'] == 200 else False
+        print("GET JOBS")
+        #print(response['response_content'])
+        ses = response['response_content']
+        soup = BeautifulSoup(ses)
+        My_table = soup.find('table',{'class':'table table-striped'})
+        table_rows = My_table.find_all('tr')
+        table_rows
+        for tr in table_rows:
+            td = tr.find_all('td')
+            row = [i.text for i in td]
+            print(row)
+        print(json.loads(row[0]))
+        new_job_id = 0
+        new_job_id = json.loads(row[0])
+        print(new_job_id)
+        print(dir(new_job_id))
         response = self.api_obj.delete_jobs_is(data=new_job_id)
+        print(response)
         result_flag = True if response['response'] == 200 else False
         print("I am in delete jobs")
         return result_flag

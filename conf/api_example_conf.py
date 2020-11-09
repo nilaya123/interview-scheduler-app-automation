@@ -8,6 +8,11 @@ candidate_details = {'candidateName':'test_more_new','candidateEmail':'test_more
 #get_interviewer_details
 interviewer_details = {'name':'test_nilaya','email':'nilaya+1234@qxf2.com','designation':'Senior QA','timeObject':'{"starttime":["10:00"],"endtime":["19:00"]}'}
 
+#job delete the
+job_id ={''}
+
+
+
 #authentication details
 user_name = 'nilaya'
 password = 'nilaya1234'

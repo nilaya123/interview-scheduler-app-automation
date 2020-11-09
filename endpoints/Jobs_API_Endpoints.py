@@ -50,9 +50,9 @@ class Jobs_API_Endpoints(Base_API):
         }
 
 
-    def delete_jobs_is(self,data):
+    def delete_jobs_is(self,data=new_job_id):
         "Adds a new job"
-        url = self.jobs_url('/delete')
+        url = self.jobs_url('/delete/%s'%new_job_id)
         response = self.post(url,data=data)
         return {
             'url':url,
