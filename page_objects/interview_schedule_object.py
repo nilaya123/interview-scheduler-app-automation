@@ -1,6 +1,5 @@
 import os
 import sys
-#import imaplib
 import email
 import datetime
 from bs4 import BeautifulSoup
@@ -12,7 +11,7 @@ import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
 from utils.email_util import Email_Util
 import conf.email_conf as conf_file
-from conf import login_conf as conf
+from conf import login_conf as login
 
 
 #Fetching conf details from the conf file
