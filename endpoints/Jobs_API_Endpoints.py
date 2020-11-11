@@ -22,10 +22,6 @@ class Jobs_API_Endpoints(Base_API):
         url = self.login_url()
         print(data)
         response = self.post(url,data=data)
-        #print(response)
-        #cookie_value = response.headers['Set-Cookie']
-        #print(response.headers)
-        #print(response)
         return response
 
 
@@ -35,7 +31,8 @@ class Jobs_API_Endpoints(Base_API):
         response = self.post(url,data=data)
         return {
             'url':url,
-            'response':response['response']
+            'response':response['response'],
+            'response_content': response['json_response']
         }
 
 
@@ -50,13 +47,14 @@ class Jobs_API_Endpoints(Base_API):
         }
 
 
-    def delete_jobs_is(self,data=new_job_id):
+    def delete_jobs_is(self,data):
         "Adds a new job"
-        url = self.jobs_url('/delete/%s'%new_job_id)
+        url = self.jobs_url('/delete')
         response = self.post(url,data=data)
         return {
             'url':url,
-            'response':response['response']
+            'response':response['response'],
+            'response_content': response['json_response']
         }
 
 

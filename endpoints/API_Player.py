@@ -25,7 +25,6 @@ class API_Player(Results):
         self.api_obj = API_Interface(url=url, session_flag=session_flag)
 
 
-
     def set_login_details(self, username, password):
         "encode auth details"
         user = username
@@ -57,21 +56,17 @@ class API_Player(Results):
             td = tr.find_all('td')
             row = [i.text for i in td]
             print(row)
-        print(json.loads(row[0]))
-        new_job_id = json.loads[row[0]]
-        print(new_job_id)
 
-        return result_flag
-        '''
-        json_response = json_response['response']
-        result_flag = True if json_response['successful'] == True else False
-        self.write(msg="Fetched jobs list:\n %s"%str(json_response))
+        #return result_flag
+        #json_response = json_response['response']
+        result_flag = True if response['response'] == 200 else False
+        self.write(msg="Fetched jobs list:\n %s"%str(row))
         self.conditional_write(result_flag,
                                positive="Successfully fetched jobs",
                                negative="Could not fetch jobs")
 
-        return json_response
-        '''
+        return response
+
 
     def add_jobs(self,job_data):
         "add new job"
@@ -84,6 +79,7 @@ class API_Player(Results):
     def add_candidates(self,candidate_data):
         "add new candidate"
         response = self.api_obj.add_candidates_is(data=candidate_data)
+        print(response)
         result_flag = True if response['response'] == 200 else False
         print("I am in add candidates")
         return result_flag
@@ -141,37 +137,38 @@ class API_Player(Results):
         "delete job"
         response = self.api_obj.get_jobs_is()
         result_flag = True if response['response'] == 200 else False
-        print("GET JOBS")
-        #print(response['response_content'])
         ses = response['response_content']
         soup = BeautifulSoup(ses)
         My_table = soup.find('table',{'class':'table table-striped'})
         table_rows = My_table.find_all('tr')
-        table_rows
         for tr in table_rows:
             td = tr.find_all('td')
             row = [i.text for i in td]
             print(row)
-        print(json.loads(row[0]))
-        new_job_id = 0
-        new_job_id = json.loads(row[0])
-        print(new_job_id)
-        print(dir(new_job_id))
-        response = self.api_obj.delete_jobs_is(data=new_job_id)
-        print(response)
+        self.new_job_id = row[0]
+        response = self.api_obj.delete_jobs_is(data={'job-id': self.new_job_id})
         result_flag = True if response['response'] == 200 else False
-        print("I am in delete jobs")
-        return result_flag
-    '''
-        json_response = json_response['response']
-        result_flag = True if json_response['successful'] == True else False
-        self.write(msg="Fetched jobs list:\n %s"%str(json_response))
-        self.conditional_write(result_flag,
-                               positive="Successfully fetched jobs",
-                               negative="Could not fetch jobs")
 
-        return json_response
-    '''
+        return result_flag
+
+    def delete_candidates(self):
+        "delete candidate"
+        response = self.api_obj.get_candidates_is()
+        result_flag = True if response['response'] == 200 else False
+        ses = response['response_content']
+        soup = BeautifulSoup(ses)
+        My_table = soup.find('table',{'class':'table table-striped'})
+        table_rows = My_table.find_all('tr')
+        for tr in table_rows:
+            td = tr.find_all('td')
+            row = [i.text for i in td]
+            print(row)
+        self.new_job_id
+        self.new_candidate_id =row[0]
+        response = self.api_obj.delete_candidates_is(data = {'candidateId':self.new_candidate_id,'jobId':self.new_job_id})
+        result_flag = True if response['response'] == 200 else False
+
+        return result_flag
 
     '''
     def get_car(self, car_name, brand, auth_details=None):
@@ -255,16 +252,8 @@ class API_Player(Results):
 
         return response
 
-    '''
-    def delete_registered_job(self, auth_details=None):
-        "deletes added job"
-        json_response = self.api_obj.delete_registered_job(headers=headers)
-        result_flag = True if json_response['response']['successful'] == True else False
-        self.conditional_write(result_flag,
-                               positive='Successfully deleted registered cars',
-                               negative='Could not delete registered car')
 
-    '''
+
     def get_car_count(self,auth_details=None):
         "Verify car count at the start"
         self.write('\n*****Verifying car count******')

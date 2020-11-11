@@ -23,17 +23,18 @@ class Candidate_API_Endpoints(Base_API):
 
 
     def add_candidates_is(self,data):
-        "Adds a new job"
+        "Adds a new candidate"
         url = self.candidates_url('/add')
         response = self.post(url,data=data)
         return {
             'url':url,
-            'response':response['response']
+            'response':response['response'],
+            'response_content': response['json_response']
         }
 
 
     def get_candidates_is(self):
-        "gets list of jobs"
+        "gets list of candidates"
         url = self.candidate_url()
         response = self.get(url)
         return {
@@ -41,6 +42,18 @@ class Candidate_API_Endpoints(Base_API):
             'response': response['response'],
             'response_content': response['json_response']
         }
+
+
+    def delete_candidates_is(self,candidate_id,data):
+        "Adds a new job"
+        url = self.candidate_url('/%s/delete',candidate_id)
+        response = self.post(url,data=data)
+        return {
+            'url':url,
+            'response':response['response'],
+            'response_content': response['json_response']
+        }
+
 
     '''
     def get_car(self,url_params,headers):
