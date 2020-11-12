@@ -11,7 +11,6 @@ import os
 import sys
 import pytest
 from page_objects.PageFactory import PageFactory
-#from utils.Option_Parser import Option_Parser
 import conf.login_conf as conf
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -42,23 +41,24 @@ def test_login_page(test_obj):
                             negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
+
         #4. Checkout for Page Heading
-        if result_flag is True:
-            result_flag = test_obj.check_heading()
+        result_flag = test_obj.check_heading()
         test_obj.log_result(result_flag,
                             positive="Heading on the redirect page checks out!\n",
                             negative="Fail: Heading on the redirect page is incorrect!")
 
+
         #5. Logout from application
         result_flag = test_obj.logout_page()
         test_obj.log_result(result_flag,
-                            positive="Successfully logged in the page\n",
-                            negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
+                            positive="Successfully logged out of the page\n",
+                            negative="Failed to logout from the page \nOn url: %s" % test_obj.get_current_url(),
                             level="critical")
 
 
         #6.Turn off the highlighting feature
-        #test_obj.turn_off_highlight()
+        test_obj.turn_off_highlight()
 
         #7. Print out the result
         test_obj.write_test_summary()

@@ -2,15 +2,14 @@
 This class models the form on the Selenium tutorial page
 The form consists of some input fields, a dropdown, a checkbox and a button
 """
-import os,sys,time,email,datetime
+import os
+import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from .Base_Page import Base_Page
 import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
-from utils.email_util import Email_Util
-import conf.email_conf as conf_file
 import conf.login_conf as login
-from selenium import webdriver
+#from selenium import webdriver
+from .Base_Page import Base_Page
 
 
 #Fetching conf details from the conf file
@@ -43,59 +42,59 @@ class Candidates_Object:
         "Click on Add Candidates button"
         result_flag = self.click_element(self.add_candidates_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the Add Candidates button',
-            negative='Failed to click on Add Candidates button',
-            level='debug')
+                               positive='Clicked on the Add Candidates button',
+                               negative='Failed to click on Add Candidates button',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_name(self,name_candidates):
+    def add_name(self, name_candidates):
         "Set the name for candidate"
-        result_flag = self.set_text(self.name_candidates,name_candidates)
+        result_flag = self.set_text(self.name_candidates, name_candidates)
         self.conditional_write(result_flag,
-            positive='Set the  candidates name to: %s'% name_candidates,
-            negative='Failed to set the name',
-            level='debug')
+                               positive='Set the  candidates name to: %s'% name_candidates,
+                               negative='Failed to set the name',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_email(self,email_candidates):
+    def add_email(self, email_candidates):
         "Set the email for the candidate"
-        result_flag = self.set_text(self.email_candidates,email_candidates)
+        result_flag = self.set_text(self.email_candidates, email_candidates)
         self.conditional_write(result_flag,
-            positive='Set the email to: %s'%email_candidates,
-            negative='Failed to set the email in the form',
-            level='debug')
+                               positive='Set the email to: %s'%email_candidates,
+                               negative='Failed to set the email in the form',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_job_applied(self,job_applied_select,wait_seconds=1):
+    def add_job_applied(self, job_applied_select, wait_seconds=1):
         "Set the email on the form"
         result_flag = self.click_element(self.job_applied)
         self.wait(wait_seconds)
         result_flag = self.click_element(self.job_applied_select%job_applied_select)
         self.conditional_write(result_flag,
-            positive='Set the email to: %s'%job_applied_select,
-            negative='Failed to set the email in the form',
-            level='debug')
+                               positive='Set the email to: %s'%job_applied_select,
+                               negative='Failed to set the email in the form',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_comments(self,comment_candidates):
+    def add_comments(self, comment_candidates):
         "Set the email on the form"
-        result_flag = self.set_text(self.comment_candidates,comment_candidates)
+        result_flag = self.set_text(self.comment_candidates, comment_candidates)
         self.conditional_write(result_flag,
-            positive='Set the comments to: %s'%comment_candidates,
-            negative='Failed to set comments',
-            level='debug')
+                               positive='Set the comments to: %s'%comment_candidates,
+                               negative='Failed to set comments',
+                               level='debug')
 
         return result_flag
 
@@ -105,16 +104,16 @@ class Candidates_Object:
         "Click on 'Submit' button"
         result_flag = self.click_element(self.submit_candidates_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the Submit button',
-            negative='Failed to click on Submit button',
-            level='debug')
+                               positive='Clicked on the Submit button',
+                               negative='Failed to click on Submit button',
+                               level='debug')
         result_flag = self.alert_accept()
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_candidate_details(self,name_candidates,email_candidates,job_applied_select,comment_candidates):
+    def add_candidate_details(self, name_candidates, email_candidates, job_applied_select, comment_candidates):
         "Add all candidate details"
         result_flag = self.add_name(name_candidates)
         result_flag &= self.add_email(email_candidates)
@@ -126,13 +125,13 @@ class Candidates_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def search_candidate(self,search_option_candidate):
+    def search_candidate(self, search_option_candidate):
         "Click on 'Search' button"
-        result_flag = self.set_text(self.search_option_candidate,search_option_candidate)
+        result_flag = self.set_text(self.search_option_candidate, search_option_candidate)
         self.conditional_write(result_flag,
-            positive='Search for Candidate name: %s'%search_option_candidate,
-            negative='Failed to Search for Candidate name',
-            level='debug')
+                               positive='Search for Candidate name: %s'%search_option_candidate,
+                               negative='Failed to Search for Candidate name',
+                               level='debug')
 
         return result_flag
 
@@ -142,23 +141,23 @@ class Candidates_Object:
         "Click on Delete Candidates button"
         result_flag = self.click_element(self.delete_candidates_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the Delete Candidates button',
-            negative='Failed to click on Delete Candidates button',
-            level='debug')
+                               positive='Clicked on the Delete Candidates button',
+                               negative='Failed to click on Delete Candidates button',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def remove_candidates(self,search_option_candidate):
+    def remove_candidates(self, search_option_candidate):
         "Click on Remove Candidates button"
         self.search_candidate(search_option_candidate)
         self.delete_candidates()
         result_flag = self.click_element(self.remove_candidates_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the Remove Candidates button',
-            negative='Failed to click on Remove Candidates button',
-            level='debug')
+                               positive='Clicked on the Remove Candidates button',
+                               negative='Failed to click on Remove Candidates button',
+                               level='debug')
 
         return result_flag
 
@@ -168,9 +167,9 @@ class Candidates_Object:
         "Click on Select Candidates button"
         result_flag = self.click_element(self.select_candidate_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the Select Candidates button',
-            negative='Failed to click on Select Candidates button',
-            level='debug')
+                               positive='Clicked on the Select Candidates button',
+                               negative='Failed to click on Select Candidates button',
+                               level='debug')
 
         return result_flag
 
@@ -180,9 +179,9 @@ class Candidates_Object:
         "Click on thumbs up button"
         result_flag = self.click_element(self.thumbs_up_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the thumbs up button',
-            negative='Failed to click on thumbs up button',
-            level='debug')
+                               positive='Clicked on the thumbs up button',
+                               negative='Failed to click on thumbs up button',
+                               level='debug')
 
         return result_flag
 
@@ -192,22 +191,22 @@ class Candidates_Object:
         "Click on thumbs up button"
         result_flag = self.click_element(self.thumbs_down_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the thumbs down button',
-            negative='Failed to click on thumbs down button',
-            level='debug')
+                               positive='Clicked on the thumbs down button',
+                               negative='Failed to click on thumbs down button',
+                               level='debug')
 
         return result_flag
 
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def select_round(self,select_round_level):
+    def select_round(self, select_round_level):
         "Set the name for round"
-        result_flag = self.set_text(self.select_round_level_scroll,select_round_level)
+        result_flag = self.set_text(self.select_round_level_scroll, select_round_level)
         self.conditional_write(result_flag,
-            positive='Set the round to: %s'% select_round_level,
-            negative='Failed to set the round',
-            level='debug')
+                               positive='Set the round to: %s'% select_round_level,
+                               negative='Failed to set the round',
+                               level='debug')
 
         return result_flag
 
@@ -218,9 +217,9 @@ class Candidates_Object:
         "Click on send email button"
         result_flag = self.click_element(self.send_email_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the send email button',
-            negative='Failed to click on send email button',
-            level='debug')
+                               positive='Clicked on the send email button',
+                               negative='Failed to click on send email button',
+                               level='debug')
         result_flag = self.alert_accept()
 
         return result_flag
@@ -228,7 +227,7 @@ class Candidates_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def send_email_candidate(self,search_option_candidate,select_round_level):
+    def send_email_candidate(self, search_option_candidate, select_round_level):
         "Search candidate,select, thumbs up, select round level, send email to candidate "
         result_flag = self.search_candidate(search_option_candidate)
         result_flag &= self.select_candidates()
@@ -246,8 +245,8 @@ class Candidates_Object:
         result_flag = self.alert_window()
         return result_flag
         self.conditional_write(result_flag,
-            positive='Clicked on the OK',
-            negative='Failed to click on OK',
-            level='debug')
+                               positive='Clicked on the OK',
+                               negative='Failed to click on OK',
+                               level='debug')
 
         return result_flag

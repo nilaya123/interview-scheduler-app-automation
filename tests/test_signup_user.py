@@ -11,6 +11,7 @@ import string
 import random
 import pytest
 from page_objects.PageFactory import PageFactory
+from utils.Option_Parser import Option_Parser
 import conf.login_conf as conf
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -52,7 +53,7 @@ def test_signup_user(test_obj):
 
 
         #6.Turn off the highlighting feature
-        #test_obj.turn_off_highlight()
+        test_obj.turn_off_highlight()
 
         #7. Print out the result
         test_obj.write_test_summary()

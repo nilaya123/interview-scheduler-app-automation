@@ -18,7 +18,7 @@ import os
 import sys
 import pytest
 from page_objects.PageFactory import PageFactory
-from utils.Option_Parser import Option_Parser
+#from utils.Option_Parser import Option_Parser
 from conf import login_conf as conf
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -73,15 +73,14 @@ def test_login_page(test_obj):
                             level="critical")
 
 
-        if result_flag is True:
-            result_flag = test_obj.check_heading()
+        result_flag = test_obj.check_heading()
         test_obj.log_result(result_flag,
                             positive="Heading on the redirect page checks out!\n",
                             negative="Fail: Heading on the redirect page is incorrect!")
 
 
         #4. Click on Interviewers Page
-        result_flag = test_obj.click_on_link()
+        result_flag = test_obj.link_to_interviewers_page()
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Interviewers page\n",
                             negative="Failed to Open Interviewers page \nOn url: %s" % test_obj.get_current_url(),
