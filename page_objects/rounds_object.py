@@ -102,7 +102,7 @@ class Rounds_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add(self):
+    def click_add_button(self):
         "Click on Add button"
         result_flag = self.click_element(self.add_button)
         self.conditional_write(result_flag,
@@ -136,6 +136,6 @@ class Rounds_Object:
         result_flag &= self.add_duration(round_duration_select)
         result_flag &= self.add_description(round_description)
         result_flag &= self.add_requirements(round_requirements)
-        result_flag &= self.add()
+        result_flag &= self.click_add_button()
 
         return result_flag

@@ -70,7 +70,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
                             negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         result_flag = test_obj.check_heading()
@@ -84,7 +84,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Interviewers page\n",
                             negative="Failed to Open Interviewers page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #5. Click on add Interviewers Page
@@ -92,7 +92,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Add Interviewers page\n",
                             negative="Failed to Open Add Interviewers page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #6. Add interviewer
@@ -100,7 +100,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully added interviewer with all details\n",
                             negative="Failed to add interviewer with all details \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         test_obj = PageFactory.get_page_object("jobs page")
@@ -111,7 +111,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully opened add jobs page\n",
                             negative="Failed to open jobs page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #8. Add Job details
@@ -119,7 +119,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully added job details\n",
                             negative="Failed to add Job details \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         test_obj = PageFactory.get_page_object("candidates page")
@@ -130,14 +130,14 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully opened add candidates page\n",
                             negative="Failed to open candidates page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
         #10. Add Candidate details
         result_flag = test_obj.add_candidate_details(name_candidates, email_candidates, job_applied_select, comment_candidates)
         test_obj.log_result(result_flag,
                             positive="Successfully added Candidates details and saved the same\n",
                             negative="Failed to add Candidates details and save \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         test_obj = PageFactory.get_page_object("jobs page")
@@ -148,7 +148,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully searched interviewer name\n",
                             negative="Failed to search interviewer name \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #12. Open jobs page to add rounds
@@ -156,7 +156,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully opened jobs page to add rounds\n",
                             negative="Failed to open jobs page \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #13. Click Add rounds
@@ -164,7 +164,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully opened add rounds\n",
                             negative="Failed to open add rounds \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #14. Add job round details
@@ -172,7 +172,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully added round details \n",
                             negative="Failed to add round details \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         test_obj = PageFactory.get_page_object("candidates page")
@@ -182,7 +182,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully deleted candidate\n",
                             negative="Failed to delete candidate \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         test_obj = PageFactory.get_page_object("interviewers page")
@@ -192,7 +192,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully deleted interviewer\n",
                             negative="Failed to delete interviewer \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         test_obj = PageFactory.get_page_object("jobs page")
@@ -202,7 +202,7 @@ def test_login_page(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully deleted job\n",
                             negative="Failed to delete job \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #Turn off the highlighting feature

@@ -41,7 +41,7 @@ def test_signup_user(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully Opened the signup form\n",
                             negative="Failed to open the signup form \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #5. Set username and password and submit the form in one go
@@ -49,7 +49,7 @@ def test_signup_user(test_obj):
         test_obj.log_result(result_flag,
                             positive="Successfully submitted the signup form\n",
                             negative="Failed to submit the form \nOn url: %s" % test_obj.get_current_url(),
-                            level="critical")
+                            level="debug")
 
 
         #6.Turn off the highlighting feature
