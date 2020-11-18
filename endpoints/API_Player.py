@@ -30,7 +30,6 @@ class API_Player(Results):
         user = username
         password = password
         login_data={'username': user,'password':password}
-
         return login_data
 
 
@@ -45,8 +44,6 @@ class API_Player(Results):
         "get available jobs"
         response = self.api_obj.get_jobs_is()
         result_flag = True if response['response'] == 200 else False
-        print("GET JOBS")
-        #print(response['response_content'])
         ses = response['response_content']
         soup = BeautifulSoup(ses)
         My_table = soup.find('table',{'class':'table table-striped'})
@@ -55,10 +52,7 @@ class API_Player(Results):
         for tr in table_rows:
             td = tr.find_all('td')
             row = [i.text for i in td]
-            print(row)
-
-        #return result_flag
-        #json_response = json_response['response']
+        self.new_job_id = row[0]
         result_flag = True if response['response'] == 200 else False
         self.write(msg="Fetched jobs list:\n %s"%str(row))
         self.conditional_write(result_flag,
@@ -72,16 +66,13 @@ class API_Player(Results):
         "add new job"
         response = self.api_obj.add_jobs_is(data=job_data)
         result_flag = True if response['response'] == 200 else False
-        print("I am in add jobs")
         return result_flag
 
 
     def add_candidates(self,candidate_data):
         "add new candidate"
         response = self.api_obj.add_candidates_is(data=candidate_data)
-        print(response)
         result_flag = True if response['response'] == 200 else False
-        print("I am in add candidates")
         return result_flag
 
 
@@ -89,8 +80,6 @@ class API_Player(Results):
         "get available jobs"
         response = self.api_obj.get_candidates_is()
         result_flag = True if response['response'] == 200 else False
-        print("GET CANDIDATES")
-        #print(response['response_content'])
         ses = response['response_content']
         soup = BeautifulSoup(ses)
         My_table = soup.find('table',{'class':'table table-striped'})
@@ -99,9 +88,6 @@ class API_Player(Results):
         for tr in table_rows:
             td = tr.find_all('td')
             row = [i.text for i in td]
-            print(row)
-        print(row)
-        print(row[1])
 
         return result_flag
 
@@ -109,7 +95,6 @@ class API_Player(Results):
         "add new interviewer"
         response = self.api_obj.add_interviewer_is(data=interviewer_data)
         result_flag = True if response['response'] == 200 else False
-        print("I am in add interviwers")
         return result_flag
 
 
@@ -117,8 +102,6 @@ class API_Player(Results):
         "get available interviewers"
         response = self.api_obj.get_interviewer_is()
         result_flag = True if response['response'] == 200 else False
-        print("GET INTERVIEWERS")
-        #print(response['response_content'])
         ses = response['response_content']
         soup = BeautifulSoup(ses)
         My_table = soup.find('table',{'class':'table table-striped'})
@@ -127,9 +110,6 @@ class API_Player(Results):
         for tr in table_rows:
             td = tr.find_all('td')
             row = [i.text for i in td]
-            print(row)
-        print(row)
-        print(row[1])
 
         return result_flag
 
@@ -144,7 +124,6 @@ class API_Player(Results):
         for tr in table_rows:
             td = tr.find_all('td')
             row = [i.text for i in td]
-            print(row)
         self.new_job_id = row[0]
         response = self.api_obj.delete_jobs_is(data={'job-id': self.new_job_id})
         result_flag = True if response['response'] == 200 else False
@@ -162,10 +141,27 @@ class API_Player(Results):
         for tr in table_rows:
             td = tr.find_all('td')
             row = [i.text for i in td]
-            print(row)
         self.new_job_id
         self.new_candidate_id =row[0]
-        response = self.api_obj.delete_candidates_is(data = {'candidateId':self.new_candidate_id,'jobId':self.new_job_id})
+        response = self.api_obj.delete_candidates_is(candidate_id = self.new_candidate_id,data = {'candidateId':self.new_candidate_id,'jobId':self.new_job_id})
+        result_flag = True if response['response'] == 200 else False
+
+        return result_flag
+
+    def delete_interviewers(self):
+        "delete interviewers"
+        response = self.api_obj.get_interviewer_is()
+        result_flag = True if response['response'] == 200 else False
+        ses = response['response_content']
+        soup = BeautifulSoup(ses)
+        My_table = soup.find('table',{'class':'table table-striped'})
+        table_rows = My_table.find_all('tr')
+        for tr in table_rows:
+            td = tr.find_all('td')
+            row = [i.text for i in td]
+        self.new_interviewer_id = row[0]
+        data = {'interviewer-id':self.new_interviewer_id}
+        response = self.api_obj.delete_interviewers_is(interviewer_id = self.new_interviewer_id,data = {'interviewer-id':self.new_interviewer_id})
         result_flag = True if response['response'] == 200 else False
 
         return result_flag

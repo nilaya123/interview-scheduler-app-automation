@@ -33,8 +33,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 @pytest.mark.API
 def test_isapi_example(api_url='http://localhost:6464/'):
     "Run api test"
-    #try:
-        # Create test object
+    # Create test object
     test_obj = API_Player(url=api_url)
     expected_pass = 0
     actual_pass = -1
@@ -90,18 +89,22 @@ def test_isapi_example(api_url='http://localhost:6464/'):
                            negative='Could not get the list of interviewers')
 
 
-    result_flag = test_obj.delete_jobs()
-    test_obj.log_result(result_flag,
-                           positive='Successfully deleted the job',
-                           negative='Could not delete the job')
-
-    '''
     result_flag = test_obj.delete_candidates()
     test_obj.log_result(result_flag,
                            positive='Successfully deleted the candidate',
                            negative='Could not delete the candidate')
 
-    '''
+
+    result_flag = test_obj.delete_jobs()
+    test_obj.log_result(result_flag,
+                           positive='Successfully deleted the job',
+                           negative='Could not delete the job')
+
+
+    result_flag = test_obj.delete_interviewers()
+    test_obj.log_result(result_flag,
+                           positive='Successfully deleted the interviewer',
+                           negative='Could not delete the interviewer')
 
 
     # write out test summary

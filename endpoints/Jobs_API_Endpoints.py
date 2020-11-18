@@ -20,7 +20,6 @@ class Jobs_API_Endpoints(Base_API):
     def login_app_is(self,data):
         """Login to App"""
         url = self.login_url()
-        print(data)
         response = self.post(url,data=data)
         return response
 
@@ -56,35 +55,3 @@ class Jobs_API_Endpoints(Base_API):
             'response':response['response'],
             'response_content': response['json_response']
         }
-
-
-    '''
-    def get_car(self,url_params,headers):
-        "gets given car details"
-        url = self.cars_url('/find?')+url_params
-        json_response = self.get(url,headers=headers)
-        return {
-            'url':url,
-            'response':json_response['json_response']
-        }
-
-
-    def update_job(self,job_name,json,headers):
-        "updates a given job"
-        url = self.cars_url('/update/%s'%job_name)
-        json_response =self.put(url,json=json,headers=headers)
-        return {
-            'url':url,
-            'response':json_response['json_response']
-        }
-
-
-    def remove_job(self,job_name,headers):
-        "deletes a car entry"
-        url =self.jobs_url('/remove/%s'%car_name)
-        json_response = self.delete(url,headers=headers)
-        return{
-            'url':url,
-            'response':json_response['json_response']
-        }
-    '''

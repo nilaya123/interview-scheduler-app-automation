@@ -12,11 +12,14 @@ class Interviewer_API_Endpoints(Base_API):
         return self.base_url+'login'
 
 
-
     def interviewer_url(self,suffix=''):
         """Append API end point to base URL"""
         return self.base_url+'interviewers'+suffix
 
+
+    def interviewer_delete_url(self,interviewer_id):
+        """Append API end point to base URL"""
+        return self.base_url+'interviewer/%s/delete'%(interviewer_id)
 
 
     def add_interviewer_is(self,data):
@@ -39,33 +42,13 @@ class Interviewer_API_Endpoints(Base_API):
             'response_content': response['json_response']
         }
 
-    '''
-    def get_car(self,url_params,headers):
-        "gets given car details"
-        url = self.cars_url('/find?')+url_params
-        json_response = self.get(url,headers=headers)
+
+    def delete_interviewers_is(self,interviewer_id,data):
+        "Deletes a new interviewer"
+        url = self.interviewer_delete_url(interviewer_id)
+        response = self.post(url,data=data)
         return {
             'url':url,
-            'response':json_response['json_response']
+            'response':response['response'],
+            'response_content': response['json_response']
         }
-
-
-    def update_job(self,job_name,json,headers):
-        "updates a given job"
-        url = self.cars_url('/update/%s'%job_name)
-        json_response =self.put(url,json=json,headers=headers)
-        return {
-            'url':url,
-            'response':json_response['json_response']
-        }
-
-
-    def remove_job(self,job_name,headers):
-        "deletes a car entry"
-        url =self.jobs_url('/remove/%s'%car_name)
-        json_response = self.delete(url,headers=headers)
-        return{
-            'url':url,
-            'response':json_response['json_response']
-        }
-    '''
