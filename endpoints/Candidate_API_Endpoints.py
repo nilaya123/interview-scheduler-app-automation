@@ -30,7 +30,6 @@ class Candidate_API_Endpoints(Base_API):
         "Adds a new candidate"
         url = self.candidates_url('/add')
         response = self.post(url,data=data)
-        print(response)
         return {
             'url':url,
             'response':response['response'],
@@ -51,10 +50,7 @@ class Candidate_API_Endpoints(Base_API):
 
     def delete_candidates_is(self,candidate_id,data):
         "Deletes a new job"
-        print(candidate_id)
         url = self.candidate_delete_url(candidate_id)
-        print(url)
-        print("nilaya")
         response = self.post(url,data=data)
         return {
             'url':url,

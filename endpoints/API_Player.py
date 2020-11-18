@@ -77,7 +77,7 @@ class API_Player(Results):
 
 
     def get_candidates(self):
-        "get available jobs"
+        "get available candidates"
         response = self.api_obj.get_candidates_is()
         result_flag = True if response['response'] == 200 else False
         ses = response['response_content']
@@ -88,6 +88,14 @@ class API_Player(Results):
         for tr in table_rows:
             td = tr.find_all('td')
             row = [i.text for i in td]
+            print(row)
+        print (row)
+        print (row[0])
+        print (row[1])
+        print (row[2])
+        print (row[3])
+        print (row[4])
+        print (row[5])
 
         return result_flag
 
