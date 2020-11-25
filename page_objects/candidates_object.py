@@ -1,16 +1,14 @@
 """
-This class models the form on the Selenium tutorial page
-The form consists of some input fields, a dropdown, a checkbox and a button
+This class models the form on candidates page
+The form consists of some input fields, a dropdown, a checkbox and a button to submit candidate details
 """
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
 import conf.login_conf as login
-#from selenium import webdriver
 from .Base_Page import Base_Page
-
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 #Fetching conf details from the conf file
 email = login.email_candidates

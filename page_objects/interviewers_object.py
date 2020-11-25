@@ -2,10 +2,9 @@
 This class models the form on the Selenium tutorial page
 The form consists of some input fields, a dropdown, a checkbox and a button
 """
-
-from .Base_Page import Base_Page
 import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
+from .Base_Page import Base_Page
 
 
 class Interviewers_Object:
@@ -34,21 +33,21 @@ class Interviewers_Object:
         "Click on 'Add Interviewers' button"
         result_flag = self.click_element(self.add_interviewers_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the "Add Interviewers" button',
-            negative='Failed to click on "Add Interviewers" button',
-            level='debug')
+                               positive='Clicked on the "Add Interviewers" button',
+                               negative='Failed to click on "Add Interviewers" button',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_name(self,interviewers_name):
+    def set_name(self, interviewers_name):
         "Set the name on the form"
-        result_flag = self.set_text(self.interviewers_name,interviewers_name)
+        result_flag = self.set_text(self.interviewers_name, interviewers_name)
         self.conditional_write(result_flag,
-            positive='Set the name to: %s'% interviewers_name,
-            negative='Failed to set the name in the form',
-            level='debug')
+                               positive='Set the name to: %s'% interviewers_name,
+                               negative='Failed to set the name in the form',
+                               level='debug')
 
         return result_flag
 
@@ -59,61 +58,61 @@ class Interviewers_Object:
         result_flag = self.alert_window()
         return result_flag
         self.conditional_write(result_flag,
-            positive='Clicked on the OK',
-            negative='Failed to click on OK',
-            level='debug')
+                               positive='Clicked on the OK',
+                               negative='Failed to click on OK',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_email(self,interviewers_email):
+    def set_email(self, interviewers_email):
         "Set the email"
-        result_flag = self.set_text(self.interviewers_email,interviewers_email)
+        result_flag = self.set_text(self.interviewers_email, interviewers_email)
         self.conditional_write(result_flag,
-            positive='Set the email to: %s'% interviewers_email,
-            negative='Failed to set the email in the form',
-            level='debug')
+                               positive='Set the email to: %s'% interviewers_email,
+                               negative='Failed to set the email in the form',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_designation(self,interviewers_designation):
+    def set_designation(self, interviewers_designation):
         "Set the designation"
-        result_flag = self.set_text(self.interviewers_designation,interviewers_designation)
+        result_flag = self.set_text(self.interviewers_designation, interviewers_designation)
         self.conditional_write(result_flag,
-            positive='Set the designation to: %s'% interviewers_designation,
-            negative='Failed to set the designation in the form',
-            level='debug')
+                               positive='Set the designation to: %s'% interviewers_designation,
+                               negative='Failed to set the designation in the form',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_starttime(self,interviewers_starttime_drop,wait_seconds=1):
+    def set_starttime(self, interviewers_starttime_drop, wait_seconds=1):
         "Set the starttime on the form"
         result_flag = self.click_element(self.interviewers_starttime)
         self.wait(wait_seconds)
         result_flag &= self.click_element(self.interviewers_starttime_drop%interviewers_starttime_drop)
         self.conditional_write(result_flag,
-            positive='Set the start time to: %s'% interviewers_starttime_drop,
-            negative='Failed to set the start time in the form',
-            level='debug')
+                               positive='Set the start time to: %s'% interviewers_starttime_drop,
+                               negative='Failed to set the start time in the form',
+                               level='debug')
 
         return result_flag
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_endtime(self,interviewers_endtime_drop,wait_seconds=1):
+    def set_endtime(self, interviewers_endtime_drop, wait_seconds=1):
         "Set the endtime on the form"
         result_flag = self.click_element(self.interviewers_endtime)
         self.wait(wait_seconds)
         result_flag = self.click_element(self.interviewers_endtime_drop%interviewers_endtime_drop)
         self.conditional_write(result_flag,
-            positive='Set the end time to: %s'% interviewers_endtime_drop,
-            negative='Failed to set the end time in the form',
-            level='debug')
+                               positive='Set the end time to: %s'% interviewers_endtime_drop,
+                               negative='Failed to set the end time in the form',
+                               level='debug')
 
         return result_flag
 
@@ -123,9 +122,9 @@ class Interviewers_Object:
         "Click on 'Add Interviewers' button"
         result_flag = self.click_element(self.add_time_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the "Add time" button',
-            negative='Failed to click on "Add time" button',
-            level='debug')
+                               positive='Clicked on the "Add time" button',
+                               negative='Failed to click on "Add time" button',
+                               level='debug')
 
         return result_flag
 
@@ -135,9 +134,9 @@ class Interviewers_Object:
         "Click on 'Save Interviewers' button"
         result_flag = self.click_element(self.save_interviewers_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the "Save Interviewers" button',
-            negative='Failed to click on "Save Interviewers" button',
-            level='debug')
+                               positive='Clicked on the "Save Interviewers" button',
+                               negative='Failed to click on "Save Interviewers" button',
+                               level='debug')
 
         return result_flag
 
@@ -147,9 +146,9 @@ class Interviewers_Object:
         "Click on 'Cancel Interviewers' button"
         result_flag = self.click_element(self.cancel_interviewers_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the "Cancel Interviewers" button',
-            negative='Failed to click on "Cancel Interviewers" button',
-            level='debug')
+                               positive='Clicked on the "Cancel Interviewers" button',
+                               negative='Failed to click on "Cancel Interviewers" button',
+                               level='debug')
 
         return result_flag
 
@@ -159,9 +158,9 @@ class Interviewers_Object:
         "Click on 'Close' button"
         result_flag = self.click_element(self.close_interviewers_button)
         self.conditional_write(result_flag,
-            positive='Clicked on the ok button',
-            negative='Failed to click on ok button',
-            level='debug')
+                               positive='Clicked on the ok button',
+                               negative='Failed to click on ok button',
+                               level='debug')
 
         return result_flag
 
@@ -172,44 +171,44 @@ class Interviewers_Object:
         "Click on 'Delete Interviewers' button"
         result_flag = self.click_element(self.delete_interviewers_button)
         self.conditional_write(result_flag,
-            positive='Clicked on delete interviewers button',
-            negative='Failed to click on button',
-            level='debug')
+                               positive='Clicked on delete interviewers button',
+                               negative='Failed to click on button',
+                               level='debug')
 
         return result_flag
 
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def remove_interviewers(self,search_option_interviewer):
+    def remove_interviewers(self, search_option_interviewer):
         "Click on 'Delete Interviewers' button"
         self.search_interviewer(search_option_interviewer)
         self.delete_interviewers()
         result_flag = self.click_element(self.remove_interviewers_button)
         self.conditional_write(result_flag,
-            positive='Clicked on remove interviewers button',
-            negative='Failed to click on button',
-            level='debug')
+                               positive='Clicked on remove interviewers button',
+                               negative='Failed to click on button',
+                               level='debug')
 
         return result_flag
 
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def search_interviewer(self,search_option_interviewer):
+    def search_interviewer(self, search_option_interviewer):
         "Click on 'Search' button"
-        result_flag = self.set_text(self.search_option_interviewer,search_option_interviewer)
+        result_flag = self.set_text(self.search_option_interviewer, search_option_interviewer)
         self.conditional_write(result_flag,
-            positive='Search for Interviewer name: %s'%search_option_interviewer,
-            negative='Failed to Search for Interviewer name',
-            level='debug')
+                               positive='Search for Interviewer name: %s'%search_option_interviewer,
+                               negative='Failed to Search for Interviewer name',
+                               level='debug')
 
         return result_flag
 
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def add_interviewers_details(self,interviewers_name,interviewers_email,interviewers_designation,interviewers_starttime_drop,interviewers_endtime_drop):
+    def add_interviewers_details(self, interviewers_name, interviewers_email, interviewers_designation, interviewers_starttime_drop, interviewers_endtime_drop):
         result_flag = self.set_name(interviewers_name)
         result_flag &= self.set_email(interviewers_email)
         result_flag &= self.set_designation(interviewers_designation)

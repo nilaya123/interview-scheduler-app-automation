@@ -32,7 +32,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 @pytest.mark.GUI
-def test_candidates_page(test_obj):
+def test_end_to_end(test_obj):
 
     "Run the test"
     if True:

@@ -24,7 +24,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 @pytest.mark.GUI
-def test_login_page(test_obj):
+def test_add_delete(test_obj):
 
     "Run the test"
     try:

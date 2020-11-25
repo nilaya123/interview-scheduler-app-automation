@@ -1,17 +1,20 @@
+"""
+This class models the interview schedule on candidate side
+The form consists of scheduling an interview,checking google link
+"""
 import os
 import sys
 import email
 import datetime
-from bs4 import BeautifulSoup
-from selenium import webdriver
 from datetime import datetime, timedelta
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from .Base_Page import Base_Page
+from bs4 import BeautifulSoup
 import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
 from utils.email_util import Email_Util
 import conf.email_conf as conf_file
 from conf import login_conf as login
+from .Base_Page import Base_Page
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 #Fetching conf details from the conf and login file
@@ -55,12 +58,11 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def fetch_email_invite(self):
-        "Get email contents and fetch URL and unique code"
+        "Get email contents and fetch URL and unique code and schedule an interview"
         imap_host = conf_file.imaphost
         username = conf_file.username
         password = conf_file.app_password
 
-        time_elapsed = 0
         unique_code = 0
         email_obj = Email_Util()
 
@@ -100,8 +102,10 @@ class Interview_Schedule_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def open_invitation_url(self,url):
-        result_flag = self.open_url_new_tab(url)
+    def open_invitation_url(self, url):
+        "Open invitation url in new tab"
+        print(self.url)
+        result_flag = self.open_url_new_tab(self.url)
         self.conditional_write(result_flag,
                                positive='Opened the new tab with link',
                                negative='Failed to open the new tab with link',
@@ -110,7 +114,8 @@ class Interview_Schedule_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_unique_code(self,unique_code):
+    def set_unique_code(self, unique_code):
+        "Setting unique code on url invitation"
         result_flag = self.set_text(self.select_unique_code, unique_code)
         self.conditional_write(result_flag,
                                positive='Set unique code  to: %s'% unique_code,
@@ -120,7 +125,8 @@ class Interview_Schedule_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_candidate_email(self,email):
+    def set_candidate_email(self, email):
+        "Setting email on url invitation"
         result_flag = self.set_text(self.select_candidate_email, email)
         self.conditional_write(result_flag,
                                positive='Set candidate email to: %s'% email,
@@ -131,6 +137,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def click_interview_schedule(self):
+        "Click on INterview Schedule button"
         result_flag = self.click_element(self.go_for_schedule)
         self.conditional_write(result_flag,
                                positive='Clicked on Scheduling interview button',
@@ -141,6 +148,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def get_the_date(self):
+        " Getting the date on calendar"
         result_flag = self.click_element(self.date_picker)
         self.conditional_write(result_flag,
                                positive='Get the date',
@@ -151,6 +159,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def set_the_date(self):
+        "Setting the date on calendar"
         date = datetime.now()
         date = date + timedelta(days=N_DAYS_After)
         self.date = date.day
@@ -164,6 +173,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def confirm_the_date(self):
+        "Confirm the date"
         result_flag = self.click_element(self.confirm_interview_date)
         self.conditional_write(result_flag,
                                positive='Clicked on confirming interview date',
@@ -174,7 +184,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def scroll_down_page(self):
-        self.wait(5)
+        "Scrolling down the page to show all available time slots for an interview"
         result_flag = self.scroll_down(self.confirm_interview_date)
         self.conditional_write(result_flag,
                                positive='Scrolling down the page till Schedule my interview option',
@@ -185,6 +195,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def slot_selection(self):
+        "Select the interview slot"
         result_flag = self.click_element(self.select_free_slot)
         self.conditional_write(result_flag,
                                positive='Selected free interview slot',
@@ -195,6 +206,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def scheduling_interview(self):
+        "Schedule an interview"
         result_flag = self.click_element(self.schedule_my_interview)
         self.conditional_write(result_flag,
                                positive='Clicked on schedule my interview',
@@ -205,6 +217,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def click_calendar_link(self):
+        "Click on calendar link on confirmation page"
         self.wait(5)
         result_flag = self.click_element(self.calendar_link)
         self.conditional_write(result_flag,
@@ -215,7 +228,8 @@ class Interview_Schedule_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_the_email(self,email_on_link):
+    def set_the_email(self, email_on_link):
+        "set email to check google link"
         self.wait(2)
         self.switch_window()
         result_flag = self.set_text(self.email_on_link, email_on_link)
@@ -228,6 +242,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def click_next_button(self):
+        "Click next button"
         result_flag = self.click_element(self.next_button)
         self.conditional_write(result_flag,
                                positive='Clicked on Next',
@@ -237,7 +252,8 @@ class Interview_Schedule_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def set_the_password_link(self,password_link):
+    def set_the_password_link(self, password_link):
+        "Set password on link"
         self.wait(5)
         result_flag = self.set_text(self.password_link, password_link)
         self.conditional_write(result_flag,
@@ -249,6 +265,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def click_next_after_password(self):
+        "Click on next button after password"
         result_flag = self.click_element(self.next_button_after_password)
         self.conditional_write(result_flag,
                                positive='Clicked on Next',
@@ -259,6 +276,7 @@ class Interview_Schedule_Object:
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def click_google_meet_link(self):
+        "Click on google link"
         result_flag = self.click_element(self.google_meet_link)
         self.conditional_write(result_flag,
                                positive='Clicked on Google meet link',
