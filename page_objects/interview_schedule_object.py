@@ -30,6 +30,10 @@ password_link = login.password_link
 
 N_DAYS_After = 7
 
+unique_code = 0
+url = "abcd"
+
+
 
 class Interview_Schedule_Object:
     "Page Object for Scheduling an interview"
@@ -51,9 +55,6 @@ class Interview_Schedule_Object:
     next_button_after_password = locators.next_button_after_password
     password_link = locators.password_link
 
-    url = "abcd"
-    unique_code = 0
-
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -63,8 +64,10 @@ class Interview_Schedule_Object:
         username = conf_file.username
         password = conf_file.app_password
 
-        unique_code = 0
         email_obj = Email_Util()
+
+        unique_code = 0
+        url = "abcd"
 
         #Connect to the IMAP host
         email_obj.connect(imap_host)
@@ -73,7 +76,7 @@ class Interview_Schedule_Object:
                                positive='Logged into %s' % imap_host,
                                negative='Could not log into %s to fetch the activation email' % imap_host,
                                level='debug')
-        self.wait(30)
+        self.wait(20)
         if result_flag is True:
             result_flag = email_obj.select_folder('Inbox')
             self.conditional_write(result_flag,
@@ -85,7 +88,17 @@ class Interview_Schedule_Object:
         soup = BeautifulSoup(''.join(email_body), 'html.parser')
         unique_code = soup.b.text
         url = soup.a.get('href')
+        print(url)
+        print(unique_code)
 
+        return result_flag,url,unique_code
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def schedule_interview(self):
+        "Open the url and schedule the interview"
+        print("NILAYA")
+        result_flag,url,unique_code = self.fetch_email_invite()
         result_flag = self.open_invitation_url(url)
         result_flag = self.set_unique_code(unique_code)
         result_flag = self.set_candidate_email(email)
@@ -104,8 +117,7 @@ class Interview_Schedule_Object:
     @Wrapit._screenshot
     def open_invitation_url(self, url):
         "Open invitation url in new tab"
-        print(self.url)
-        result_flag = self.open_url_new_tab(self.url)
+        result_flag = self.open_url_new_tab(url,wait_time=1)
         self.conditional_write(result_flag,
                                positive='Opened the new tab with link',
                                negative='Failed to open the new tab with link',
@@ -185,6 +197,7 @@ class Interview_Schedule_Object:
     @Wrapit._screenshot
     def scroll_down_page(self):
         "Scrolling down the page to show all available time slots for an interview"
+        self.wait(10)
         result_flag = self.scroll_down(self.confirm_interview_date)
         self.conditional_write(result_flag,
                                positive='Scrolling down the page till Schedule my interview option',
@@ -218,7 +231,7 @@ class Interview_Schedule_Object:
     @Wrapit._screenshot
     def click_calendar_link(self):
         "Click on calendar link on confirmation page"
-        self.wait(5)
+        self.wait(10)
         result_flag = self.click_element(self.calendar_link)
         self.conditional_write(result_flag,
                                positive='Clicked on calendar link',

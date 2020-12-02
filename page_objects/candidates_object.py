@@ -218,6 +218,7 @@ class Candidates_Object:
                                positive='Clicked on the send email button',
                                negative='Failed to click on send email button',
                                level='debug')
+        self.wait(10)
         result_flag = self.alert_accept()
 
         return result_flag

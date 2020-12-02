@@ -35,8 +35,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 def test_end_to_end(test_obj):
 
     "Run the test"
-    if True:
-        #Initalize flags for tests summary
+    try:
+        #Initialize flags for tests summary
         expected_pass = 0
         actual_pass = -1
 
@@ -196,9 +196,10 @@ def test_end_to_end(test_obj):
                             level="debug")
 
 
+
         #16.Get the details from email such as url and unique code,login to url and schedule an interview
         # check the invite and look for google link on the same
-        result_flag = test_obj.fetch_email_invite()
+        result_flag = test_obj.schedule_interview()
         test_obj.log_result(result_flag,
                             positive="Successfully interview scheduled by candidate\n",
                             negative="Failed to schedule an interview \nOn url: %s" % test_obj.get_current_url(),
@@ -243,9 +244,9 @@ def test_end_to_end(test_obj):
         expected_pass = test_obj.result_counter
         actual_pass = test_obj.pass_counter
 
-    #except Exception as e:
-    print("Exception when trying to run test: %s"%__file__)
-    print("Python says:%s"%str(e))
+    except Exception as e:
+        print("Exception when trying to run test: %s"%__file__)
+        print("Python says:%s"%str(e))
 
     assert expected_pass == actual_pass, "Test failed: %s"%__file__
 
