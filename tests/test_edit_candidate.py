@@ -44,7 +44,8 @@ def test_edit_candidate(test_obj):
         result_flag = test_obj.login_page(username, password)
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
-                            negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to login the page \nOn url: %s" \
+                            % test_obj.get_current_url(),
                             level="debug")
 
         #4. Check for Page Heading
@@ -61,27 +62,31 @@ def test_edit_candidate(test_obj):
         result_flag= test_obj.search_candidate(search_option_candidate)
         test_obj.log_result(result_flag,
                             positive="Successfully searched Candidate name\n",
-                            negative="Failed to search Candidate name \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to search Candidate name \nOn url: %s"\
+                            % test_obj.get_current_url(),
                             level="debug")
         #Click on edit Candidate button
         result_flag= test_obj.edit_candidates()
         test_obj.log_result(result_flag,
                             positive="Successfully clicked the edit Candidate button\n",
-                            negative="Failed to click on the edit Candidate button \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to click on the edit Candidate button \nOn url: %s"\
+                            % test_obj.get_current_url(),
                             level="debug")
 
         #Edit Candidate comments
         result_flag= test_obj.edit_candidate_comment(comment_candidates)
         test_obj.log_result(result_flag,
                             positive="Successfully edited Candidate comments\n",
-                            negative="Failed to edit Candidate comments \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to edit Candidate comments \nOn url: %s" \
+                            % test_obj.get_current_url(),
                             level="debug")
 
         #Click on Save button after editing candidate
         result_flag= test_obj.save_edited_candidate()
         test_obj.log_result(result_flag,
                             positive="Clicked on Save button of edit candidate page\n",
-                            negative="Failed to click on Save button of edit Candidate page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to click on Save button of edit Candidate\
+                            page \nOn url: %s" % test_obj.get_current_url(),
                             level="debug")
 
         test_obj = PageFactory.get_page_object("candidates page")
@@ -112,7 +117,9 @@ if __name__ == '__main__':
         test_obj = PageFactory.get_page_object("Zero", base_url=options.url)
 
         #Setup and register a driver
-        test_obj.register_driver(options.remote_flag, options.os_name, options.os_version, options.browser, options.browser_version, options.remote_project_name, options.remote_build_name)
+        test_obj.register_driver(options.remote_flag, options.os_name,\
+        options.os_version, options.browser, options.browser_version,\
+        options.remote_project_name, options.remote_build_name)
 
         #teardowm
         test_obj.wait(3)
