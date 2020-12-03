@@ -38,7 +38,8 @@ def test_login_user(test_obj):
         result_flag = test_obj.login_page(username, password)
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
-                            negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to login the page \nOn url: %s" % \
+                                test_obj.get_current_url(),
                             level="debug")
 
 
@@ -53,7 +54,8 @@ def test_login_user(test_obj):
         result_flag = test_obj.logout_page()
         test_obj.log_result(result_flag,
                             positive="Successfully logged out of the page\n",
-                            negative="Failed to logout from the page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to logout from the page \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -84,7 +86,9 @@ if __name__ == '__main__':
         test_obj = PageFactory.get_page_object("Zero", base_url=options.url)
 
         #Setup and register a driver
-        test_obj.register_driver(options.remote_flag, options.os_name, options.os_version, options.browser, options.browser_version, options.remote_project_name, options.remote_build_name)
+        test_obj.register_driver(options.remote_flag, options.os_name, options.os_version,\
+             options.browser, options.browser_version, options.remote_project_name, \
+                 options.remote_build_name)
 
         #teardowm
         test_obj.wait(3)

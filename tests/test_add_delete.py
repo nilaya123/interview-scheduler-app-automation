@@ -69,7 +69,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.login_page(username, password)
         test_obj.log_result(result_flag,
                             positive="Successfully logged in the page\n",
-                            negative="Failed to login the page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to login the page \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -83,7 +84,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.link_to_interviewers_page()
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Interviewers page\n",
-                            negative="Failed to Open Interviewers page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to Open Interviewers page \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -91,15 +93,18 @@ def test_add_delete(test_obj):
         result_flag = test_obj.add_interviewer()
         test_obj.log_result(result_flag,
                             positive="Successfully Opened Add Interviewers page\n",
-                            negative="Failed to Open Add Interviewers page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to Open Add Interviewers page \nOn url: %s"\
+                                 % test_obj.get_current_url(),
                             level="debug")
 
 
         #6. Add interviewer
-        result_flag = test_obj.add_interviewers_details(interviewers_name, interviewers_email, interviewers_designation, interviewers_starttime_drop, interviewers_endtime_drop)
+        result_flag = test_obj.add_interviewers_details(interviewers_name, interviewers_email,\
+             interviewers_designation, interviewers_starttime_drop, interviewers_endtime_drop)
         test_obj.log_result(result_flag,
                             positive="Successfully added interviewer with all details\n",
-                            negative="Failed to add interviewer with all details \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to add interviewer with all details \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -110,7 +115,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.add_jobs()
         test_obj.log_result(result_flag,
                             positive="Successfully opened add jobs page\n",
-                            negative="Failed to open jobs page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to open jobs page \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -118,7 +124,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.add_job_details(job_role, job_interviewers)
         test_obj.log_result(result_flag,
                             positive="Successfully added job details\n",
-                            negative="Failed to add Job details \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to add Job details \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -129,14 +136,18 @@ def test_add_delete(test_obj):
         result_flag = test_obj.add_candidates()
         test_obj.log_result(result_flag,
                             positive="Successfully opened add candidates page\n",
-                            negative="Failed to open candidates page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to open candidates page \nOn url: %s"\
+                                 % test_obj.get_current_url(),
                             level="debug")
 
         #10. Add Candidate details
-        result_flag = test_obj.add_candidate_details(name_candidates, email_candidates, job_applied_select, comment_candidates)
+        result_flag = test_obj.add_candidate_details(name_candidates, email_candidates,\
+             job_applied_select, comment_candidates)
         test_obj.log_result(result_flag,
-                            positive="Successfully added Candidates details and saved the same\n",
-                            negative="Failed to add Candidates details and save \nOn url: %s" % test_obj.get_current_url(),
+                            positive="Successfully added Candidates details and \
+                                saved the same\n",
+                            negative="Failed to add Candidates details and save \nOn url:\
+                                 %s" % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -147,7 +158,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.search_job(search_option_job)
         test_obj.log_result(result_flag,
                             positive="Successfully searched interviewer name\n",
-                            negative="Failed to search interviewer name \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to search interviewer name \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -155,7 +167,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.round_to_job()
         test_obj.log_result(result_flag,
                             positive="Successfully opened jobs page to add rounds\n",
-                            negative="Failed to open jobs page \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to open jobs page \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -163,15 +176,18 @@ def test_add_delete(test_obj):
         result_flag = test_obj.add_rounds()
         test_obj.log_result(result_flag,
                             positive="Successfully opened add rounds\n",
-                            negative="Failed to open add rounds \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to open add rounds \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
         #14. Add job round details
-        result_flag = test_obj.add_round_details(round_name, round_duration_select, round_description, round_requirements)
+        result_flag = test_obj.add_round_details(round_name, round_duration_select,\
+             round_description, round_requirements)
         test_obj.log_result(result_flag,
                             positive="Successfully added round details \n",
-                            negative="Failed to add round details \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to add round details \nOn url: %s"\
+                                 % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -181,7 +197,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.remove_candidates(search_option_candidate)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted candidate\n",
-                            negative="Failed to delete candidate \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to delete candidate \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -191,7 +208,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.remove_interviewers(search_option_interviewer)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted interviewer\n",
-                            negative="Failed to delete interviewer \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to delete interviewer \nOn url: %s"\
+                                 % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -201,7 +219,8 @@ def test_add_delete(test_obj):
         result_flag = test_obj.remove_job(search_option_job)
         test_obj.log_result(result_flag,
                             positive="Successfully deleted job\n",
-                            negative="Failed to delete job \nOn url: %s" % test_obj.get_current_url(),
+                            negative="Failed to delete job \nOn url: %s" \
+                                % test_obj.get_current_url(),
                             level="debug")
 
 
@@ -232,7 +251,9 @@ if __name__ == '__main__':
         test_obj = PageFactory.get_page_object("Zero", base_url=options.url)
 
         #Setup and register a driver
-        test_obj.register_driver(options.remote_flag, options.os_name, options.os_version, options.browser, options.browser_version, options.remote_project_name, options.remote_build_name)
+        test_obj.register_driver(options.remote_flag, options.os_name,\
+             options.os_version, options.browser, options.browser_version, \
+                 options.remote_project_name, options.remote_build_name)
 
         test_login_page(test_obj)
 
