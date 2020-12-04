@@ -34,7 +34,7 @@ class Candidates_Object:
     send_email_button = locators.send_email_button
     edit_candidate_button = locators.edit_candidate_button
     edit_candidate_page_save_button = locators.edit_candidate_page_save_button
-
+    candidate_job_filter = locators.candiate_job_filter
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -285,4 +285,16 @@ class Candidates_Object:
                                 negative='Failed to click on save button after editing candidate',
                                 level='debug')
         result_flag = self.alert_accept()
+        return result_flag
+
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def job_filter(self):
+        "Click the Save button to save changes applied for te candidate"
+        result_flag = self.click_element(self.candidate_job_filter)
+        self.conditional_write(result_flag,
+                                positive= 'Clicked on Job drop down successfully',
+                                negative='Failed to click on Job drop down',
+                                level='debug')
         return result_flag
