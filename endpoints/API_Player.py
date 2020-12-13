@@ -4,14 +4,12 @@ a) serves as an interface between the test and API_Interface
 b) contains several useful wrappers around commonly used combination of actions
 c) maintains the test context/state
 """
-import json
-from base64 import b64encode
-from .API_Interface import API_Interface
-from utils.results import Results
-import urllib.parse
 import logging
+from base64 import b64encode
 from bs4 import BeautifulSoup
+from utils.results import Results
 from conf import api_example_conf as conf
+from .API_Interface import API_Interface
 
 
 class API_Player(Results):
@@ -24,44 +22,65 @@ class API_Player(Results):
         self.api_obj = API_Interface(url=url, session_flag=session_flag)
 
 
-    def set_login_details(self, username, password):
+    def login_details(self, username, password):
         "encode auth details"
         user = username
         password = password
-        login_data={'username': user,'password':password}
+        login_data = {'username':user, 'password':password}
+
         return login_data
 
 
-    def login_app(self,login_data):
+    def login_app(self, login_data):
         "login to app"
-        response = self.api_obj.login_app_is(data=login_data)
-        result_flag = True if response['response'] == 200 else False
+        response = self.api_obj.login_app(data=login_data)
+        result_flag = bool(response['response'] == 200)
 
         return result_flag
 
 
+    def get_list(self, response):
+        "to extract list from response"
+        ses = response['response_content']
+        soup = BeautifulSoup(ses, "html.parser")
+        table = soup.find('table', {'class':'table table-striped'})
+        table_rows = table.find_all('tr')
+        new_list = []
+        for tr in table_rows:
+            cols = tr.find_all('td')
+            row = [i.text for i in cols]
+            new_list.append(row)
+        new_list.pop(0)
+        new_event_list = []
+        for val in new_list:
+            new_event_list.append(val[1])
+        new_event_list = [element.replace("\n", "") for element in new_event_list]
+
+        return new_event_list
+
+    def get_id(self, response):
+        "to extract list from response"
+        ses = response['response_content']
+        soup = BeautifulSoup(ses, "html.parser")
+        table = soup.find('table', {'class':'table table-striped'})
+        table_rows = table.find_all('tr')
+        new_list = []
+        for tr in table_rows:
+            cols = tr.find_all('td')
+            row = [element.text for element in cols]
+        self.new_id = row[0]
+
+        return self.new_id
+
+
     def get_jobs(self):
         "get available jobs"
-        response = self.api_obj.get_jobs_is()
-        result_flag = True if response['response'] == 200 else False
-        ses = response['response_content']
-        soup = BeautifulSoup(ses)
-        My_table = soup.find('table',{'class':'table table-striped'})
-        table_rows = My_table.find_all('tr')
-        list_1=[]
-        for tr in table_rows:
-            td = tr.find_all('td')
-            row = [i.text for i in td]
-            list_1.append(row)
-        list_1.pop(0)
-        list_2 = []
-        for val in list_1:
-            list_2.append(val[1])
-        list_2 = [x.replace("\n","") for x in list_2]
-        self.new_job_id = row[0]
+        response = self.api_obj.get_jobs()
+        new_event_list = self.get_list(response)
+        new_jobs_list = new_event_list
+        result_flag = bool(response['response'] == 200)
+        self.write(msg="Fetched jobs list:\n %s"%new_jobs_list)
 
-        result_flag = True if response['response'] == 200 else False
-        self.write(msg="Fetched jobs list:\n %s"%list_2)
         self.conditional_write(result_flag,
                                positive="Successfully fetched jobs",
                                negative="Could not fetch jobs")
@@ -69,51 +88,38 @@ class API_Player(Results):
         return result_flag
 
 
-    def add_jobs(self,job_data):
+    def add_jobs(self, job_data):
         "add new job"
-        response = self.api_obj.add_jobs_is(data=job_data)
-        result_flag = True if response['response'] == 200 else False
-
+        response = self.api_obj.add_jobs(data=job_data)
+        result_flag = bool(response['response'] == 200)
         return result_flag
 
 
-    def add_candidates(self,candidate_data):
+    def add_candidates(self, candidate_data):
         "add new candidate"
-        response = self.api_obj.add_candidates_is(data=candidate_data)
-        result_flag = True if response['response'] == 200 else False
-
+        response = self.api_obj.add_candidates(data=candidate_data)
+        result_flag = bool(response['response'] == 200)
         return result_flag
 
 
     def get_candidates(self):
         "get available candidates"
-        response = self.api_obj.get_candidates_is()
-        result_flag = True if response['response'] == 200 else False
-        ses = response['response_content']
-        soup = BeautifulSoup(ses)
-        My_table = soup.find('table',{'class':'table table-striped'})
-        table_rows = My_table.find_all('tr')
-        list_1=[]
-        for tr in table_rows:
-            td = tr.find_all('td')
-            row = [i.text for i in td]
-            list_1.append(row)
-        list_1.pop(0)
-        list_2 = []
-        for val in list_1:
-            list_2.append(val[1])
-        list_2 = [x.replace("\n","") for x in list_2]
-        result_flag = True if response['response'] == 200 else False
-        self.write(msg="Fetched candidates list:\n %s"%list_2)
+        response = self.api_obj.get_candidates()
+        new_event_list = self.get_list(response)
+        new_list_id = self.get_list(response)
+        new_candidates_list = new_event_list
+
+        result_flag = bool(response['response'] == 200)
+        self.write(msg="Fetched candidates list:\n %s"%new_candidates_list)
         self.conditional_write(result_flag,
                                positive="Successfully fetched candidates",
                                negative="Could not fetch candidates")
 
         return result_flag
 
-    def add_interviewers(self,interviewer_data):
+    def add_interviewers(self, interviewer_data):
         "add new interviewer"
-        response = self.api_obj.add_interviewer_is(data=interviewer_data)
+        response = self.api_obj.add_interviewer(data=interviewer_data)
         result_flag = True if response['response'] == 200 else False
 
         return result_flag
@@ -121,24 +127,13 @@ class API_Player(Results):
 
     def get_interviewers(self):
         "get available interviewers"
-        response = self.api_obj.get_interviewer_is()
-        result_flag = True if response['response'] == 200 else False
-        ses = response['response_content']
-        soup = BeautifulSoup(ses)
-        My_table = soup.find('table',{'class':'table table-striped'})
-        table_rows = My_table.find_all('tr')
-        list_1=[]
-        for tr in table_rows:
-            td = tr.find_all('td')
-            row = [i.text for i in td]
-            list_1.append(row)
-        list_1.pop(0)
-        list_2 = []
-        for val in list_1:
-            list_2.append(val[1])
-        list_2 = [x.replace("\n","") for x in list_2]
-        result_flag = True if response['response'] == 200 else False
-        self.write(msg="Fetched interviewers list:\n %s"%list_2)
+        response = self.api_obj.get_interviewer()
+        new_event_list = self.get_list(response)
+        new_list_id = self.get_list(response)
+        new_interviewer_list = new_event_list
+
+        result_flag = bool(response['response'] == 200)
+        self.write(msg="Fetched interviewers list:\n %s"%new_interviewer_list)
         self.conditional_write(result_flag,
                                positive="Successfully fetched interviewers",
                                negative="Could not fetch interviewers")
@@ -148,55 +143,38 @@ class API_Player(Results):
 
     def delete_jobs(self):
         "delete job"
-        response = self.api_obj.get_jobs_is()
-        result_flag = True if response['response'] == 200 else False
-        ses = response['response_content']
-        soup = BeautifulSoup(ses)
-        My_table = soup.find('table',{'class':'table table-striped'})
-        table_rows = My_table.find_all('tr')
-        for tr in table_rows:
-            td = tr.find_all('td')
-            row = [i.text for i in td]
-        self.new_job_id = row[0]
-        response = self.api_obj.delete_jobs_is(data={'job-id': self.new_job_id})
-        result_flag = True if response['response'] == 200 else False
+        response = self.api_obj.get_jobs()
+        new_id = self.get_id(response)
+        self.new_job_id = new_id
+        response = self.api_obj.delete_jobs(data={'job-id': self.new_job_id})
+        result_flag = bool(response['response'] == 200)
 
         return result_flag
 
 
     def delete_candidates(self):
         "delete candidate"
-        response = self.api_obj.get_candidates_is()
-        result_flag = True if response['response'] == 200 else False
-        ses = response['response_content']
-        soup = BeautifulSoup(ses)
-        My_table = soup.find('table',{'class':'table table-striped'})
-        table_rows = My_table.find_all('tr')
-        for tr in table_rows:
-            td = tr.find_all('td')
-            row = [i.text for i in td]
-        self.new_job_id
-        self.new_candidate_id =row[0]
-        response = self.api_obj.delete_candidates_is(candidate_id = self.new_candidate_id,data = {'candidateId':self.new_candidate_id,'jobId':self.new_job_id})
-        result_flag = True if response['response'] == 200 else False
+        response = self.api_obj.get_candidates()
+        new_id = self.get_id(response)
+        self.new_candidate_id = new_id
+        response = self.api_obj.get_jobs()
+        new_id = self.get_id(response)
+        self.new_job_id = new_id
+        response = self.api_obj.delete_candidates(candidate_id=self.new_candidate_id, \
+            data={'candidateId':self.new_candidate_id, 'jobId':self.new_job_id})
+        result_flag = bool(response['response'] == 200)
 
         return result_flag
 
 
     def delete_interviewers(self):
         "delete interviewers"
-        response = self.api_obj.get_interviewer_is()
-        result_flag = True if response['response'] == 200 else False
-        ses = response['response_content']
-        soup = BeautifulSoup(ses)
-        My_table = soup.find('table',{'class':'table table-striped'})
-        table_rows = My_table.find_all('tr')
-        for tr in table_rows:
-            td = tr.find_all('td')
-            row = [i.text for i in td]
-        self.new_interviewer_id = row[0]
+        response = self.api_obj.get_interviewer()
+        new_id = self.get_id(response)
+        self.new_interviewer_id = new_id
         data = {'interviewer-id':self.new_interviewer_id}
-        response = self.api_obj.delete_interviewers_is(interviewer_id = self.new_interviewer_id,data = {'interviewer-id':self.new_interviewer_id})
-        result_flag = True if response['response'] == 200 else False
+        response = self.api_obj.delete_interviewers(interviewer_id=self.new_interviewer_id,\
+            data={'interviewer-id':self.new_interviewer_id})
+        result_flag = bool(response['response'] == 200)
 
         return result_flag

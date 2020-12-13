@@ -17,14 +17,14 @@ class Jobs_API_Endpoints(Base_API):
         return self.base_url+'jobs'+suffix
 
 
-    def login_app_is(self,data):
+    def login_app(self,data):
         """Login to App"""
         url = self.login_url()
         response = self.post(url,data=data)
         return response
 
 
-    def add_jobs_is(self,data):
+    def add_jobs(self,data):
         "Adds a new job"
         url = self.jobs_url('/add')
         response = self.post(url,data=data)
@@ -35,7 +35,7 @@ class Jobs_API_Endpoints(Base_API):
         }
 
 
-    def get_jobs_is(self):
+    def get_jobs(self):
         "gets list of jobs"
         url = self.jobs_url()
         response = self.get(url)
@@ -46,7 +46,7 @@ class Jobs_API_Endpoints(Base_API):
         }
 
 
-    def delete_jobs_is(self,data):
+    def delete_jobs(self,data):
         "Adds a new job"
         url = self.jobs_url('/delete')
         response = self.post(url,data=data)

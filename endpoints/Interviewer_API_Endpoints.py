@@ -22,7 +22,7 @@ class Interviewer_API_Endpoints(Base_API):
         return self.base_url+'interviewer/%s/delete'%(interviewer_id)
 
 
-    def add_interviewer_is(self,data):
+    def add_interviewer(self,data):
         "Adds a new job"
         url = self.interviewer_url('/add')
         response = self.post(url,data=data)
@@ -32,7 +32,7 @@ class Interviewer_API_Endpoints(Base_API):
         }
 
 
-    def get_interviewer_is(self):
+    def get_interviewer(self):
         "gets list of jobs"
         url = self.interviewer_url()
         response = self.get(url)
@@ -43,7 +43,7 @@ class Interviewer_API_Endpoints(Base_API):
         }
 
 
-    def delete_interviewers_is(self,interviewer_id,data):
+    def delete_interviewers(self,interviewer_id,data):
         "Deletes a new interviewer"
         url = self.interviewer_delete_url(interviewer_id)
         response = self.post(url,data=data)
