@@ -257,7 +257,7 @@ class Candidates_Object:
         result_flag = self.click_element(self.candidate_job_filter)
         self.conditional_write(result_flag,
                                positive='Clicked on Job filter successfully',
-                               negative='Failed to click on Jb filter',
+                               negative='Failed to click on Job filter',
                                level='debug')
         
         return result_flag
