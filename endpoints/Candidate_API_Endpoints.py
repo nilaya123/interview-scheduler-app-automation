@@ -7,7 +7,7 @@ from .Base_API import Base_API
 class Candidate_API_Endpoints(Base_API):
     "Class for Jobs endpoints"
 
-    def login_url(self, suffix=''):
+    def login_url(self):
         """Append API end point to base URL"""
         return self.base_url+'login'
 

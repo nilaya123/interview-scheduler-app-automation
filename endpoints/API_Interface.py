@@ -9,7 +9,7 @@ from .Candidate_API_Endpoints import Candidate_API_Endpoints
 from .Interviewer_API_Endpoints import Interviewer_API_Endpoints
 
 
-class API_Interface(Jobs_API_Endpoints,Candidate_API_Endpoints,Interviewer_API_Endpoints):
+class API_Interface(Jobs_API_Endpoints, Candidate_API_Endpoints, Interviewer_API_Endpoints):
 	"A composed interface for the API objects"
 
 	def __init__(self, url, session_flag=False):

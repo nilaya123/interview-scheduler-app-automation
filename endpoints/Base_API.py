@@ -11,16 +11,17 @@ class Base_API:
     def __init__(self, url=None):
         pass
 
-    def json_or_text(self,response):
-            try:
-                json_response = response.json()
-            except Exception as e:
-                if (response.headers["Content-Type"] == 'application/json' or 'text/html'):
-                    json_response = response.text
-                else:
-                    json_response = None
+    def json_or_text(self, response):
+        "Class to define text or json response"
+        try:
+            json_response = response.json()
+        except Exception as e:
+            if (response.headers["Content-Type"] == 'application/json' or 'text/html'):
+                json_response = response.text
+            else:
+                json_response = None
 
-            return json_response
+        return json_response
 
 
     def get(self, url, headers={}):
@@ -30,17 +31,7 @@ class Base_API:
 
         try:
             response = self.request_obj.get(url=url, headers=headers)
-
             json_response = self.json_or_text(response)
-            '''
-            try:
-                json_response = response.json()
-            except Exception as e:
-                if (response.headers["Content-Type"] == 'application/json' or 'text/html'):
-                    json_response = response.text
-                else:
-                    json_response = None
-            '''
         except (HTTPError, URLError) as e:
             error = e
             if isinstance(e, HTTPError):
@@ -66,18 +57,7 @@ class Base_API:
         json_response = None
         try:
             response = self.request_obj.post(url, data=data, json=json, headers=headers)
-
             self.json_or_text(response)
-            '''
-            try:
-                json_response = response.json()
-            except Exception as e:
-                if (response.headers["Content-Type"] == 'application/json' or 'text/html'):
-                    json_response = response.text
-                else:
-                    json_response = None
-            '''
-
         except (HTTPError, URLError) as e:
             error = e
             if isinstance(e, HTTPError, URLError):
