@@ -32,7 +32,7 @@ class Candidates_Object:
     thumbs_down_button = locators.thumbs_down_button
     select_round_level_scroll = locators.select_round_level_scroll
     send_email_button = locators.send_email_button
-
+    candidate_job_filter = locators.candiate_job_filter
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -248,4 +248,16 @@ class Candidates_Object:
                                negative='Failed to click on OK',
                                level='debug')
 
+        return result_flag
+
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def job_filter(self):
+        "Click on Job drop down"
+        result_flag = self.click_element(self.candidate_job_filter)
+        self.conditional_write(result_flag,
+                               positive='Clicked on Job filter successfully',
+                               negative='Failed to click on Jb filter',
+                               level='debug')
+        
         return result_flag

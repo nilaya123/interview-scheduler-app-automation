@@ -65,6 +65,7 @@ email_on_link = "xpath,//input[@type='email']"
 next_button = "xpath,//div[@class='VfPpkd-RLmnJb']"
 next_button_after_password = "xpath,//*[@id='passwordNext']"
 password_link = "xpath,//input[@type='password']"
+candiate_job_filter = "xpath,//select[@class='drop-down']//parent::th[@aria-label='Job']"
 
 #Locators for Interviewers Page
 add_interviewers_button = "xpath,//input[contains(@onclick,'addinterviewer()')]"
