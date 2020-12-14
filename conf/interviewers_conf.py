@@ -1,5 +1,0 @@
-interviewers_name = "nilaya"
-interviewers_email = "nilaya@qxf2.com"
-intervierwers_designation = "Senior QA"
-interviewers_starttime = "11:00"
-interviewers_endtime = "15:30"

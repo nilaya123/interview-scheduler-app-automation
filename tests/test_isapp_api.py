@@ -99,12 +99,15 @@ def test_isapi_example(api_url='http://localhost:6464/'):
                             positive='Successfully deleted the interviewer',
                             negative='Could not delete the interviewer')
 
-    except Exception as e:
-        print(e)
         # write out test summary
         expected_pass = test_obj.total
         actual_pass = test_obj.passed
         test_obj.write_test_summary()
+
+    except Exception as e:
+        print(e)
+
+
 
 
 if __name__ == '__main__':
