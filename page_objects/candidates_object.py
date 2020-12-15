@@ -62,6 +62,7 @@ class Candidates_Object:
 
         return result_flag
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def add_email(self, email_candidates):
@@ -73,6 +74,7 @@ class Candidates_Object:
                                level='debug')
 
         return result_flag
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -88,6 +90,7 @@ class Candidates_Object:
 
         return result_flag
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def add_comments(self, comment_candidates):
@@ -99,6 +102,7 @@ class Candidates_Object:
                                level='debug')
 
         return result_flag
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -113,6 +117,7 @@ class Candidates_Object:
 
         return result_flag
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def add_candidate_details(self, name_candidates, email_candidates, job_applied_select, comment_candidates):
@@ -124,6 +129,7 @@ class Candidates_Object:
         result_flag &= self.submit()
 
         return result_flag
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -137,6 +143,7 @@ class Candidates_Object:
 
         return result_flag
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def delete_candidates(self):
@@ -148,6 +155,7 @@ class Candidates_Object:
                                level='debug')
 
         return result_flag
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -163,6 +171,7 @@ class Candidates_Object:
 
         return result_flag
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def select_candidates(self):
@@ -175,6 +184,7 @@ class Candidates_Object:
 
         return result_flag
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def thumbs_up(self):
@@ -186,6 +196,7 @@ class Candidates_Object:
                                level='debug')
 
         return result_flag
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -227,6 +238,7 @@ class Candidates_Object:
         return result_flag
 
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def send_email_candidate(self, search_option_candidate, select_round_level):
@@ -245,14 +257,14 @@ class Candidates_Object:
     def alert_accept(self):
         "Click on 'Ok' alert"
         result_flag = self.alert_window()
-        return result_flag
         self.conditional_write(result_flag,
                                positive='Clicked on the OK',
                                negative='Failed to click on OK',
                                level='debug')
 
         return result_flag
- 
+
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def edit_candidates(self):
@@ -264,6 +276,7 @@ class Candidates_Object:
                                 level='debug')
         return result_flag
 
+
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
     def edit_candidate_comment(self, comment_candidates):
@@ -274,6 +287,7 @@ class Candidates_Object:
                                negative='Failed to edit comments',
                                level='debug')
         return result_flag
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -287,14 +301,3 @@ class Candidates_Object:
         result_flag = self.alert_accept()
         return result_flag
 
-
-    @Wrapit._exceptionHandler
-    @Wrapit._screenshot
-    def job_filter(self):
-        "Click the Save button to save changes applied for te candidate"
-        result_flag = self.click_element(self.candidate_job_filter)
-        self.conditional_write(result_flag,
-                                positive= 'Clicked on Job drop down successfully',
-                                negative='Failed to click on Job drop down',
-                                level='debug')
-        return result_flag
