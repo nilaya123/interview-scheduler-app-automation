@@ -61,6 +61,14 @@ def test_edit_candidate(test_obj):
                             % test_obj.get_current_url(),
                             level="debug")
 
+        
+        result_flag = test_obj.validate_job_filter(business_analyst)
+        test_obj.log_result(result_flag,
+                            positive="Successfully retrieved text from xpath\n",
+                            negative="Failed to retrieve text from xpath \nOn url: %s" \
+                            % test_obj.get_current_url(),
+                            level="debug")
+
 
        
         #6.Turn off the highlighting feature

@@ -33,6 +33,8 @@ class Candidates_Object:
     select_round_level_scroll = locators.select_round_level_scroll
     send_email_button = locators.send_email_button
     candidate_job_filter = locators.candiate_job_filter
+    business_analyst = locators.business_analyst
+
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
@@ -261,3 +263,14 @@ class Candidates_Object:
                                level='debug')
         
         return result_flag
+
+    
+    @Wrapit._exceptionHandler
+    @Wrapit._screenshot
+    def validate_job_filter(self):
+        "Validate each row of filtered table for the selected Job"
+        result_flag = self.get_text(self.business_analyst)
+        self.conditional_write(result_flag,
+                               positive='Fetched the text from Xapth successfully',
+                               negative='Failed to fetch text from xpath',
+                               level='debug')
