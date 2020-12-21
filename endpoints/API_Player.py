@@ -5,10 +5,8 @@ b) contains several useful wrappers around commonly used combination of actions
 c) maintains the test context/state
 """
 import logging
-from base64 import b64encode
 from bs4 import BeautifulSoup
 from utils.results import Results
-from conf import api_example_conf as conf
 from .API_Interface import API_Interface
 
 
@@ -25,8 +23,8 @@ class API_Player(Results):
     def login_details(self, username, password):
         "encode auth details"
         user = username
-        password = password
-        login_data = {'username':user, 'password':password}
+        pass_word = password
+        login_data = {'username':user, 'password':pass_word}
 
         return login_data
 
@@ -46,8 +44,8 @@ class API_Player(Results):
         table = soup.find('table', {'class':'table table-striped'})
         table_rows = table.find_all('tr')
         new_list = []
-        for tr in table_rows:
-            cols = tr.find_all('td')
+        for t_rows in table_rows:
+            cols = t_rows.find_all('td')
             row = [i.text for i in cols]
             new_list.append(row)
         new_list.pop(0)
@@ -64,9 +62,8 @@ class API_Player(Results):
         soup = BeautifulSoup(ses, "html.parser")
         table = soup.find('table', {'class':'table table-striped'})
         table_rows = table.find_all('tr')
-        new_list = []
-        for tr in table_rows:
-            cols = tr.find_all('td')
+        for t_rows in table_rows:
+            cols = t_rows.find_all('td')
             row = [element.text for element in cols]
         self.new_id = row[0]
 
@@ -77,9 +74,8 @@ class API_Player(Results):
         "get available jobs"
         response = self.api_obj.get_jobs()
         new_event_list = self.get_list(response)
-        new_jobs_list = new_event_list
         result_flag = bool(response['response'] == 200)
-        self.write(msg="Fetched jobs list:\n %s"%new_jobs_list)
+        self.write(msg="Fetched jobs list:\n %s"%new_event_list)
 
         self.conditional_write(result_flag,
                                positive="Successfully fetched jobs",
@@ -106,11 +102,9 @@ class API_Player(Results):
         "get available candidates"
         response = self.api_obj.get_candidates()
         new_event_list = self.get_list(response)
-        new_list_id = self.get_list(response)
-        new_candidates_list = new_event_list
 
         result_flag = bool(response['response'] == 200)
-        self.write(msg="Fetched candidates list:\n %s"%new_candidates_list)
+        self.write(msg="Fetched candidates list:\n %s"%new_event_list)
         self.conditional_write(result_flag,
                                positive="Successfully fetched candidates",
                                negative="Could not fetch candidates")
@@ -129,11 +123,9 @@ class API_Player(Results):
         "get available interviewers"
         response = self.api_obj.get_interviewer()
         new_event_list = self.get_list(response)
-        new_list_id = self.get_list(response)
-        new_interviewer_list = new_event_list
 
         result_flag = bool(response['response'] == 200)
-        self.write(msg="Fetched interviewers list:\n %s"%new_interviewer_list)
+        self.write(msg="Fetched interviewers list:\n %s"%new_event_list)
         self.conditional_write(result_flag,
                                positive="Successfully fetched interviewers",
                                negative="Could not fetch interviewers")
@@ -172,7 +164,6 @@ class API_Player(Results):
         response = self.api_obj.get_interviewer()
         new_id = self.get_id(response)
         self.new_interviewer_id = new_id
-        data = {'interviewer-id':self.new_interviewer_id}
         response = self.api_obj.delete_interviewers(interviewer_id=self.new_interviewer_id,\
             data={'interviewer-id':self.new_interviewer_id})
         result_flag = bool(response['response'] == 200)

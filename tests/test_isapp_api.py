@@ -14,7 +14,6 @@ API test for Interview Scheduler Application
 import os
 import sys
 import pytest
-import requests
 from conf import api_example_conf as conf
 from endpoints.API_Player import API_Player
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -26,17 +25,15 @@ def test_isapi_example(api_url='http://localhost:6464/'):
     try:
         # Create test object
         test_obj = API_Player(url=api_url)
-        expected_pass = 0
-        actual_pass = -1
 
         # set authentication details
         username = conf.user_name
-        password = conf.password
+        password_details = conf.password
         job_data = conf.job_details
         candidate_data = conf.candidate_details
         interviewer_data = conf.interviewer_details
 
-        auth_details = test_obj.login_details(username, password)
+        auth_details = test_obj.login_details(username, password_details)
 
         result_flag = test_obj.login_app(auth_details)
         test_obj.log_result(result_flag,
