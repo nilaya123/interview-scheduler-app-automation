@@ -1,5 +1,5 @@
 """
-PageFactory uses the factory design pattern. 
+PageFactory uses the factory design pattern.
 get_page_object() returns the appropriate page object.
 Add elif clauses as and when you implement new pages.
 Pages implemented so far:
@@ -9,13 +9,14 @@ Pages implemented so far:
 4. Bitcoin main page
 5. Bitcoin price page
 """
-
-from page_objects.zero_mobile_page import Zero_Mobile_Page
 from page_objects.zero_page import Zero_Page
 from page_objects.login_page import Login_Page
 from page_objects.scheduler_main_page import Scheduler_Main_Page
 from page_objects.index_page import Index_Page
-
+from page_objects.redirect_index_page import Redirect_Index_Page
+from page_objects.jobs_page import Jobs_Page
+from page_objects.candidates_page import Candidates_Page
+from page_objects.interviewers_page import Interviewers_Page
 import conf.base_url_conf
 
 
@@ -33,6 +34,14 @@ class PageFactory():
             test_obj = Scheduler_Main_Page(base_url=base_url)
         elif page_name == "index page":
             test_obj = Index_Page(base_url=base_url)
+        elif page_name == "redirect":
+            test_obj = Redirect_Index_Page(base_url=base_url)
+        elif page_name == "candidates page":
+            test_obj = Candidates_Page(base_url=base_url)
+        elif page_name == "jobs page":
+            test_obj = Jobs_Page(base_url=base_url)
+        elif page_name == "interviewers page":
+            test_obj = Interviewers_Page(base_url=base_url)
         return test_obj
 
     get_page_object = staticmethod(get_page_object)
