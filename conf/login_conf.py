@@ -1,5 +1,5 @@
-user_name = "nilaya"
-password = "nilaya123"
+user_name = "Kavya.Y.S"
+password = "Silicon123"
 
 interviewers_name = "nilaya"
 interviewers_email = "nilaya@qxf2.com"

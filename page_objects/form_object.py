@@ -205,7 +205,7 @@ class Form_Object:
         result_flag &= self.enter_password(password)
         result_flag &= self.confirm_password(password)
         result_flag &= self.submit()
-
+        result_flag = self.alert_accept()
         return result_flag
 
 
