@@ -1,4 +1,4 @@
-user_name = "Kavya.Y.S"
+user_name = "Namitha Sathyananda"
 password = "Silicon@123"
 
 interviewers_name = "nilaya"
