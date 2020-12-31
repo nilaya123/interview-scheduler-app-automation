@@ -3,7 +3,7 @@ from page_objects.PageFactory import PageFactory
 from conf import browser_os_name_conf
 from conf import base_url_conf
 from utils import post_test_reports_to_slack
-from utils.email_pytest_report import Email_Pytest_Report
+#from utils.email_pytest_report import Email_Pytest_Report
 from utils import Tesults
 
 @pytest.fixture
