@@ -14,8 +14,8 @@ API test for Interview Scheduler Application
 import os
 import sys
 import pytest
-from conf import api_example_conf as conf
-from endpoints.API_Player import API_Player
+from QA.conf import api_example_conf as conf
+from QA.endpoints.API_Player import API_Player
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 

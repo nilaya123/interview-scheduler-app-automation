@@ -6,7 +6,7 @@ c) maintains the test context/state
 """
 import logging
 from bs4 import BeautifulSoup
-from utils.results import Results
+from QA.utils.results import Results
 from .API_Interface import API_Interface
 
 
