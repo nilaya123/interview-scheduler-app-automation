@@ -1,23 +1,13 @@
 #Conf for api example
+#get_job_details
+job_details = {'role':'technical_man','interviewerlist':'["nilaya"]'}
 
-#add_car
-car_details = {'name':'figo','brand':'ford','price_range':'5-8 lacs','car_type':'hatchback'}
+#get_candidate_details
+candidate_details = {'candidateName':'test_api_new123','candidateEmail':'test_api_new+567@gmail.com','jobApplied':'technical_man','addedcomments':'N/A'}
 
-#get_car_details
-car_name_1 = 'Swift'
-brand = 'Maruti'
-
-#update
-car_name_2 = 'figo'
-update_car = {'name':'figo','brand':'Ford','price_range':'2-3lacs','car_type':'hatchback'}
-
-#register_car
-customer_details = {'customer_name':'Rohan','city':'Ponda'}
+#get_interviewer_details
+interviewer_details = {'name':'test_nilaya','email':'nilaya+1234@qxf2.com','designation':'Senior QA','timeObject':'{"starttime":["10:00"],"endtime":["19:00"]}'}
 
 #authentication details
-user_name = 'eric' 
-password = 'testqxf2'
-
-#invalid auth details
-invalid_user_name = 'unknown'
-invalid_password = 'unknown'
+user_name = 'nilaya'
+password = 'nilaya123'
