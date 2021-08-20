@@ -12,6 +12,7 @@
 ###########################################
 
 #Locators for the login object
+
 username_field = "xpath,//input[@id = 'username']"
 password_field = "xpath,//input[@id='userpassword']"
 login_button = "xpath,//*[@id='loginButton']"
@@ -24,12 +25,12 @@ submit_button = "xpath,//button[contains(@id,'addSubmit')]"
 logout_button = "xpath,//input[contains(@value,'log out')]"
 
 #Locators for the index object
-interviewers_page = "xpath,//a[contains(.,'List the interviewers')]"
-jobs_page = "xpath,//a[contains(.,'List the jobs')]"
-candidates_page = "xpath,//a[contains(.,'List the candidates')]"
+interviewers_page = "xpath,//a[contains(.,'interviewers')]"
+jobs_page = "xpath,//a[contains(.,'jobs')]"
+candidates_page = "xpath,//a[contains(.,'candidates')]"
 
 #Heading for index page
-heading = "xpath,//h2[contains(.,'Why Interview Scheduler Application?')]"
+heading = "xpath,//h1[contains(.,'Qxf2 Services-Interview Scheduler')]"
 
 #Locators for Candidates Page
 search_option = "xpath,//input[contains(@type,'search')]"
@@ -87,11 +88,12 @@ add_jobs_button = "xpath,//input[contains(@onclick,'addJob()')]"
 job_role = "xpath,//input[contains(@id,'role')]"
 job_interviewers = "xpath,//input[contains(@id,'interviewers')]"
 submit_job_button = "xpath,//button[contains(@id,'submit')]"
-delete_job_button = "xpath,//a[text()='Junior QA']/parent::td/following-sibling::td/button[@data-jobrole='Junior QA']"
+delete_job_button = "xpath,//a[text()='%s']/parent::td/following-sibling::td/button[@data-jobrole='%s']"
 remove_job_button = "xpath,//button[@id='remove-button']"
 
+
 #Locators for Rounds
-specific_round_add = "xpath,//a[text()='Junior QA']/parent::td/following-sibling::td/button[text()='Rounds']"
+specific_round_add = "xpath,//a[text()='%s']/parent::td/following-sibling::td/button[text()='Rounds']"
 add_rounds_button = "xpath,//input[@value='Add Rounds']"
 round_name = "xpath,//input[@id='rname']"
 round_duration = "xpath,//select[@name='Duration']"
