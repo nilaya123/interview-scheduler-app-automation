@@ -10,11 +10,9 @@ search_option_interviewer = "nilaya"
 
 job_role = "Junior QA"
 job_interviewers = "nilaya"
-search_option_job = "Junior QA"
 
 name_candidates = "Nayara"
 email_candidates = "test+100@qxf2.com"
-job_applied_select = "Junior QA"
 comment_candidates = "Nilaya's referral"
 select_round_level = "Technical Round"
 search_option_candidate = "Nayara"

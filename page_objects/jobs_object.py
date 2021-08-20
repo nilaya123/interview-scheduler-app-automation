@@ -72,9 +72,12 @@ class Jobs_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def delete_job(self):
+    def delete_job(self,job_role):
         "Click on 'Delete Job' button"
-        result_flag = self.click_element(self.delete_job_button)
+        print("Under Delete job")
+        print(job_role)
+        result_flag = self.click_element(self.delete_job_button%(job_role,job_role))
+        self.wait(5)
         self.conditional_write(result_flag,
             positive='Clicked on delete job button',
             negative='Failed to click on button',
@@ -84,10 +87,12 @@ class Jobs_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def remove_job(self,search_option_job):
+    def remove_job(self,search_option_job,job_role):
         "Click on 'Remove Job' button"
         self.search_job(search_option_job)
-        self.delete_job()
+        print("NILAYA")
+        print(job_role)
+        self.delete_job(job_role)
         result_flag = self.click_element(self.remove_job_button)
         self.conditional_write(result_flag,
             positive='Clicked on remove job button',

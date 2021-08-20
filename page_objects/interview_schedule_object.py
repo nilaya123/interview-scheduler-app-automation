@@ -97,7 +97,6 @@ class Interview_Schedule_Object:
     @Wrapit._screenshot
     def schedule_interview(self):
         "Open the url and schedule the interview"
-        print("NILAYA")
         result_flag,url,unique_code = self.fetch_email_invite()
         result_flag = self.open_invitation_url(url)
         result_flag = self.set_unique_code(unique_code)
@@ -315,10 +314,11 @@ class Interview_Schedule_Object:
     def checking_interview_meet_link(self):
         "Scheduling an interview by candidate"
         result_flag = self.click_calendar_link()
+        '''
         result_flag = self.set_the_email(email_on_link)
         result_flag = self.click_next_button()
         result_flag = self.set_the_password_link(password_link)
         result_flag = self.click_next_after_password()
         result_flag = self.click_google_meet_link()
-
+        '''
         return result_flag

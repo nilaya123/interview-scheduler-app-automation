@@ -25,6 +25,8 @@ Our automated test will do the following:
 import os
 import sys
 import pytest
+import string
+import random
 from page_objects.PageFactory import PageFactory
 from utils.Option_Parser import Option_Parser
 import conf.login_conf as conf
@@ -50,6 +52,7 @@ def test_end_to_end(test_obj):
         username = conf.user_name
         password = conf.password
 
+
         interviewers_name = conf.interviewers_name
         interviewers_email = conf.interviewers_email
         interviewers_designation = conf.interviewers_designation
@@ -57,13 +60,13 @@ def test_end_to_end(test_obj):
         interviewers_endtime_drop = conf.interviewers_endtime_drop
         search_option_interviewer = conf.search_option_interviewer
 
-        job_role = conf.job_role
+        job_role = conf.job_role+''.join(random.choices(string.digits, k=3))
         job_interviewers = conf.job_interviewers
-        search_option_job = conf.search_option_job
+        search_option_job = job_role
 
         name_candidates = conf.name_candidates
         email_candidates = conf.email_candidates
-        job_applied_select = conf.job_applied_select
+        job_applied_select = job_role
         comment_candidates = conf.comment_candidates
         select_round_level = conf.select_round_level
         search_option_candidate = conf.search_option_candidate
@@ -173,7 +176,7 @@ def test_end_to_end(test_obj):
 
 
         #12. Open jobs page to add rounds
-        result_flag = test_obj.round_to_job()
+        result_flag = test_obj.round_to_job(job_role)
         test_obj.log_result(result_flag,
                             positive="Successfully opened jobs page to add rounds\n",
                             negative="Failed to open jobs page \nOn url: %s"\
@@ -211,7 +214,6 @@ def test_end_to_end(test_obj):
                             negative="Failed to click on send email \nOn url: %s" \
                                 % test_obj.get_current_url(),
                             level="debug")
-
 
 
         #16.Get the details from email such as url and unique code,login to url and schedule\

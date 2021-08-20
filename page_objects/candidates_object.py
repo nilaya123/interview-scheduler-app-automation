@@ -105,7 +105,7 @@ class Candidates_Object:
                                positive='Clicked on the Submit button',
                                negative='Failed to click on Submit button',
                                level='debug')
-        result_flag = self.alert_accept()
+        #result_flag = self.alert_accept()
 
         return result_flag
 
@@ -117,7 +117,9 @@ class Candidates_Object:
         result_flag &= self.add_email(email_candidates)
         result_flag &= self.add_job_applied(job_applied_select)
         result_flag &= self.add_comments(comment_candidates)
-        result_flag &= self.submit()
+        self.wait(5)
+        result_flag = self.submit()
+        result_flag = self.alert_accept()
 
         return result_flag
 

@@ -166,7 +166,6 @@ class Form_Object:
                                negative='Failed to click on "Submit" button',
                                level='debug')
 
-        result_flag = self.alert_accept()
 
         return result_flag
 

@@ -24,9 +24,9 @@ class Rounds_Object:
 
     @Wrapit._exceptionHandler
     @Wrapit._screenshot
-    def round_to_job(self):
+    def round_to_job(self,job_role):
         "Click on Add Rounds button"
-        result_flag = self.click_element(self.specific_round_add)
+        result_flag = self.click_element(self.specific_round_add%job_role)
         self.conditional_write(result_flag,
             positive='Clicked on the Add Rounds button',
             negative='Failed to click on Add Rounds button',
